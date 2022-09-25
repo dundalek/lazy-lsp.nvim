@@ -19,7 +19,9 @@ local function setup(opts)
 
   for lsp, nix_pkg in pairs(servers) do
     if lspconfig[lsp] and not vim.tbl_contains(excluded_servers, lsp) then
-      local cmd = (opts.configs[lsp] and opts.configs[lsp].cmd) or lspconfig[lsp].document_config.default_config.cmd
+      local cmd = (opts.configs[lsp] and opts.configs[lsp].cmd) or
+          (type(nix_pkg) == "table" and nix_pkg.cmd) or
+          lspconfig[lsp].document_config.default_config.cmd
       if nix_pkg ~= "" and cmd then
         local config = opts.configs[lsp] or default_config
         local nix_pkgs = type(nix_pkg) == "string" and { nix_pkg } or nix_pkg.pkgs

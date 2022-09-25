@@ -3,13 +3,13 @@
 require 'luarocks.loader'
 local serpent = require("serpent")
 
-local lazy_servers = dofile('lua/lazy-lsp/servers.lua')
+local servers_file = 'lua/lazy-lsp/servers.lua'
+local configurations_directory = 'tmp/nvim-lspconfig/lua/lspconfig/server_configurations'
 
-local directory = 'tmp/nvim-lspconfig/lua/lspconfig/server_configurations'
-
+local lazy_servers = dofile(servers_file)
 local servers = {}
 
-local pfile = io.popen("ls '" .. directory .. "'")
+local pfile = io.popen("ls '" .. configurations_directory .. "'")
 for filename in pfile:lines() do
   server = filename:gsub('%.lua$', '')
   servers[server] = ""
@@ -22,6 +22,6 @@ for k, v in pairs(lazy_servers) do
   end
 end
 
-local f = io.open("tmp.lua", "w")
+local f = io.open(servers_file, 'w')
 f:write('return ' .. serpent.block(servers, { comment = false }))
 f:close()

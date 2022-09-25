@@ -56,7 +56,7 @@ EOF
 
 ## Status
 
-Currently supports 66 out of 159 servers available in lspconfig, see the [full list of servers](./servers.md).
+Currently supports 71 out of 174 servers available in lspconfig, see the [full list of servers](./servers.md).
 
 ## How it works
 
@@ -64,7 +64,7 @@ Currently supports 66 out of 159 servers available in lspconfig, see the [full l
 
 ## Comparison with alternatives
 
-- Install manually, or via language specific package managers like npm, pip, etc. which is a hassle.
+- Installing manually, or via language specific package managers like npm, pip, etc. is a hassle.
 - [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer)
   - Pro: Supports Windows natively
   - Pro: Supports more servers at the moment
@@ -75,3 +75,26 @@ Currently supports 66 out of 159 servers available in lspconfig, see the [full l
   - Con: Maintaining cross-platform installation scripts is a large maintanance burden  
     (vs. leveraging work by a large Nix community specializing in software packaging)
 - [lspcontainers.nvim](https://github.com/lspcontainers/lspcontainers.nvim) - uses docker containers to run servers in a portable way which comes with an extra overhead
+
+## Development
+
+The available lsp servers and stats are generated from `nvim-lspconfig` source.
+
+Make a local copy:
+```
+mkdir tmp && cd tmp
+git clone https://github.com/neovim/nvim-lspconfig.git
+```
+
+Update `servers.lua` with new entries:
+```
+cd tmp/nvim-lspconfig
+git pull
+cd ../..
+scripts/update.lua
+```
+
+Once done specifying servers, generate the stats in [servers.md](servers.md):
+```
+scripts/genstats.lua
+```
