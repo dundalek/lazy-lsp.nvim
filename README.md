@@ -4,6 +4,8 @@ Neovim plugin to automatically install [nvim-lspconfig](https://github.com/neovi
 
 Language servers are loaded in the background without a need of a manual user intervention. They are not installed upfront, but only on-demand after a source file for a given language is opened. The plugin works by relying on Nix package manager which works on Linux, macOS and Windows WSL.
 
+Currently supports 71 out of 174 servers available in lspconfig, see the full list of [supported servers](./servers.md).
+
 ## Install
 
 Requires Neovim v0.7.0+
@@ -53,10 +55,6 @@ require('lazy-lsp').setup {
 }
 EOF
 ```
-
-## Status
-
-Currently supports 71 out of 174 servers available in lspconfig, see the [full list of servers](./servers.md).
 
 ## How it works
 
