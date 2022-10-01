@@ -96,6 +96,7 @@ return {
   mlir_lsp_server = "",
   mlir_pdll_lsp_server = "",
   mm0_ls = "",
+  move_analyzer = "",
   nickel_ls = "",
   nil_ls = "nil",
   nimls = "nimlsp",
