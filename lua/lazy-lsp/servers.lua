@@ -51,7 +51,7 @@ return {
   fortls = "",
   fsautocomplete = "",
   fstar = "fstar",
-  gdscript = "godot",
+  gdscript = "",
   ghcide = "",
   ghdl_ls = "",
   glint = "",
