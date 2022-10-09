@@ -18,6 +18,45 @@ use { 'dundalek/lazy-lsp.nvim', requires = { 'neovim/nvim-lspconfig' } }
 ```
 3) That's it, nothing else to install!
 
+### Install via Nix/Home Manager
+
+Alternatively, if you're using nix to manage your Neovim config, you can package
+the plugin locally and install it that way. Remember to include nvim-lspconfig.
+
+```nix
+{ pkgs, ... }:
+
+let
+  nvim-lazy-lsp = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "lazy-lsp.nvim";
+    version = "2020.10.01";
+    src = pkgs.fetchFromGitHub {
+      owner = "dundalek";
+      repo = "lazy-lsp.nvim";
+      rev = "251b913596b66d9f87232f817a1c7d1a9c009a20";
+      sha256 = "0sn7yk4xkychbwzrq3xihzm3m2vh5mll448ivk17zwq0qakzimv0";
+    };
+    meta.homepage = "https://github.com/dundalek/lazy-lsp.nvim";
+  };
+in
+{
+  programs.neovim = {
+    enable = true;
+    plugins = with pkgs.vimPlugins; [
+      nvim-lspconfig
+      nvim-lazy-lsp
+    ];
+    extraConfig = ''
+      lua << EOF
+      require('lazy-lsp').setup {
+        ...
+      }
+      EOF
+    '';
+  };
+}
+```
+
 ## Setup
 
 Add to `init.lua`:
