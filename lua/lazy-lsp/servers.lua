@@ -37,6 +37,7 @@ return {
   elmls = "elmPackages.elm-language-server",
   ember = "",
   emmet_ls = "",
+  erg_language_server = "",
   erlangls = "erlang-ls",
   esbonio = "",
   eslint = {
@@ -97,6 +98,7 @@ return {
   mlir_pdll_lsp_server = "",
   mm0_ls = "",
   move_analyzer = "",
+  neocmake = "",
   nickel_ls = "",
   nil_ls = "nil",
   nimls = "nimlsp",
@@ -135,6 +137,7 @@ return {
   rnix = "rnix-lsp",
   robotframework_ls = "",
   rome = "",
+  ruby_ls = "",
   rust_analyzer = "rust-analyzer",
   salt_ls = "",
   scry = "scry",
