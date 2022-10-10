@@ -29,12 +29,12 @@ the plugin locally and install it that way. Remember to include nvim-lspconfig.
 let
   nvim-lazy-lsp = pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "lazy-lsp.nvim";
-    version = "2020.10.01";
+    version = "2022.10.09";
     src = pkgs.fetchFromGitHub {
       owner = "dundalek";
       repo = "lazy-lsp.nvim";
-      rev = "251b913596b66d9f87232f817a1c7d1a9c009a20";
-      sha256 = "0sn7yk4xkychbwzrq3xihzm3m2vh5mll448ivk17zwq0qakzimv0";
+      rev = "d1731da0751317eae2c2b6b591e5c7f0216fc654";
+      sha256 = "0jd9lywj5q09ccrpmvf0566dx8wf7qbnkny86pwx4mw556zgzbmy";
     };
     meta.homepage = "https://github.com/dundalek/lazy-lsp.nvim";
   };
