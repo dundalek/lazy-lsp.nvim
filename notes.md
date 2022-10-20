@@ -1,14 +1,34 @@
+# Install via Nix/Home Manager
 
-### Install via Nix/Home Manager
+`lazy-lsp-nvim` is available in the unstable channel. Install with:
 
-Alternatively, if you're using nix to manage your Neovim config, you can package
+```nix
+{ pkgs, ... }:
+{
+  programs.neovim = {
+    enable = true;
+    plugins = with pkgs.vimPlugins; [
+      lazy-lsp-nvim
+    ];
+    extraConfig = ''
+      lua << EOF
+      require('lazy-lsp').setup {
+        ...
+      }
+      EOF
+    '';
+  };
+}
+```
+
+Alternatively, if you're using a different channel, you can package
 the plugin locally and install it that way. Remember to include nvim-lspconfig.
 
 ```nix
 { pkgs, ... }:
 
 let
-  nvim-lazy-lsp = pkgs.vimUtils.buildVimPluginFrom2Nix {
+  lazy-lsp-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "lazy-lsp.nvim";
     version = "2022.10.09";
     src = pkgs.fetchFromGitHub {
@@ -25,7 +45,7 @@ in
     enable = true;
     plugins = with pkgs.vimPlugins; [
       nvim-lspconfig
-      nvim-lazy-lsp
+      lazy-lsp-nvim
     ];
     extraConfig = ''
       lua << EOF
