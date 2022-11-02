@@ -14,16 +14,18 @@ local function escape_shell_args(args)
 end
 
 local function setup(opts)
+  opts = opts or {}
   local excluded_servers = opts.excluded_servers or {}
   local default_config = opts.default_config or {}
+  local configs = opts.configs or {}
 
   for lsp, nix_pkg in pairs(servers) do
     if lspconfig[lsp] and not vim.tbl_contains(excluded_servers, lsp) then
-      local cmd = (opts.configs[lsp] and opts.configs[lsp].cmd) or
+      local cmd = (configs[lsp] and configs[lsp].cmd) or
           (type(nix_pkg) == "table" and nix_pkg.cmd) or
           lspconfig[lsp].document_config.default_config.cmd
       if nix_pkg ~= "" and cmd then
-        local config = opts.configs[lsp] or default_config
+        local config = configs[lsp] or default_config
         local nix_pkgs = type(nix_pkg) == "string" and { nix_pkg } or nix_pkg.pkgs
         local nix_cmd = { "nix-shell", "-p" }
         vim.list_extend(nix_cmd, nix_pkgs)
@@ -31,8 +33,8 @@ local function setup(opts)
         table.insert(nix_cmd, escape_shell_args(cmd))
         config = vim.tbl_extend("keep", { cmd = nix_cmd }, config)
         lspconfig[lsp].setup(config)
-      elseif opts.configs[lsp] then
-        lspconfig[lsp].setup(opts.configs[lsp])
+      elseif configs[lsp] then
+        lspconfig[lsp].setup(configs[lsp])
       end
     end
   end
