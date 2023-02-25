@@ -140,7 +140,7 @@ return {
   phpactor = "",
   please = "",
   powershell_es = "",
-  prismals = "",
+  prismals = 'nodePackages.\"@prisma/language-server\"',
   prolog_ls = "",
   prosemd_lsp = "",
   psalm = "php80Packages.psalm",
