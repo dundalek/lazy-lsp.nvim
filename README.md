@@ -39,6 +39,11 @@ require('lazy-lsp').setup {
     -- on_attach = on_attach,
     -- capabilities = capabilities,
   },
+  -- Define common configurations for all server (optional)
+  common_config = {
+    -- on_attach = on_attach,
+    -- capabilities = capabilities,
+  }
   -- Override config for specific servers that will passed down to lspconfig setup.
   configs = {
     sumneko_lua = {

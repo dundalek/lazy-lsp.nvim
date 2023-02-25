@@ -17,6 +17,7 @@ local function setup(opts)
   opts = opts or {}
   local excluded_servers = opts.excluded_servers or {}
   local default_config = opts.default_config or {}
+  local common_config = opts.common_config or {}
   local configs = opts.configs or {}
 
   for lsp, npkg in pairs(servers) do
@@ -31,7 +32,7 @@ local function setup(opts)
           (type(nix_pkg) == "table" and nix_pkg.cmd) or
           lspconfig[lsp].document_config.default_config.cmd
       if nix_pkg ~= "" and cmd then
-        local config = configs[lsp] or default_config
+        local config = vim.tbl_extend("keep", configs[lsp] or default_config, common_config)
         local nix_pkgs = type(nix_pkg) == "string" and { nix_pkg } or nix_pkg.pkgs
         local nix_cmd = { "nix-shell", "-p" }
         vim.list_extend(nix_cmd, nix_pkgs)
@@ -40,7 +41,8 @@ local function setup(opts)
         config = vim.tbl_extend("keep", { cmd = nix_cmd }, config)
         lspconfig[lsp].setup(config)
       elseif configs[lsp] then
-        lspconfig[lsp].setup(configs[lsp])
+        local config = vim.tbl_extend("keep", configs[lsp], common_config)
+        lspconfig[lsp].setup(config)
       end
     end
   end
