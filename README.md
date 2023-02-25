@@ -63,6 +63,19 @@ EOF
 
 `lazy-lsp` registers all available configurations from lspconfig to start LSP servers by wrapping the commands in a [nix-shell](https://nixos.org/manual/nix/unstable/command-ref/nix-shell.html) environment. The nix-shell prepares the environment by pulling all specified dependencies regardless of what is installed on the host system and avoids packages clashes. The first time a server is run there is a delay until dependencies are downloaded, but on subsequent runs the time to prepare the shell environment is negligeable.
 
+If you want to use an LSP that is not already available with this plugin, you can search if this is packaged on nix and use it by defining the "nix_pkg" field on the server configuration.
+Here is an example with lua's lsp:
+
+```lua
+require("lazy-lsp").setup({
+  configs = {
+    lua_ls = {
+      nix_pkg = "lua-language-server",
+    }
+  }
+})
+```
+
 ## Comparison with alternatives
 
 - Installing manually, or via language specific package managers like npm, pip, etc. is a hassle.

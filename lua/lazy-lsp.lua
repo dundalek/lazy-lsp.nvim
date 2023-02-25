@@ -19,8 +19,14 @@ local function setup(opts)
   local default_config = opts.default_config or {}
   local configs = opts.configs or {}
 
-  for lsp, nix_pkg in pairs(servers) do
+  for lsp, npkg in pairs(servers) do
     if lspconfig[lsp] and not vim.tbl_contains(excluded_servers, lsp) then
+      -- Allow users to override nix_pkg (to quickly support new servers)
+      local nix_pkg = (configs[lsp] and configs[lsp].nix_pkg) or npkg
+      if configs[lsp] then
+        configs[lsp].nix_pkg = nil
+      end
+
       local cmd = (configs[lsp] and configs[lsp].cmd) or
           (type(nix_pkg) == "table" and nix_pkg.cmd) or
           lspconfig[lsp].document_config.default_config.cmd
