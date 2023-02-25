@@ -87,6 +87,8 @@ mkdir tmp && cd tmp
 git clone https://github.com/neovim/nvim-lspconfig.git
 ```
 
+Run `nix-shell` to load dependencies needed for running the dev scripts.
+
 Update `servers.lua` with new entries:
 ```
 cd tmp/nvim-lspconfig

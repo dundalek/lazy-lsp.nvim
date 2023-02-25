@@ -3,9 +3,6 @@ stdenv.mkDerivation {
   name = "lazy-lsp-env";
   buildInputs = [
     luajit
-    luajitPackages.luarocks
+    luajitPackages.serpent
   ];
-  shellHook = ''
-    # luarocks install --local serpent
-  '';
 }

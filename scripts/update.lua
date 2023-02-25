@@ -1,6 +1,5 @@
 #!/usr/bin/env luajit
 
-require 'luarocks.loader'
 local serpent = require("serpent")
 
 local servers_file = 'lua/lazy-lsp/servers.lua'
