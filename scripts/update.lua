@@ -22,5 +22,5 @@ for k, v in pairs(lazy_servers) do
 end
 
 local f = io.open(servers_file, 'w')
-f:write('return ' .. serpent.block(servers, { comment = false }))
+f:write('return ' .. serpent.block(servers, { comment = false }) .. '\n')
 f:close()
