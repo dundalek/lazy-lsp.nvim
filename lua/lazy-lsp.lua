@@ -39,6 +39,23 @@ local function setup(opts)
         table.insert(nix_cmd, "--run")
         table.insert(nix_cmd, escape_shell_args(cmd))
         config = vim.tbl_extend("keep", { cmd = nix_cmd }, config)
+
+        -- This method can alter the cmd line, if it does, we merge the new arguments with the binary (since nix-shell does not support --)
+        config.on_new_config = function(new_config, root_path)
+          local fake_config = vim.tbl_extend("keep", { cmd = {} }, new_config)
+          print(vim.inspect(fake_config))
+          pcall(lspconfig[lsp].document_config.default_config.on_new_config, fake_config, root_path)
+
+          if #fake_config.cmd ~= 0 then
+            print(vim.inspect(fake_config.cmd), #fake_config.cmd)
+            local nargs = escape_shell_args{ unpack(cmd), unpack(fake_config.cmd)}
+            print(nargs)
+            print(vim.inspect(new_config.cmd))
+            new_config.cmd[#new_config.cmd] = nargs
+            print(vim.inspect(new_config.cmd))
+          end
+        end
+
         lspconfig[lsp].setup(config)
       elseif configs[lsp] then
         local config = vim.tbl_extend("keep", configs[lsp], common_config)
