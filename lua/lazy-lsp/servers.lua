@@ -125,7 +125,10 @@ return {
   ocamlls = "nodePackages.ocaml-language-server",
   ocamllsp = "ocamlPackages.ocaml-lsp",
   ols = "",
-  omnisharp = "omnisharp-roslyn",
+  omnisharp = {
+    cmd = { "OmniSharp" },
+    pkgs = { "omnisharp-roslyn", "dotnet-sdk" },
+  },
   opencl_ls = "",
   openscad_ls = "",
   openscad_lsp = "",
