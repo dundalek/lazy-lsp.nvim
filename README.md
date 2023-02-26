@@ -40,6 +40,7 @@ require('lazy-lsp').setup {
     -- capabilities = capabilities,
   },
   -- Override config for specific servers that will passed down to lspconfig setup.
+  -- Note that the default_config will be nerged with this specific configuration so you don't need to specify everything twice.
   configs = {
     sumneko_lua = {
       cmd = {"lua-language-server"},
