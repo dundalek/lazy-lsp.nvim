@@ -102,3 +102,17 @@ Once done specifying servers, generate the stats in [servers.md](servers.md):
 ```
 scripts/genstats.lua
 ```
+
+### Testing
+
+Using Plenary for testing, see the [Testing Guide](https://github.com/nvim-lua/plenary.nvim/blob/master/TESTS_README.md) for details.
+
+Run tests:
+```
+scripts/test
+```
+
+Run tests in watch mode:
+```
+scripts/test-watch
+```
