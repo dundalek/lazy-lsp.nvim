@@ -21,11 +21,13 @@ local function setup(opts)
 
   for lsp, nix_pkg in pairs(servers) do
     if lspconfig[lsp] and not vim.tbl_contains(excluded_servers, lsp) then
-      local cmd = (configs[lsp] and configs[lsp].cmd) or
+      local lang_config = lspconfig[lsp]
+      local user_config = configs[lsp]
+      local cmd = (user_config and user_config.cmd) or
           (type(nix_pkg) == "table" and nix_pkg.cmd) or
-          lspconfig[lsp].document_config.default_config.cmd
+          lang_config.document_config.default_config.cmd
       if nix_pkg ~= "" and cmd then
-        local config = vim.tbl_extend("keep", configs[lsp] or {}, default_config)
+        local config = vim.tbl_extend("keep", user_config or {}, default_config)
         local nix_pkgs = type(nix_pkg) == "string" and { nix_pkg } or nix_pkg.pkgs
         local nix_cmd = { "nix-shell", "-p" }
         vim.list_extend(nix_cmd, nix_pkgs)
@@ -36,18 +38,18 @@ local function setup(opts)
         -- This method can alter the cmd line, if it does, we merge the new arguments with the binary (since nix-shell does not support --)
         config.on_new_config = function(new_config, root_path)
           local fake_config = vim.tbl_extend("keep", { cmd = {} }, new_config)
-          pcall(lspconfig[lsp].document_config.default_config.on_new_config, fake_config, root_path)
+          pcall(lang_config.document_config.default_config.on_new_config, fake_config, root_path)
 
           if #fake_config.cmd ~= 0 then
-            local nargs = escape_shell_args{ unpack(cmd), unpack(fake_config.cmd)}
+            local nargs = escape_shell_args { unpack(cmd), unpack(fake_config.cmd) }
             new_config.cmd[#new_config.cmd] = nargs
           end
         end
 
-        lspconfig[lsp].setup(config)
-      elseif configs[lsp] then
-        local config = vim.tbl_extend("keep", configs[lsp], default_config)
-        lspconfig[lsp].setup(config)
+        lang_config.setup(config)
+      elseif user_config then
+        local config = vim.tbl_extend("keep", user_config, default_config)
+        lang_config.setup(config)
       end
     end
   end
