@@ -1,0 +1,18 @@
+name: "Test"
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: cachix/install-nix-action@v19
+      with:
+        nix_path: nixpkgs=channel:nixos-unstable
+    - name: Prepare Nix deps
+      run: nix-shell --run "nvim --version"
+    - name: Run tests
+      run: nix-shell --run scripts/test
