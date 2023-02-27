@@ -2,10 +2,10 @@ return {
   als = "",
   anakin_language_server = "",
   angularls = "",
-  ansiblels = "",
+  ansiblels = "ansible-language-server",
   antlersls = "",
   apex_ls = "",
-  arduino_language_server = "",
+  arduino_language_server = "arduino-language-server",
   asm_lsp = "",
   astro = "",
   awk_ls = "",
@@ -126,8 +126,13 @@ return {
   ocamllsp = "ocamlPackages.ocaml-lsp",
   ols = "",
   omnisharp = {
-    cmd = { "OmniSharp" },
-    pkgs = { "omnisharp-roslyn", "dotnet-sdk" },
+    cmd = {
+      "OmniSharp"
+    },
+    pkgs = {
+      "omnisharp-roslyn",
+      "dotnet-sdk"
+    }
   },
   opencl_ls = "",
   openscad_ls = "",
@@ -140,7 +145,7 @@ return {
   phpactor = "",
   please = "",
   powershell_es = "",
-  prismals = 'nodePackages.\"@prisma/language-server\"',
+  prismals = "nodePackages.\"@prisma/language-server\"",
   prolog_ls = "",
   prosemd_lsp = "",
   psalm = "php80Packages.psalm",
@@ -195,7 +200,7 @@ return {
   tailwindcss = "",
   taplo = "taplo-lsp",
   tblgen_lsp_server = "",
-  teal_ls = "",
+  teal_ls = "luajitPackages.teal-language-server",
   terraform_lsp = "terraform-lsp",
   terraformls = "terraform-ls",
   texlab = "texlab",

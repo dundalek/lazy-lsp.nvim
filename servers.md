@@ -1,8 +1,10 @@
 
-## Supported: 74 / 212
+## Supported: 78 / 212
 
 | Language Server | Nix package |
 | - | - |
+| [ansiblels](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ansiblels) | [ansible-language-server](https://search.nixos.org/packages?channel=unstable&query=ansible-language-server&show=ansible-language-server) |
+| [arduino_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#arduino_language_server) | [arduino-language-server](https://search.nixos.org/packages?channel=unstable&query=arduino-language-server&show=arduino-language-server) |
 | [bashls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bashls) | [nodePackages.bash-language-server](https://search.nixos.org/packages?channel=unstable&query=nodePackages.bash-language-server&show=nodePackages.bash-language-server) |
 | [beancount](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#beancount) | [beancount-language-server](https://search.nixos.org/packages?channel=unstable&query=beancount-language-server&show=beancount-language-server) |
 | [blueprint_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#blueprint_ls) | [blueprint-compiler](https://search.nixos.org/packages?channel=unstable&query=blueprint-compiler&show=blueprint-compiler) |
@@ -46,6 +48,7 @@
 | [ocamllsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ocamllsp) | [ocamlPackages.ocaml-lsp](https://search.nixos.org/packages?channel=unstable&query=ocamlPackages.ocaml-lsp&show=ocamlPackages.ocaml-lsp) |
 | [omnisharp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#omnisharp) | [omnisharp-roslyn](https://search.nixos.org/packages?channel=unstable&query=omnisharp-roslyn&show=omnisharp-roslyn) |
 | [perlpls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#perlpls) | [perl534Packages.PLS](https://search.nixos.org/packages?channel=unstable&query=perl534Packages.PLS&show=perl534Packages.PLS) |
+| [prismals](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#prismals) | [nodePackages."@prisma/language-server"](https://search.nixos.org/packages?channel=unstable&query=nodePackages."@prisma/language-server"&show=nodePackages."@prisma/language-server") |
 | [psalm](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#psalm) | [php80Packages.psalm](https://search.nixos.org/packages?channel=unstable&query=php80Packages.psalm&show=php80Packages.psalm) |
 | [purescriptls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#purescriptls) | [nodePackages.purescript-language-server](https://search.nixos.org/packages?channel=unstable&query=nodePackages.purescript-language-server&show=nodePackages.purescript-language-server) |
 | [pylsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp) | [python39Packages.python-lsp-server](https://search.nixos.org/packages?channel=unstable&query=python39Packages.python-lsp-server&show=python39Packages.python-lsp-server) |
@@ -63,6 +66,7 @@
 | [svls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#svls) | [svls](https://search.nixos.org/packages?channel=unstable&query=svls&show=svls) |
 | [syntax_tree](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#syntax_tree) | [rubyPackages.syntax_tree](https://search.nixos.org/packages?channel=unstable&query=rubyPackages.syntax_tree&show=rubyPackages.syntax_tree) |
 | [taplo](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#taplo) | [taplo-lsp](https://search.nixos.org/packages?channel=unstable&query=taplo-lsp&show=taplo-lsp) |
+| [teal_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#teal_ls) | [luajitPackages.teal-language-server](https://search.nixos.org/packages?channel=unstable&query=luajitPackages.teal-language-server&show=luajitPackages.teal-language-server) |
 | [terraform_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#terraform_lsp) | [terraform-lsp](https://search.nixos.org/packages?channel=unstable&query=terraform-lsp&show=terraform-lsp) |
 | [terraformls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#terraformls) | [terraform-ls](https://search.nixos.org/packages?channel=unstable&query=terraform-ls&show=terraform-ls) |
 | [texlab](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#texlab) | [texlab](https://search.nixos.org/packages?channel=unstable&query=texlab&show=texlab) |
@@ -78,15 +82,13 @@
 | [zk](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#zk) | [zk](https://search.nixos.org/packages?channel=unstable&query=zk&show=zk) |
 | [zls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#zls) | [zls](https://search.nixos.org/packages?channel=unstable&query=zls&show=zls) |
 
-## Missing: 138
+## Missing: 134
 
 - [als](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#als)
 - [anakin_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#anakin_language_server)
 - [angularls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#angularls)
-- [ansiblels](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ansiblels)
 - [antlersls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#antlersls)
 - [apex_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#apex_ls)
-- [arduino_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#arduino_language_server)
 - [asm_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#asm_lsp)
 - [astro](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#astro)
 - [awk_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#awk_ls)
@@ -165,7 +167,6 @@
 - [phpactor](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#phpactor)
 - [please](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#please)
 - [powershell_es](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#powershell_es)
-- [prismals](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#prismals)
 - [prolog_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#prolog_ls)
 - [prosemd_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#prosemd_lsp)
 - [puppet](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#puppet)
@@ -203,7 +204,6 @@
 - [svlangserver](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#svlangserver)
 - [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tailwindcss)
 - [tblgen_lsp_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tblgen_lsp_server)
-- [teal_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#teal_ls)
 - [textlsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#textlsp)
 - [theme_check](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#theme_check)
 - [turtle_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#turtle_ls)
