@@ -16,7 +16,9 @@ end
 pfile:close()
 
 for k, v in pairs(lazy_servers) do
-  if v ~= "" then
+  local server_exists_in_lspconfig = servers[k]
+  local nix_pkg_defined = v ~= ""
+  if server_exists_in_lspconfig and nix_pkg_defined then
     servers[k] = v
   end
 end
