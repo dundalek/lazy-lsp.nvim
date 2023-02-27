@@ -93,5 +93,69 @@ describe("lazy-lsp", function()
         ).some_parameter
       )
     end)
+
+    it("on_new_config does not error when lang config has no on_new_config function", function()
+      local config = helpers.process_config(lang_config, nil, empty_default_config, "nix_pkg_name")
+      config.on_new_config(config, "/some/root/path")
+      assert.same(
+        { "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_original_cmd'" },
+        config.cmd
+      )
+    end)
+
+    it("on_new_config keeps original cmd if call back does not update it", function()
+      local lang_config_with_on_new_config = {
+        document_config = {
+          default_config = {
+            cmd = { "ls_original_cmd" },
+            on_new_config = function(new_config, root_path)
+            end
+          }
+        }
+      }
+      local config = helpers.process_config(lang_config_with_on_new_config, nil, empty_default_config, "nix_pkg_name")
+      config.on_new_config(config, "/some/root/path")
+      assert.same({ "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_original_cmd'" }, config.cmd)
+    end)
+
+    it("on_new_config updates cmd when callback appends to it (e.g. omnisharp)", function()
+      local lang_config_with_on_new_config = {
+        document_config = {
+          default_config = {
+            cmd = { "ls_original_cmd" },
+            on_new_config = function(new_config, root_path)
+              table.insert(new_config.cmd, "--path")
+              table.insert(new_config.cmd, root_path)
+            end
+          }
+        }
+      }
+      local config = helpers.process_config(lang_config_with_on_new_config, nil, empty_default_config, "nix_pkg_name")
+      config.on_new_config(config, "/some/root/path")
+      assert.same(
+        { "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_original_cmd' '--path' '/some/root/path'" },
+        config.cmd
+      )
+    end)
+
+    it("on_new_config updates cmd when callback build a new one (e.g. eslint, codeqlls)", function()
+      local lang_config_with_on_new_config = {
+        document_config = {
+          default_config = {
+            cmd = { "ls_original_cmd" },
+            on_new_config = function(new_config, root_path)
+              new_config.cmd = { "new_cmd", "--path", root_path }
+            end
+          }
+        }
+      }
+      local config = helpers.process_config(lang_config_with_on_new_config, nil, empty_default_config, "nix_pkg_name")
+      config.on_new_config(config, "/some/root/path")
+      -- Encoding current behavior, the presence of `ls_original_cmd` seems wrong, might need to fix it
+      assert.same(
+        { "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_original_cmd' 'new_cmd' '--path' '/some/root/path'" },
+        config.cmd
+      )
+    end)
   end)
 end)
