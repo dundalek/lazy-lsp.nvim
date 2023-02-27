@@ -39,6 +39,8 @@ local function process_config(lang_config, user_config, default_config, nix_pkg)
     local config = vim.tbl_extend("keep", user_config, default_config)
     return config
   end
+
+  return nil
 end
 
 return {
