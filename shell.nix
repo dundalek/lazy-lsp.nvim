@@ -4,5 +4,9 @@ stdenv.mkDerivation {
   buildInputs = [
     luajit
     luajitPackages.serpent
+    git
+
+    # for running tests in watch mode
+    watchexec
   ];
 }
