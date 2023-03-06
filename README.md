@@ -42,10 +42,15 @@ require('lazy-lsp').setup {
   -- Override config for specific servers that will passed down to lspconfig setup.
   -- Note that the default_config will be nerged with this specific configuration so you don't need to specify everything twice.
   configs = {
-    sumneko_lua = {
-      cmd = {"lua-language-server"},
-      -- on_attach = on_lua_attach,
-      -- capabilities = capabilities,
+    lua_ls = {
+      settings = {
+        Lua = {
+          diagnostics = {
+            -- Get the language server to recognize the `vim` global
+            globals = { "vim" },
+          },
+        },
+      },
     },
   },
 }
