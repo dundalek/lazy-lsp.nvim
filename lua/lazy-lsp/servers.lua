@@ -104,7 +104,7 @@ return {
   lelwel_ls = "",
   lemminx = "",
   ltex = "ltex-ls",
-  lua_ls = "lua-language-server",
+  lua_ls = "sumneko-lua-language-server",
   luau_lsp = "",
   m68k = "",
   marksman = "",
