@@ -9,7 +9,9 @@ local function setup(opts)
   local configs = opts.configs or {}
 
   for lsp, nix_pkg in pairs(servers) do
-    if lspconfig[lsp] and not vim.tbl_contains(excluded_servers, lsp) then
+    -- Check if a server is excluded first, so that we don't look up the config
+    -- and for deprecated servers we won't get a warning message.
+    if not vim.tbl_contains(excluded_servers, lsp) and lspconfig[lsp] then
       local lang_config = lspconfig[lsp]
       local user_config = configs[lsp]
 
