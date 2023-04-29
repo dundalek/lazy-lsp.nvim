@@ -1,6 +1,6 @@
-local lspconfig = require('lspconfig')
-local servers = require('lazy-lsp.servers')
-local process_config = require('lazy-lsp.helpers').process_config
+local lspconfig = require("lspconfig")
+local servers = require("lazy-lsp.servers")
+local process_config = require("lazy-lsp.helpers").process_config
 
 local function setup(opts)
   opts = opts or {}

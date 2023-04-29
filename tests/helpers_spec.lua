@@ -1,16 +1,16 @@
-local helpers = require "lazy-lsp.helpers"
+local helpers = require("lazy-lsp.helpers")
 
 describe("lazy-lsp", function()
   it("escape_shell_arg", function()
     assert.same("'hello world'", helpers.escape_shell_arg("hello world"))
-    assert.same("'h\"i'", helpers.escape_shell_arg("h\"i"))
+    assert.same("'h\"i'", helpers.escape_shell_arg('h"i'))
     assert.same("'h'\"'\"'i'", helpers.escape_shell_arg("h'i"))
     assert.same("''", helpers.escape_shell_arg(""))
   end)
 
   it("escape_shell_args", function()
     assert.same("'hello world'", helpers.escape_shell_args({ "hello world" }))
-    assert.same("'hello world' 'h\"i' 'h'\"'\"'i'", helpers.escape_shell_args({ "hello world", "h\"i", "h'i" }))
+    assert.same("'hello world' 'h\"i' 'h'\"'\"'i'", helpers.escape_shell_args({ "hello world", 'h"i', "h'i" }))
     assert.same("", helpers.escape_shell_args({}))
   end)
 
@@ -36,7 +36,10 @@ describe("lazy-lsp", function()
       assert.same(
         { "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_server_cmd'" },
         helpers.process_config(
-          lang_config, nil, empty_default_config, { cmd = { "ls_server_cmd" }, pkgs = { "nix_pkg_name" } }
+          lang_config,
+          nil,
+          empty_default_config,
+          { cmd = { "ls_server_cmd" }, pkgs = { "nix_pkg_name" } }
         ).cmd
       )
     end)
@@ -45,7 +48,10 @@ describe("lazy-lsp", function()
       assert.same(
         { "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_server_cmd' '--lsp'" },
         helpers.process_config(
-          lang_config, nil, empty_default_config, { cmd = { "ls_server_cmd", "--lsp" }, pkgs = { "nix_pkg_name" } }
+          lang_config,
+          nil,
+          empty_default_config,
+          { cmd = { "ls_server_cmd", "--lsp" }, pkgs = { "nix_pkg_name" } }
         ).cmd
       )
     end)
@@ -54,17 +60,16 @@ describe("lazy-lsp", function()
       assert.same(
         { "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_user_cmd'" },
         helpers.process_config(
-          lang_config, { cmd = { "ls_user_cmd" } }, empty_default_config,
+          lang_config,
+          { cmd = { "ls_user_cmd" } },
+          empty_default_config,
           { cmd = { "ls_server_cmd" }, pkgs = { "nix_pkg_name" } }
         ).cmd
       )
     end)
 
     it("when nix pkg is not available returns (will not setup ls)", function()
-      assert.equals(
-        nil,
-        helpers.process_config(lang_config, nil, empty_default_config, "")
-      )
+      assert.equals(nil, helpers.process_config(lang_config, nil, empty_default_config, ""))
     end)
 
     it("uses users config when nix pkg is not available", function()
@@ -89,7 +94,10 @@ describe("lazy-lsp", function()
       assert.same(
         "some-value",
         helpers.process_config(
-          lang_config, { cmd = { "ls_user_cmd" } }, { some_parameter = "some-value" }, "nix_pkg_name"
+          lang_config,
+          { cmd = { "ls_user_cmd" } },
+          { some_parameter = "some-value" },
+          "nix_pkg_name"
         ).some_parameter
       )
     end)
@@ -97,10 +105,7 @@ describe("lazy-lsp", function()
     it("on_new_config does not error when lang config has no on_new_config function", function()
       local config = helpers.process_config(lang_config, nil, empty_default_config, "nix_pkg_name")
       config.on_new_config(config, "/some/root/path")
-      assert.same(
-        { "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_original_cmd'" },
-        config.cmd
-      )
+      assert.same({ "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_original_cmd'" }, config.cmd)
     end)
 
     it("on_new_config keeps original cmd if call back does not update it", function()
@@ -108,10 +113,9 @@ describe("lazy-lsp", function()
         document_config = {
           default_config = {
             cmd = { "ls_original_cmd" },
-            on_new_config = function(new_config, root_path)
-            end
-          }
-        }
+            on_new_config = function(new_config, root_path) end,
+          },
+        },
       }
       local config = helpers.process_config(lang_config_with_on_new_config, nil, empty_default_config, "nix_pkg_name")
       config.on_new_config(config, "/some/root/path")
@@ -126,9 +130,9 @@ describe("lazy-lsp", function()
             on_new_config = function(new_config, root_path)
               table.insert(new_config.cmd, "--path")
               table.insert(new_config.cmd, root_path)
-            end
-          }
-        }
+            end,
+          },
+        },
       }
       local config = helpers.process_config(lang_config_with_on_new_config, nil, empty_default_config, "nix_pkg_name")
       config.on_new_config(config, "/some/root/path")
@@ -145,9 +149,9 @@ describe("lazy-lsp", function()
             cmd = { "ls_original_cmd" },
             on_new_config = function(new_config, root_path)
               new_config.cmd = { "new_cmd", "--path", root_path }
-            end
-          }
-        }
+            end,
+          },
+        },
       }
       local config = helpers.process_config(lang_config_with_on_new_config, nil, empty_default_config, "nix_pkg_name")
       config.on_new_config(config, "/some/root/path")
