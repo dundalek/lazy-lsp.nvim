@@ -1,0 +1,13 @@
+#!/usr/bin/env bb
+;; -*- clojure -*-
+;; vim: set filetype=clojure:
+
+(require '[babashka.process :as proc])
+
+(let [args (if (= (first *command-line-args*) "fix")
+             ""
+             "--check")]
+  (-> (proc/process {:inherit true} (str "stylua " args " lua tests"))
+      deref
+      :exit
+      System/exit))
