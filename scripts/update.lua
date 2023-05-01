@@ -10,7 +10,7 @@ local servers = {}
 
 local pfile = io.popen("ls '" .. configurations_directory .. "'")
 for filename in pfile:lines() do
-  server = filename:gsub('%.lua$', '')
+  local server = filename:gsub('%.lua$', '')
   servers[server] = ""
 end
 pfile:close()
