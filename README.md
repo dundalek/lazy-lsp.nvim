@@ -26,10 +26,21 @@ Alternatively, you can install the plugin via [Nix/Home Manager](./notes.md#inst
 Add to `init.lua`:
 
 ```lua
-require('lazy-lsp').setup {
+require("lazy-lsp").setup {}
+```
+
+Available options:
+
+```lua
+require("lazy-lsp").setup {
   -- By default all available servers are set up. Exclude unwanted or misbehaving servers.
   excluded_servers = {
     "ccls", "zk",
+  },
+  -- Alternatively specify preferred servers for a filetype (others will be ignored).
+  preferred_servers = {
+    haskell = { "hls" },
+    rust = { "rust_analyzer" },
   },
   -- Default config passed to all servers to specify on_attach callback and other options.
   default_config = {
@@ -59,7 +70,7 @@ require('lazy-lsp').setup {
 For `init.vim` based config wrap with lua command:
 ```vim
 lua << EOF
-require('lazy-lsp').setup {
+require("lazy-lsp").setup {
   ...
 }
 EOF
