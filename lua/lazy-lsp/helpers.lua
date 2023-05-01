@@ -10,6 +10,7 @@ local function escape_shell_args(args)
   return table.concat(escaped, " ")
 end
 
+-- should rename to something indicating that it is for an individual config
 local function process_config(lang_config, user_config, default_config, nix_pkg)
   local cmd = (user_config and user_config.cmd)
     or (type(nix_pkg) == "table" and nix_pkg.cmd)
@@ -43,8 +44,34 @@ local function process_config(lang_config, user_config, default_config, nix_pkg)
   return nil
 end
 
+local function server_configs(lspconfig, servers, opts)
+  opts = opts or {}
+  local excluded_servers = opts.excluded_servers or {}
+  local default_config = opts.default_config or {}
+  local configs = opts.configs or {}
+
+  local returned_configs = {}
+
+  for lsp, nix_pkg in pairs(servers) do
+    -- Check if a server is excluded first, so that we don't look up the config
+    -- and for deprecated servers we won't get a warning message.
+    if not vim.tbl_contains(excluded_servers, lsp) and lspconfig[lsp] then
+      local lang_config = lspconfig[lsp]
+      local user_config = configs[lsp]
+
+      local config = process_config(lang_config, user_config, default_config, nix_pkg)
+      if config then
+        returned_configs[lsp] = config
+      end
+    end
+  end
+
+  return returned_configs
+end
+
 return {
   escape_shell_arg = escape_shell_arg,
   escape_shell_args = escape_shell_args,
   process_config = process_config,
+  server_configs = server_configs,
 }
