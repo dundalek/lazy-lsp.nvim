@@ -10,7 +10,7 @@
 | [blueprint_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#blueprint_ls) | [blueprint-compiler](https://search.nixos.org/packages?channel=unstable&query=blueprint-compiler&show=blueprint-compiler) |
 | [bufls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bufls) | [buf-language-server](https://search.nixos.org/packages?channel=unstable&query=buf-language-server&show=buf-language-server) |
 | [ccls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ccls) | [ccls](https://search.nixos.org/packages?channel=unstable&query=ccls&show=ccls) |
-| [clangd](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#clangd) | [clang-tools](https://search.nixos.org/packages?channel=unstable&query=clang-tools&show=clang-tools) |
+| [clangd](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#clangd) | [clang-tools_16](https://search.nixos.org/packages?channel=unstable&query=clang-tools_16&show=clang-tools_16) |
 | [clojure_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#clojure_lsp) | [clojure-lsp](https://search.nixos.org/packages?channel=unstable&query=clojure-lsp&show=clojure-lsp) |
 | [cmake](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#cmake) | [cmake-language-server](https://search.nixos.org/packages?channel=unstable&query=cmake-language-server&show=cmake-language-server) |
 | [codeqlls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#codeqlls) | [codeql](https://search.nixos.org/packages?channel=unstable&query=codeql&show=codeql) |

@@ -20,7 +20,7 @@ return {
   cadence = "",
   cairo_ls = "",
   ccls = "ccls",
-  clangd = "clang-tools",
+  clangd = "clang-tools_16",
   clarity_lsp = "",
   clojure_lsp = "clojure-lsp",
   cmake = "cmake-language-server",
