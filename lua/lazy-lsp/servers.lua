@@ -180,7 +180,7 @@ return {
   relay_lsp = "",
   remark_ls = "",
   rescriptls = "",
-  rls = "rls",
+  rls = "",
   rnix = "rnix-lsp",
   robotframework_ls = "",
   rome = {
