@@ -91,7 +91,7 @@ See [docs about channels](https://nixos.wiki/wiki/Nix_channels) for more details
 ## Comparison with alternatives
 
 - Installing manually, or via language specific package managers like npm, pip, etc. is a hassle.
-- [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer)
+- [nvim-lsp-installer](https://github.com/williamboman/nvim-lsp-installer) / [mason.nvim](https://github.com/williamboman/mason.nvim)
   - Pro: Supports Windows natively
   - Pro: Supports more servers at the moment
   - Con: `:LspInstall` command needs to be run manually for each server  
