@@ -76,6 +76,14 @@ require("lazy-lsp").setup {
 EOF
 ```
 
+## Versions
+
+Nix uses channels to determine which packages and versions are available.
+I recommend to use the `unstable` channel to get the latest versions.
+
+If you encounter an older version of a language server try to run `nix-channel --update` to update channels.
+See [docs about channels](https://nixos.wiki/wiki/Nix_channels) for more details how to work with channels.
+
 ## How it works
 
 `lazy-lsp` registers all available configurations from lspconfig to start LSP servers by wrapping the commands in a [nix-shell](https://nixos.org/manual/nix/unstable/command-ref/nix-shell.html) environment. The nix-shell prepares the environment by pulling all specified dependencies regardless of what is installed on the host system and avoids packages clashes. The first time a server is run there is a delay until dependencies are downloaded, but on subsequent runs the time to prepare the shell environment is negligeable.
