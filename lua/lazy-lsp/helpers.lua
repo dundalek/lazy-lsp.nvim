@@ -20,17 +20,18 @@ end
 
 -- should rename to something indicating that it is for an individual config
 local function process_config(lang_config, user_config, default_config, nix_pkg, filetypes)
-  local cmd = (user_config and user_config.cmd)
-      or (type(nix_pkg) == "table" and nix_pkg.cmd)
-      or lang_config.document_config.default_config.cmd
-  if nix_pkg ~= "" and cmd then
+  if nix_pkg ~= "" then
+    local override = { filetypes = filetypes }
+    if type(nix_pkg) == "table" and nix_pkg.cmd then
+      override.cmd = nix_pkg.cmd
+    end
     local nix_pkgs = type(nix_pkg) == "string" and { nix_pkg } or nix_pkg.pkgs
     local config = vim.tbl_extend(
       "keep",
-      { cmd = cmd },
       user_config or {},
-      { filetypes = filetypes },
-      default_config
+      override,
+      default_config,
+      lang_config.document_config.default_config
     )
 
     config.on_new_config = function(new_config, root_path)
