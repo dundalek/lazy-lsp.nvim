@@ -3,6 +3,9 @@ local lspconfig = require("lspconfig")
 local helpers = require("lazy-lsp.helpers")
 
 return {
+  elixirls = {
+    cmd = { "elixir-ls" },
+  },
   jdtls = {
     on_new_config = function(new_config, new_root_dir)
       pcall(lspconfig.jdtls.document_config.default_config.on_new_config, new_config, new_root_dir)

@@ -50,7 +50,7 @@ return {
   ds_pinyin_lsp = "",
   ecsact = "",
   efm = "efm-langserver",
-  elixirls = "elixir_ls",
+  elixirls = { "elixir_ls", "beamPackages.hex" },
   elmls = "elmPackages.elm-language-server",
   ember = "",
   emmet_language_server = "",
