@@ -1,3 +1,9 @@
+local function replace_first(list, replacement)
+  local result = vim.list_slice(list, 2)
+  table.insert(result, 1, replacement)
+  return result
+end
+
 local function escape_shell_arg(arg)
   return "'" .. string.gsub(arg, "'", "'\"'\"'") .. "'"
 end
@@ -124,6 +130,7 @@ end
 return {
   server_configs = server_configs,
   in_shell = in_shell,
+  replace_first = replace_first,
   -- Internal, only for testing
   escape_shell_arg = escape_shell_arg,
   escape_shell_args = escape_shell_args,

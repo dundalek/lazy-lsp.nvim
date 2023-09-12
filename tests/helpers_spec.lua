@@ -348,3 +348,7 @@ describe("server_configs", function()
     assert.same({ "javascript", "typescript" }, cfg.tsserver.filetypes)
   end)
 end)
+
+it("replace_first", function()
+  assert.same({ "cmd_b", "--some", "arg" }, helpers.replace_first({ "cmd_a", "--some", "arg" }, "cmd_b"))
+end)
