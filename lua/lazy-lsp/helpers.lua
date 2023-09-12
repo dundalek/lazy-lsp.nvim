@@ -19,15 +19,17 @@ local function in_shell(nix_pkgs, cmd)
 end
 
 -- should rename to something indicating that it is for an individual config
-local function process_config(lang_config, user_config, default_config, nix_pkg, filetypes)
+local function process_config(lang_config, user_config, default_config, nix_pkg, filetypes, config_override)
   if nix_pkg ~= "" then
-    local override = { filetypes = filetypes }
-    if type(nix_pkg) == "table" and nix_pkg.cmd then
-      override.cmd = nix_pkg.cmd
-    end
     local nix_pkgs = type(nix_pkg) == "string" and { nix_pkg } or nix_pkg.pkgs
-    local config =
-      vim.tbl_extend("keep", user_config or {}, override, default_config, lang_config.document_config.default_config)
+    local config = vim.tbl_extend(
+      "keep",
+      user_config or {},
+      { filetypes = filetypes },
+      config_override or {},
+      default_config,
+      lang_config.document_config.default_config
+    )
     local original_on_new_config = config.on_new_config
 
     config.on_new_config = function(new_config, root_path)
@@ -81,7 +83,7 @@ local function build_server_to_filetypes_index(server_to_filetypes)
   return index
 end
 
-local function server_configs(lspconfig, servers, opts)
+local function server_configs(lspconfig, servers, opts, overrides)
   opts = opts or {}
   local excluded_servers = opts.excluded_servers or {}
   local default_config = opts.default_config or {}
@@ -107,8 +109,10 @@ local function server_configs(lspconfig, servers, opts)
     if server_to_filetypes[lsp] and lspconfig[lsp] then
       local lang_config = lspconfig[lsp]
       local user_config = configs[lsp]
+      local config_override = overrides[lsp]
 
-      local config = process_config(lang_config, user_config, default_config, nix_pkg, server_to_filetypes[lsp])
+      local config =
+        process_config(lang_config, user_config, default_config, nix_pkg, server_to_filetypes[lsp], config_override)
       if config then
         returned_configs[lsp] = config
       end

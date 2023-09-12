@@ -47,7 +47,9 @@ describe("lazy-lsp", function()
             lang_config,
             nil,
             empty_default_config,
-            { cmd = { "ls_server_cmd" }, pkgs = { "nix_pkg_name" } }
+            { pkgs = { "nix_pkg_name" } },
+            nil,
+            { cmd = { "ls_server_cmd" } }
           )
         ).cmd
       )
@@ -61,7 +63,9 @@ describe("lazy-lsp", function()
             lang_config,
             nil,
             empty_default_config,
-            { cmd = { "ls_server_cmd", "--lsp" }, pkgs = { "nix_pkg_name" } }
+            { pkgs = { "nix_pkg_name" } },
+            nil,
+            { cmd = { "ls_server_cmd", "--lsp" } }
           )
         ).cmd
       )
@@ -242,6 +246,8 @@ local fake_servers = {
   },
 }
 
+local fake_overrides = {}
+
 local function normalize_table_values(tbl)
   for _, v in pairs(tbl) do
     table.sort(v)
@@ -286,7 +292,7 @@ end)
 
 describe("server_configs", function()
   it("augments commands with nix-shell", function()
-    local cfg = helpers.server_configs(fake_lspconfig, fake_servers, {})
+    local cfg = helpers.server_configs(fake_lspconfig, fake_servers, {}, fake_overrides)
     assert.same({ "nix-shell", "-p", "fakelsp-package", "--run", "'fakelsp-binary'" }, make_config(cfg.fakelsp).cmd)
     assert.same(
       { "nix-shell", "-p", "python39Packages.python-lsp-server", "--run", "'pylsp'" },
@@ -309,7 +315,7 @@ describe("server_configs", function()
   it("removes excluded servers", function()
     local cfg = helpers.server_configs(fake_lspconfig, fake_servers, {
       excluded_servers = { "pylsp", "pyright", "tsserver" },
-    })
+    }, fake_overrides)
     assert.same({ "nix-shell", "-p", "fakelsp-package", "--run", "'fakelsp-binary'" }, make_config(cfg.fakelsp).cmd)
     assert.is_nil(cfg.pylsp)
     assert.is_nil(cfg.pyright)
@@ -317,7 +323,7 @@ describe("server_configs", function()
   end)
 
   it("uses default filetypes", function()
-    local cfg = helpers.server_configs(fake_lspconfig, fake_servers, {})
+    local cfg = helpers.server_configs(fake_lspconfig, fake_servers, {}, fake_overrides)
     table.sort(cfg.fakelsp.filetypes)
     table.sort(cfg.pylsp.filetypes)
     table.sort(cfg.pyright.filetypes)
@@ -334,7 +340,7 @@ describe("server_configs", function()
         python = { "pyright" },
         typescript = "tsserver",
       },
-    })
+    }, fake_overrides)
     table.sort(cfg.fakelsp.filetypes)
     table.sort(cfg.pyright.filetypes)
     table.sort(cfg.tsserver.filetypes)
