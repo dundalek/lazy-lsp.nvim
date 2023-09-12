@@ -192,6 +192,21 @@ describe("lazy-lsp", function()
         config.cmd
       )
     end)
+
+    it("don't wrap result from on_new_config if it is already wrapped", function()
+      local user_config = {
+        on_new_config = function(new_config, root_path)
+          new_config.cmd = helpers.in_shell({ "user_pkg_name" }, new_config.cmd)
+        end,
+      }
+      local config = helpers.process_config(lang_config, user_config, empty_default_config,
+        "nix_pkg_name")
+      config.on_new_config(config, "")
+      assert.same(
+        { "nix-shell", "-p", "user_pkg_name", "--run", "'ls_original_cmd'" },
+        config.cmd
+      )
+    end)
   end)
 end)
 

@@ -37,7 +37,10 @@ local function process_config(lang_config, user_config, default_config, nix_pkg,
 
     config.on_new_config = function(new_config, root_path)
       pcall(original_on_new_config, new_config, root_path)
-      new_config.cmd = in_shell(nix_pkgs, new_config.cmd)
+      -- Don't wrap with nix-shell if user callback already wrapped it
+      if new_config.cmd[1] ~= "nix-shell" then
+        new_config.cmd = in_shell(nix_pkgs, new_config.cmd)
+      end
     end
 
     return config
