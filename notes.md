@@ -1,3 +1,21 @@
+# Override used Nix packages
+
+In case you need to specify custom nix packages, you can override the default ones by specifying `on_new_config` callback with `in_shell` helper function:
+
+```lua
+require("lazy-lsp").setup {
+  configs = {
+    omnisharp = {
+      on_new_config = function(new_config, new_root_dir)
+        pcall(require("lspconfig").omnisharp.document_config.default_config.on_new_config, new_config, new_root_dir)
+        local custom_nix_pkgs = { "omnisharp-roslyn" }
+        new_config.cmd = require("lazy-lsp").in_shell(custom_nix_pkgs, new_config.cmd)
+      end,
+    },
+  },
+}
+```
+
 # Install via Nix/Home Manager
 
 `lazy-lsp-nvim` is available in the unstable channel. Install with:
