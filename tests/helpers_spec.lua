@@ -1,5 +1,11 @@
 local helpers = require("lazy-lsp.helpers")
 
+
+local function make_config(config)
+  config.on_new_config(config, "")
+  return config
+end
+
 describe("lazy-lsp", function()
   it("escape_shell_arg", function()
     assert.same("'hello world'", helpers.escape_shell_arg("hello world"))
@@ -21,50 +27,51 @@ describe("lazy-lsp", function()
     it("uses cmd from lspconfig", function()
       assert.same(
         { "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_original_cmd'" },
-        helpers.process_config(lang_config, nil, empty_default_config, "nix_pkg_name").cmd
+        make_config(helpers.process_config(lang_config, nil, empty_default_config, "nix_pkg_name")).cmd
       )
     end)
 
     it("servers config can specify multiple nix packages", function()
       assert.same(
         { "nix-shell", "-p", "nix_pkg_a", "nix_pkg_b", "--run", "'ls_original_cmd'" },
-        helpers.process_config(lang_config, nil, empty_default_config, { pkgs = { "nix_pkg_a", "nix_pkg_b" } }).cmd
+        make_config(helpers.process_config(lang_config, nil, empty_default_config,
+          { pkgs = { "nix_pkg_a", "nix_pkg_b" } })).cmd
       )
     end)
 
     it("servers config can override cmd", function()
       assert.same(
         { "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_server_cmd'" },
-        helpers.process_config(
+        make_config(helpers.process_config(
           lang_config,
           nil,
           empty_default_config,
           { cmd = { "ls_server_cmd" }, pkgs = { "nix_pkg_name" } }
-        ).cmd
+        )).cmd
       )
     end)
 
     it("servers config can override cmd including arguments", function()
       assert.same(
         { "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_server_cmd' '--lsp'" },
-        helpers.process_config(
+        make_config(helpers.process_config(
           lang_config,
           nil,
           empty_default_config,
           { cmd = { "ls_server_cmd", "--lsp" }, pkgs = { "nix_pkg_name" } }
-        ).cmd
+        )).cmd
       )
     end)
 
     it("user specified cmd takes override priority", function()
       assert.same(
         { "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_user_cmd'" },
-        helpers.process_config(
+        make_config(helpers.process_config(
           lang_config,
           { cmd = { "ls_user_cmd" } },
           empty_default_config,
           { cmd = { "ls_server_cmd" }, pkgs = { "nix_pkg_name" } }
-        ).cmd
+        )).cmd
       )
     end)
 
@@ -155,9 +162,8 @@ describe("lazy-lsp", function()
       }
       local config = helpers.process_config(lang_config_with_on_new_config, nil, empty_default_config, "nix_pkg_name")
       config.on_new_config(config, "/some/root/path")
-      -- Encoding current behavior, the presence of `ls_original_cmd` seems wrong, might need to fix it
       assert.same(
-        { "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_original_cmd' 'new_cmd' '--path' '/some/root/path'" },
+        { "nix-shell", "-p", "nix_pkg_name", "--run", "'new_cmd' '--path' '/some/root/path'" },
         config.cmd
       )
     end)
@@ -238,9 +244,18 @@ end)
 describe("server_configs", function()
   it("augments commands with nix-shell", function()
     local cfg = helpers.server_configs(fake_lspconfig, fake_servers, {})
-    assert.same({ "nix-shell", "-p", "fakelsp-package", "--run", "'fakelsp-binary'" }, cfg.fakelsp.cmd)
-    assert.same({ "nix-shell", "-p", "python39Packages.python-lsp-server", "--run", "'pylsp'" }, cfg.pylsp.cmd)
-    assert.same({ "nix-shell", "-p", "pyright", "--run", "'pyright-langserver' '--stdio'" }, cfg.pyright.cmd)
+    assert.same(
+      { "nix-shell", "-p", "fakelsp-package", "--run", "'fakelsp-binary'" },
+      make_config(cfg.fakelsp).cmd
+    )
+    assert.same(
+      { "nix-shell", "-p", "python39Packages.python-lsp-server", "--run", "'pylsp'" },
+      make_config(cfg.pylsp).cmd
+    )
+    assert.same(
+      { "nix-shell", "-p", "pyright", "--run", "'pyright-langserver' '--stdio'" },
+      make_config(cfg.pyright).cmd
+    )
     assert.same({
       "nix-shell",
       "-p",
@@ -248,14 +263,14 @@ describe("server_configs", function()
       "nodePackages.typescript",
       "--run",
       "'typescript-language-server' '--stdio'",
-    }, cfg.tsserver.cmd)
+    }, make_config(cfg.tsserver).cmd)
   end)
 
   it("removes excluded servers", function()
     local cfg = helpers.server_configs(fake_lspconfig, fake_servers, {
       excluded_servers = { "pylsp", "pyright", "tsserver" },
     })
-    assert.same({ "nix-shell", "-p", "fakelsp-package", "--run", "'fakelsp-binary'" }, cfg.fakelsp.cmd)
+    assert.same({ "nix-shell", "-p", "fakelsp-package", "--run", "'fakelsp-binary'" }, make_config(cfg.fakelsp).cmd)
     assert.is_nil(cfg.pylsp)
     assert.is_nil(cfg.pyright)
     assert.is_nil(cfg.tsserver)

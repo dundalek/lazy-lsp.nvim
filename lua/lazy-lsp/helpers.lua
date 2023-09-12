@@ -21,28 +21,21 @@ end
 -- should rename to something indicating that it is for an individual config
 local function process_config(lang_config, user_config, default_config, nix_pkg, filetypes)
   local cmd = (user_config and user_config.cmd)
-    or (type(nix_pkg) == "table" and nix_pkg.cmd)
-    or lang_config.document_config.default_config.cmd
+      or (type(nix_pkg) == "table" and nix_pkg.cmd)
+      or lang_config.document_config.default_config.cmd
   if nix_pkg ~= "" and cmd then
     local nix_pkgs = type(nix_pkg) == "string" and { nix_pkg } or nix_pkg.pkgs
-    local nix_cmd = in_shell(nix_pkgs, cmd)
     local config = vim.tbl_extend(
       "keep",
-      { cmd = nix_cmd },
+      { cmd = cmd },
       user_config or {},
       { filetypes = filetypes },
       default_config
     )
 
-    -- This method can alter the cmd line, if it does, we merge the new arguments with the binary (since nix-shell does not support --)
     config.on_new_config = function(new_config, root_path)
-      local fake_config = vim.tbl_extend("keep", { cmd = {} }, new_config)
-      pcall(lang_config.document_config.default_config.on_new_config, fake_config, root_path)
-
-      if #fake_config.cmd ~= 0 then
-        local nargs = escape_shell_args({ unpack(cmd), unpack(fake_config.cmd) })
-        new_config.cmd[#new_config.cmd] = nargs
-      end
+      pcall(lang_config.document_config.default_config.on_new_config, new_config, root_path)
+      new_config.cmd = in_shell(nix_pkgs, new_config.cmd)
     end
 
     return config
