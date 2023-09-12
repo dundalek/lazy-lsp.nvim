@@ -33,9 +33,7 @@ describe("lazy-lsp", function()
     it("servers config can specify multiple nix packages", function()
       assert.same(
         { "nix-shell", "-p", "nix_pkg_a", "nix_pkg_b", "--run", "'ls_original_cmd'" },
-        make_config(
-          helpers.process_config(lang_config, nil, empty_default_config, { pkgs = { "nix_pkg_a", "nix_pkg_b" } })
-        ).cmd
+        make_config(helpers.process_config(lang_config, nil, empty_default_config, { "nix_pkg_a", "nix_pkg_b" })).cmd
       )
     end)
 
@@ -47,7 +45,7 @@ describe("lazy-lsp", function()
             lang_config,
             nil,
             empty_default_config,
-            { pkgs = { "nix_pkg_name" } },
+            { "nix_pkg_name" },
             nil,
             { cmd = { "ls_server_cmd" } }
           )
@@ -63,7 +61,7 @@ describe("lazy-lsp", function()
             lang_config,
             nil,
             empty_default_config,
-            { pkgs = { "nix_pkg_name" } },
+            { "nix_pkg_name" },
             nil,
             { cmd = { "ls_server_cmd", "--lsp" } }
           )
@@ -79,7 +77,9 @@ describe("lazy-lsp", function()
             lang_config,
             { cmd = { "ls_user_cmd" } },
             empty_default_config,
-            { cmd = { "ls_server_cmd" }, pkgs = { "nix_pkg_name" } }
+            { "nix_pkg_name" },
+            nil,
+            { cmd = { "ls_server_cmd" } }
           )
         ).cmd
       )
@@ -239,10 +239,8 @@ local fake_servers = {
   pyright = "pyright",
   fakelsp = "fakelsp-package",
   tsserver = {
-    pkgs = {
-      "nodePackages.typescript-language-server",
-      "nodePackages.typescript",
-    },
+    "nodePackages.typescript-language-server",
+    "nodePackages.typescript",
   },
 }
 

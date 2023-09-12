@@ -32,7 +32,7 @@ f:write(string.format('\n## Supported: %d / %d\n\n', supported, total))
 f:write('| Language Server | Nix package |\n')
 f:write('| - | - |\n')
 for _, server in ipairs(supported_servers) do
-  local nix_pkg = type(servers[server]) == "string" and servers[server] or servers[server].pkgs[1]
+  local nix_pkg = type(servers[server]) == "string" and servers[server] or servers[server][1]
   local nix_link = string.format('https://search.nixos.org/packages?channel=unstable&query=%s&show=%s', nix_pkg, nix_pkg)
   f:write(string.format('| [%s](%s) | [%s](%s) |\n', server, lsp_link(server), nix_pkg, nix_link))
 end

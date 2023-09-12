@@ -59,10 +59,8 @@ return {
   erlangls = "erlang-ls",
   esbonio = "",
   eslint = {
-    pkgs = {
-      "nodePackages.vscode-langservers-extracted",
-      "nodePackages.eslint"
-    }
+    "nodePackages.vscode-langservers-extracted",
+    "nodePackages.eslint"
   },
   fennel_language_server = "",
   fennel_ls = "",
@@ -82,10 +80,8 @@ return {
   glslls = "",
   golangci_lint_ls = "",
   gopls = {
-    pkgs = {
-      "gopls",
-      "go"
-    }
+    "gopls",
+    "go"
   },
   gradle_ls = "",
   grammarly = "",
@@ -121,14 +117,7 @@ return {
   marksman = "marksman",
   matlab_ls = "",
   metals = "metals",
-  millet = {
-    cmd = {
-      "millet-ls"
-    },
-    pkgs = {
-      "millet"
-    }
-  },
+  millet = "millet",
   mint = "mint",
   mlir_lsp_server = "",
   mlir_pdll_lsp_server = "",
@@ -148,13 +137,8 @@ return {
   ocamllsp = "ocamlPackages.ocaml-lsp",
   ols = "",
   omnisharp = {
-    cmd = {
-      "OmniSharp"
-    },
-    pkgs = {
-      "omnisharp-roslyn",
-      "dotnet-sdk"
-    }
+    "omnisharp-roslyn",
+    "dotnet-sdk"
   },
   opencl_ls = "",
   openedge_ls = "",
@@ -196,13 +180,7 @@ return {
   rnix = "rnix-lsp",
   robotframework_ls = "",
   rome = {
-    cmd = {
-      "rome",
-      "lsp_proxy"
-    },
-    pkgs = {
-      "rome"
-    }
+    "rome"
   },
   rubocop = "",
   ruby_ls = "",
@@ -250,10 +228,8 @@ return {
   theme_check = "",
   tilt_ls = "tilt",
   tsserver = {
-    pkgs = {
-      "nodePackages.typescript-language-server",
-      "nodePackages.typescript"
-    }
+    "nodePackages.typescript-language-server",
+    "nodePackages.typescript"
   },
   turtle_ls = "",
   typeprof = "",

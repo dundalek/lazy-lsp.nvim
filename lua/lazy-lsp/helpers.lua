@@ -21,7 +21,7 @@ end
 -- should rename to something indicating that it is for an individual config
 local function process_config(lang_config, user_config, default_config, nix_pkg, filetypes, config_override)
   if nix_pkg ~= "" then
-    local nix_pkgs = type(nix_pkg) == "string" and { nix_pkg } or nix_pkg.pkgs
+    local nix_pkgs = type(nix_pkg) == "string" and { nix_pkg } or nix_pkg
     local config = vim.tbl_extend(
       "keep",
       user_config or {},
