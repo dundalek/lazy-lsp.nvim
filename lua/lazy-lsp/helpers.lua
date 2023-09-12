@@ -120,6 +120,7 @@ end
 
 return {
   server_configs = server_configs,
+  in_shell = in_shell,
   -- Internal, only for testing
   escape_shell_arg = escape_shell_arg,
   escape_shell_args = escape_shell_args,
