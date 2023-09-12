@@ -10,6 +10,14 @@ local function escape_shell_args(args)
   return table.concat(escaped, " ")
 end
 
+local function in_shell(nix_pkgs, cmd)
+  local nix_cmd = { "nix-shell", "-p" }
+  vim.list_extend(nix_cmd, nix_pkgs)
+  table.insert(nix_cmd, "--run")
+  table.insert(nix_cmd, escape_shell_args(cmd))
+  return nix_cmd
+end
+
 -- should rename to something indicating that it is for an individual config
 local function process_config(lang_config, user_config, default_config, nix_pkg, filetypes)
   local cmd = (user_config and user_config.cmd)
@@ -17,10 +25,7 @@ local function process_config(lang_config, user_config, default_config, nix_pkg,
     or lang_config.document_config.default_config.cmd
   if nix_pkg ~= "" and cmd then
     local nix_pkgs = type(nix_pkg) == "string" and { nix_pkg } or nix_pkg.pkgs
-    local nix_cmd = { "nix-shell", "-p" }
-    vim.list_extend(nix_cmd, nix_pkgs)
-    table.insert(nix_cmd, "--run")
-    table.insert(nix_cmd, escape_shell_args(cmd))
+    local nix_cmd = in_shell(nix_pkgs, cmd)
     local config = vim.tbl_extend(
       "keep",
       { cmd = nix_cmd },
