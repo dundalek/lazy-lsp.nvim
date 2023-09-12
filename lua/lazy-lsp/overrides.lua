@@ -1,10 +1,15 @@
 -- Having overrides in a separate file so that we can provide custom implementations with functions
 local lspconfig = require("lspconfig")
+local util = require("lspconfig/util")
 local helpers = require("lazy-lsp.helpers")
 
 return {
   elixirls = {
     cmd = { "elixir-ls" },
+  },
+  gopls = {
+    -- lspconfig tries to look up mod_cache which seems broken, do just simple root pattern
+    root_dir = util.root_pattern("go.work", "go.mod", ".git"),
   },
   jdtls = {
     on_new_config = function(new_config, new_root_dir)
