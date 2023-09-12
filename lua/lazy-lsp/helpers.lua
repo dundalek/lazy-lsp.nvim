@@ -26,13 +26,8 @@ local function process_config(lang_config, user_config, default_config, nix_pkg,
       override.cmd = nix_pkg.cmd
     end
     local nix_pkgs = type(nix_pkg) == "string" and { nix_pkg } or nix_pkg.pkgs
-    local config = vim.tbl_extend(
-      "keep",
-      user_config or {},
-      override,
-      default_config,
-      lang_config.document_config.default_config
-    )
+    local config =
+      vim.tbl_extend("keep", user_config or {}, override, default_config, lang_config.document_config.default_config)
     local original_on_new_config = config.on_new_config
 
     config.on_new_config = function(new_config, root_path)
