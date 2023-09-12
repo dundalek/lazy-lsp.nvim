@@ -167,6 +167,31 @@ describe("lazy-lsp", function()
         config.cmd
       )
     end)
+
+    it("on_new_config from user config takes precedence", function()
+      local lang_config_with_on_new_config = {
+        document_config = {
+          default_config = {
+            cmd = { "ls_original_cmd" },
+            on_new_config = function(new_config, root_path)
+              new_config.cmd = { "default_config_cmd", "--path", root_path }
+            end,
+          },
+        },
+      }
+      local user_config_with_on_new_config = {
+        on_new_config = function(new_config, root_path)
+          new_config.cmd = { "user_config_cmd", "--path", root_path }
+        end,
+      }
+      local config = helpers.process_config(lang_config_with_on_new_config, user_config_with_on_new_config,
+        empty_default_config, "nix_pkg_name")
+      config.on_new_config(config, "/some/root/path")
+      assert.same(
+        { "nix-shell", "-p", "nix_pkg_name", "--run", "'user_config_cmd' '--path' '/some/root/path'" },
+        config.cmd
+      )
+    end)
   end)
 end)
 

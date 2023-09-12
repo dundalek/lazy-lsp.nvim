@@ -33,9 +33,10 @@ local function process_config(lang_config, user_config, default_config, nix_pkg,
       default_config,
       lang_config.document_config.default_config
     )
+    local original_on_new_config = config.on_new_config
 
     config.on_new_config = function(new_config, root_path)
-      pcall(lang_config.document_config.default_config.on_new_config, new_config, root_path)
+      pcall(original_on_new_config, new_config, root_path)
       new_config.cmd = in_shell(nix_pkgs, new_config.cmd)
     end
 
