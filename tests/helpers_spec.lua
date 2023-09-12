@@ -347,6 +347,18 @@ describe("server_configs", function()
     assert.same({ "python" }, cfg.pyright.filetypes)
     assert.same({ "javascript", "typescript" }, cfg.tsserver.filetypes)
   end)
+
+  it("removes servers without specified cmd", function()
+    local lspconfig = {
+      fakelsp = {
+        document_config = {
+          default_config = { filetypes = { "javascript" } },
+        },
+      },
+    }
+    local cfgs = helpers.server_configs(lspconfig, fake_servers, {}, fake_overrides)
+    assert.same({}, cfgs)
+  end)
 end)
 
 it("replace_first", function()

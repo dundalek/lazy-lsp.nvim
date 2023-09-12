@@ -26,29 +26,30 @@ end
 
 -- should rename to something indicating that it is for an individual config
 local function process_config(lang_config, user_config, default_config, nix_pkg, filetypes, config_override)
-  if nix_pkg ~= "" then
-    local nix_pkgs = type(nix_pkg) == "string" and { nix_pkg } or nix_pkg
-    local config = vim.tbl_extend(
-      "keep",
-      user_config or {},
-      { filetypes = filetypes },
-      config_override or {},
-      default_config,
-      lang_config.document_config.default_config
-    )
+  local config = vim.tbl_extend(
+    "keep",
+    user_config or {},
+    { filetypes = filetypes },
+    config_override or {},
+    default_config,
+    lang_config.document_config.default_config
+  )
+
+  if nix_pkg ~= "" and config.cmd then
     local original_on_new_config = config.on_new_config
 
     config.on_new_config = function(new_config, root_path)
       pcall(original_on_new_config, new_config, root_path)
       -- Don't wrap with nix-shell if user callback already wrapped it
       if new_config.cmd[1] ~= "nix-shell" then
+        local nix_pkgs = type(nix_pkg) == "string" and { nix_pkg } or nix_pkg
         new_config.cmd = in_shell(nix_pkgs, new_config.cmd)
       end
     end
 
     return config
   elseif user_config then
-    local config = vim.tbl_extend("keep", user_config, default_config)
+    config = vim.tbl_extend("keep", user_config, default_config)
     return config
   end
 
