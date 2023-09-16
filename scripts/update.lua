@@ -23,6 +23,11 @@ for k, v in pairs(lazy_servers) do
   end
 end
 
+-- Remove following so that they are not automatically added which would cause warning messages on neovim startup
+print("Ignoring deprecated: `rome`, `sqls`")
+servers.rome = nil
+servers.sqls = nil
+
 local f = io.open(servers_file, 'w')
 f:write('return ' .. serpent.block(servers, { comment = false }) .. '\n')
 f:close()

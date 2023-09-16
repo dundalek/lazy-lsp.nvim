@@ -179,9 +179,6 @@ return {
   rls = "",
   rnix = "rnix-lsp",
   robotframework_ls = "",
-  rome = {
-    "rome"
-  },
   rubocop = "",
   ruby_ls = "",
   ruff_lsp = "ruff-lsp",
@@ -205,7 +202,6 @@ return {
   sourcery = "",
   spectral = "",
   sqlls = "",
-  sqls = "sqls",
   standardrb = "",
   starlark_rust = "",
   statix = "",

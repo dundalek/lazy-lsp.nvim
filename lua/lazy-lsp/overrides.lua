@@ -27,7 +27,4 @@ return {
   omnisharp = {
     cmd = { "OmniSharp" },
   },
-  rome = {
-    cmd = { "rome", "lsp_proxy" },
-  },
 }
