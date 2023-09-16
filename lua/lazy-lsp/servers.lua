@@ -148,7 +148,7 @@ return {
   pasls = "",
   perlls = "",
   perlnavigator = "",
-  perlpls = "perl534Packages.PLS",
+  perlpls = "perl538Packages.PLS",
   pest_ls = "",
   phan = "",
   phpactor = "phpactor",
