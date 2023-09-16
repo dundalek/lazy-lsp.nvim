@@ -1,35 +1,66 @@
 # lazy-lsp.nvim
 
-Neovim plugin to automatically install [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) language servers.
+Neovim plugin to automatically install [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) language servers. It is an alternative to [mason.nvim](https://github.com/williamboman/mason.nvim).
+
+To ease the setup even further it can be complemented with [lsp-zero.nvim](https://github.com/VonHeikemen/lsp-zero.nvim).
 
 Language servers are loaded in the background without a need of a manual user intervention. They are not installed upfront, but only on-demand after a source file for a given language is opened. The plugin works by relying on Nix package manager which works on Linux, macOS and Windows WSL.
 
-Currently supports 97 out of 244 servers available in lspconfig, see the full list of [supported servers](./servers.md).
+Currently available 97 out of 244 servers in lspconfig, see the full list of [supported servers](./servers.md).
 
 ## Install
 
 Requires Neovim v0.7.0+
 
 1. Install [Nix](https://nixos.org/download.html#nix-quick-install) package manager: `curl -L https://nixos.org/nix/install | sh`
-2. Install the plugin using [packer](https://github.com/wbthomason/packer.nvim):
+2. Install the plugin using [lazy.nvim](https://github.com/folke/lazy.nvim):
 
-```
-use { 'dundalek/lazy-lsp.nvim', requires = { 'neovim/nvim-lspconfig' } }
+```lua
+{
+  "dundalek/lazy-lsp.nvim",
+  dependencies = { "neovim/nvim-lspconfig" },
+  config = function()
+    require("lazy-lsp").setup {}
+  end
+},
 ```
 
-Alternatively, you can install the plugin via [Nix/Home Manager](./notes.md#install-via-nix%2Fhome-manager).
+Alternatively, you can install the plugin via [Nix/Home Manager](./notes.md#install-via-nixhome-manager).
 
 3. That's it, nothing else to install!
 
 ## Setup
 
-Add to `init.lua`:
+Quickest way to configure is to use [lsp-zero.nvim](https://github.com/VonHeikemen/lsp-zero.nvim) which sets up key bindings and autocompletion.
 
 ```lua
-require("lazy-lsp").setup {}
+{
+  "dundalek/lazy-lsp.nvim",
+  dependencies = {
+    "neovim/nvim-lspconfig",
+    {"VonHeikemen/lsp-zero.nvim", branch = "v3.x"},
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/nvim-cmp",
+  },
+  config = function()
+    local lsp_zero = require("lsp-zero")
+
+    lsp_zero.on_attach(function(client, bufnr)
+      -- see :help lsp-zero-keybindings to learn the available actions
+      lsp_zero.default_keymaps({
+        buffer = bufnr,
+        preserve_mappings = false
+      })
+    end)
+
+    require("lazy-lsp").setup {}
+  end,
+},
 ```
 
-Available options:
+Another approach is to configure manually by passing `on_attach` handler which sets up keybindings and `capabilities` for autocomplection in the `default_config` section.
+
+Available configuration options:
 
 ```lua
 require("lazy-lsp").setup {
@@ -68,15 +99,9 @@ require("lazy-lsp").setup {
 }
 ```
 
-For `init.vim` based config wrap with lua command:
+## How it works
 
-```vim
-lua << EOF
-require("lazy-lsp").setup {
-  ...
-}
-EOF
-```
+`lazy-lsp` registers all available configurations from lspconfig to start LSP servers by wrapping the commands in a [nix-shell](https://nixos.org/manual/nix/unstable/command-ref/nix-shell.html) environment. The nix-shell prepares the environment by pulling all specified dependencies regardless of what is installed on the host system and avoids packages clashes. The first time a server is run there is a delay until dependencies are downloaded, but on subsequent runs the time to prepare the shell environment is negligeable.
 
 ## Versions
 
@@ -85,10 +110,6 @@ I recommend to use the `unstable` channel to get the latest versions.
 
 If you encounter an older version of a language server try to run `nix-channel --update` to update channels.
 See [docs about channels](https://nixos.wiki/wiki/Nix_channels) for more details how to work with channels.
-
-## How it works
-
-`lazy-lsp` registers all available configurations from lspconfig to start LSP servers by wrapping the commands in a [nix-shell](https://nixos.org/manual/nix/unstable/command-ref/nix-shell.html) environment. The nix-shell prepares the environment by pulling all specified dependencies regardless of what is installed on the host system and avoids packages clashes. The first time a server is run there is a delay until dependencies are downloaded, but on subsequent runs the time to prepare the shell environment is negligeable.
 
 ## Comparison with alternatives
 
