@@ -25,7 +25,7 @@ local function in_shell(nix_pkgs, cmd)
 end
 
 -- should rename to something indicating that it is for an individual config
-local function process_config(lang_config, user_config, default_config, nix_pkg, filetypes, config_override)
+local function process_config(lang_config, user_config, default_config, nix_pkg, filetypes, config_override, prefer_local)
   local config = vim.tbl_extend(
     "keep",
     user_config or {},
@@ -42,8 +42,10 @@ local function process_config(lang_config, user_config, default_config, nix_pkg,
       pcall(original_on_new_config, new_config, root_path)
       -- Don't wrap with nix-shell if user callback already wrapped it
       if new_config.cmd[1] ~= "nix-shell" then
-        local nix_pkgs = type(nix_pkg) == "string" and { nix_pkg } or nix_pkg
-        new_config.cmd = in_shell(nix_pkgs, new_config.cmd)
+        if prefer_local == false or vim.fn.executable(new_config.cmd[1]) == 0 then
+          local nix_pkgs = type(nix_pkg) == "string" and { nix_pkg } or nix_pkg
+          new_config.cmd = in_shell(nix_pkgs, new_config.cmd)
+        end
       end
     end
 
@@ -96,6 +98,7 @@ local function server_configs(lspconfig, servers, opts, overrides)
   local default_config = opts.default_config or {}
   local configs = opts.configs or {}
   local preferred_servers = opts.preferred_servers or {}
+  local prefer_local = opts.prefer_local or false
 
   local included_servers = vim.tbl_extend("force", {}, servers)
   for _, server in ipairs(excluded_servers) do
@@ -119,7 +122,7 @@ local function server_configs(lspconfig, servers, opts, overrides)
       local config_override = overrides[lsp]
 
       local config =
-        process_config(lang_config, user_config, default_config, nix_pkg, server_to_filetypes[lsp], config_override)
+        process_config(lang_config, user_config, default_config, nix_pkg, server_to_filetypes[lsp], config_override, prefer_local)
       if config then
         returned_configs[lsp] = config
       end

@@ -10,8 +10,8 @@ Currently supports 97 out of 244 servers available in lspconfig, see the full li
 
 Requires Neovim v0.7.0+
 
-1) Install [Nix](https://nixos.org/download.html#nix-quick-install) package manager:  `curl -L https://nixos.org/nix/install | sh`
-2) Install the plugin using [packer](https://github.com/wbthomason/packer.nvim):
+1. Install [Nix](https://nixos.org/download.html#nix-quick-install) package manager: `curl -L https://nixos.org/nix/install | sh`
+2. Install the plugin using [packer](https://github.com/wbthomason/packer.nvim):
 
 ```
 use { 'dundalek/lazy-lsp.nvim', requires = { 'neovim/nvim-lspconfig' } }
@@ -19,7 +19,7 @@ use { 'dundalek/lazy-lsp.nvim', requires = { 'neovim/nvim-lspconfig' } }
 
 Alternatively, you can install the plugin via [Nix/Home Manager](./notes.md#install-via-nix%2Fhome-manager).
 
-3) That's it, nothing else to install!
+3. That's it, nothing else to install!
 
 ## Setup
 
@@ -37,6 +37,7 @@ require("lazy-lsp").setup {
   excluded_servers = {
     "ccls", "zk",
   },
+  prefer_local = true, -- Prefer locally installed servers over nix-shell
   -- Alternatively specify preferred servers for a filetype (others will be ignored).
   preferred_servers = {
     haskell = { "hls" },
@@ -68,6 +69,7 @@ require("lazy-lsp").setup {
 ```
 
 For `init.vim` based config wrap with lua command:
+
 ```vim
 lua << EOF
 require("lazy-lsp").setup {
@@ -107,6 +109,7 @@ See [docs about channels](https://nixos.wiki/wiki/Nix_channels) for more details
 The available lsp servers and stats are generated from `nvim-lspconfig` source.
 
 Make a local copy:
+
 ```
 mkdir tmp && cd tmp
 git clone https://github.com/neovim/nvim-lspconfig.git
@@ -115,6 +118,7 @@ git clone https://github.com/neovim/nvim-lspconfig.git
 Run `nix-shell` to load dependencies needed for running the dev scripts.
 
 Update `servers.lua` with new entries:
+
 ```
 cd tmp/nvim-lspconfig
 git pull
@@ -123,6 +127,7 @@ scripts/update.lua
 ```
 
 Once done specifying servers, generate the stats in [servers.md](servers.md):
+
 ```
 scripts/genstats.lua
 ```
@@ -132,11 +137,13 @@ scripts/genstats.lua
 Using Plenary for testing, see the [Testing Guide](https://github.com/nvim-lua/plenary.nvim/blob/master/TESTS_README.md) for details.
 
 Run tests:
+
 ```
 scripts/test
 ```
 
 Run tests in watch mode:
+
 ```
 scripts/test-watch
 ```
