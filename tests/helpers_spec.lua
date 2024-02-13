@@ -359,6 +359,51 @@ describe("server_configs", function()
     local cfgs = helpers.server_configs(lspconfig, fake_servers, {}, fake_overrides)
     assert.same({}, cfgs)
   end)
+
+  describe("prefer_local", function()
+    local empty_overrides = {}
+    local locally_installed_binary = "git"
+    local lspconfig_with_binary = {
+      fakelsp = {
+        document_config = {
+          default_config = { filetypes = { "fake" }, cmd = { locally_installed_binary } },
+        },
+      },
+    }
+
+    it("wraps in shell by default", function()
+      local cfgs = helpers.server_configs(lspconfig_with_binary, fake_servers, {}, empty_overrides)
+      assert.same({ "nix-shell", "-p", "fakelsp-package", "--run", "'git'" }, make_config(cfgs.fakelsp).cmd)
+    end)
+
+    it("wraps in shell when option false", function()
+      local cfgs =
+        helpers.server_configs(lspconfig_with_binary, fake_servers, { prefer_local = false }, empty_overrides)
+      assert.same({ "nix-shell", "-p", "fakelsp-package", "--run", "'git'" }, make_config(cfgs.fakelsp).cmd)
+    end)
+
+    it("uses local binary when option true", function()
+      local cfgs = helpers.server_configs(lspconfig_with_binary, fake_servers, { prefer_local = true }, empty_overrides)
+      assert.same({ "git" }, make_config(cfgs.fakelsp).cmd)
+    end)
+
+    local non_existing_binary = "this-does-not-exist"
+    local lspconfig_without_binary = {
+      fakelsp = {
+        document_config = {
+          default_config = { filetypes = { "fake" }, cmd = { non_existing_binary } },
+        },
+      },
+    }
+    it("wraps in shell when binary not found", function()
+      local cfgs =
+        helpers.server_configs(lspconfig_without_binary, fake_servers, { prefer_local = true }, empty_overrides)
+      assert.same(
+        { "nix-shell", "-p", "fakelsp-package", "--run", "'this-does-not-exist'" },
+        make_config(cfgs.fakelsp).cmd
+      )
+    end)
+  end)
 end)
 
 it("replace_first", function()
