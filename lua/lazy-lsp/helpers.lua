@@ -25,7 +25,15 @@ local function in_shell(nix_pkgs, cmd)
 end
 
 -- should rename to something indicating that it is for an individual config
-local function process_config(lang_config, user_config, default_config, nix_pkg, filetypes, config_override, prefer_local)
+local function process_config(
+  lang_config,
+  user_config,
+  default_config,
+  nix_pkg,
+  filetypes,
+  config_override,
+  prefer_local
+)
   local config = vim.tbl_extend(
     "keep",
     user_config or {},
@@ -121,8 +129,15 @@ local function server_configs(lspconfig, servers, opts, overrides)
       local user_config = configs[lsp]
       local config_override = overrides[lsp]
 
-      local config =
-        process_config(lang_config, user_config, default_config, nix_pkg, server_to_filetypes[lsp], config_override, prefer_local)
+      local config = process_config(
+        lang_config,
+        user_config,
+        default_config,
+        nix_pkg,
+        server_to_filetypes[lsp],
+        config_override,
+        prefer_local
+      )
       if config then
         returned_configs[lsp] = config
       end
