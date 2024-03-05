@@ -27,4 +27,7 @@ return {
   omnisharp = {
     cmd = { "OmniSharp" },
   },
+  perlnavigator = {
+    cmd = { "perlnavigator", "--stdio" },
+  },
 }
