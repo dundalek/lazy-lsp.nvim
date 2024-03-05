@@ -6,7 +6,7 @@ To ease the setup even further it can be complemented with [lsp-zero.nvim](https
 
 Language servers are loaded in the background without a need of a manual user intervention. They are not installed upfront, but only on-demand after a source file for a given language is opened. The plugin works by relying on Nix package manager which works on Linux, macOS and Windows WSL.
 
-Currently available 97 out of 244 servers in lspconfig, see the full list of [supported servers](./servers.md).
+Currently available 116 out of 287 servers in lspconfig, see the full list of [supported servers](./servers.md).
 
 ## Install
 
