@@ -93,7 +93,10 @@ return {
   helm_ls = "",
   hhvm = "",
   hie = "",
-  hls = "haskell-language-server",
+  hls = {
+    "haskell-language-server",
+    "ghc"
+  },
   hoon_ls = "",
   html = "nodePackages.vscode-langservers-extracted",
   idris2_lsp = "",
