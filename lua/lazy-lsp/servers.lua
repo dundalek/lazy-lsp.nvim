@@ -231,7 +231,11 @@ return {
   ruby_ls = "rubyPackages.ruby-lsp",
   ruff_lsp = "ruff-lsp",
   rune_languageserver = "rune-languageserver",
-  rust_analyzer = "rust-analyzer",
+  rust_analyzer = {
+    "rust-analyzer",
+    "cargo",
+    "rustfmt"
+  },
   salt_ls = "",
   scheme_langserver = "",
   scry = "scry",
