@@ -39,7 +39,7 @@ return {
           or util.root_pattern("rust-project.json")(fname)
           or util.find_git_ancestor(fname)
       end
-      return lspconfig.jdtls.document_config.default_config.root_dir(fname)
+      return lspconfig.rust_analyzer.document_config.default_config.root_dir(fname)
     end,
   },
 }
