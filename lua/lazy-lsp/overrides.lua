@@ -36,10 +36,10 @@ return {
       -- It fails if cargo is not available, fallback to a simpler detection.
       if not vim.fn.executable("cargo") then
         return util.root_pattern("Cargo.toml")(fname)
-            or util.root_pattern("rust-project.json")(fname)
-            or util.find_git_ancestor(fname)
+          or util.root_pattern("rust-project.json")(fname)
+          or util.find_git_ancestor(fname)
       end
       return lspconfig.jdtls.document_config.default_config.root_dir(fname)
-    end
+    end,
   },
 }
