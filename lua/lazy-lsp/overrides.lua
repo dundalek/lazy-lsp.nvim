@@ -10,10 +10,10 @@ return {
   gopls = {
     root_dir = function(fname)
       -- lspconfig tries to look up mod_cache using go, if not available fallback to a simple root pattern
-      if not vim.fn.executable("go") then
-        return util.root_pattern("go.work", "go.mod", ".git")(fname)
+      if vim.fn.executable("go") == 1 then
+        return lspconfig.gopls.document_config.default_config.root_dir(fname)
       end
-      return lspconfig.gopls.document_config.default_config.root_dir(fname)
+      return util.root_pattern("go.work", "go.mod", ".git")(fname)
     end,
   },
   -- java-language-server seems to have problems with lsp protocol, so let's not define a cmd for it
@@ -39,12 +39,12 @@ return {
     root_dir = function(fname)
       -- Default lspconfig root_dir detection uses cargo to try to detect workspace directory.
       -- It fails if cargo is not available, fallback to a simpler detection.
-      if not vim.fn.executable("cargo") then
-        return util.root_pattern("Cargo.toml")(fname)
-          or util.root_pattern("rust-project.json")(fname)
-          or util.find_git_ancestor(fname)
+      if vim.fn.executable("cargo") == 1 then
+        return lspconfig.rust_analyzer.document_config.default_config.root_dir(fname)
       end
-      return lspconfig.rust_analyzer.document_config.default_config.root_dir(fname)
+      return util.root_pattern("Cargo.toml")(fname)
+        or util.root_pattern("rust-project.json")(fname)
+        or util.find_git_ancestor(fname)
     end,
   },
 }
