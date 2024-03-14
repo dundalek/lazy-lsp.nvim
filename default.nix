@@ -1,7 +1,6 @@
 with import <nixpkgs> { };
-stdenv.mkDerivation {
-  name = "lazy-lsp-env";
-  buildInputs = [
+mkShell {
+buildInputs = [
     babashka
     git
     luajit
@@ -9,5 +8,5 @@ stdenv.mkDerivation {
     neovim
     stylua
     watchexec # for running tests in watch mode
-  ];
+];
 }
