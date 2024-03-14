@@ -11,7 +11,8 @@ jobs:
       with:
         nix_path: nixpkgs=channel:nixos-unstable
     - uses: DeterminateSystems/magic-nix-cache-action@main
-    - run: nix-build
+    - name: Run nix-build to prime magic-nix-cache
+      run: nix-build
     - name: Prepare Nix deps
       run: nix-shell --run "nvim --version"
     - name: Run tests
