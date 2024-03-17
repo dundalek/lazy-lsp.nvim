@@ -8,7 +8,7 @@ local configurations_directory = 'tmp/nvim-lspconfig/lua/lspconfig/server_config
 local lazy_servers = dofile(servers_file)
 local servers = {}
 
-local pfile = io.popen("ls '" .. configurations_directory .. "'")
+local pfile = assert(io.popen("ls '" .. configurations_directory .. "'"))
 for filename in pfile:lines() do
   local server = filename:gsub('%.lua$', '')
   servers[server] = ""
@@ -28,6 +28,6 @@ print("Ignoring deprecated: `rome`, `sqls`")
 servers.rome = nil
 servers.sqls = nil
 
-local f = io.open(servers_file, 'w')
+local f = assert(io.open(servers_file, 'w'))
 f:write('return ' .. serpent.block(servers, { comment = false }) .. '\n')
 f:close()
