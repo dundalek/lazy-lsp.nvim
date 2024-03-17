@@ -1,4 +1,4 @@
-#!/usr/bin/env luajit
+#!/usr/bin/env -S nvim -l
 -- Update servers.md
 
 local servers = dofile('lua/lazy-lsp/servers.lua')
@@ -27,7 +27,7 @@ local function lsp_link(server)
   return 'https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#' .. server
 end
 
-local f = io.open('servers.md', 'w')
+local f = assert(io.open('servers.md', 'w'))
 f:write(string.format('\n## Supported: %d / %d\n\n', supported, total))
 f:write('| Language Server | Nix package |\n')
 f:write('| - | - |\n')
@@ -43,7 +43,8 @@ end
 f:close()
 
 print("Supported:", supported)
-print("Missing:", missing)
-print("Total:\t", total)
+print("Missing:  ", missing)
+print("Total:    ", total)
 print()
 print("Don't forget to update stats in README.md!")
+print(string.format("%d out of %d", supported, total))
