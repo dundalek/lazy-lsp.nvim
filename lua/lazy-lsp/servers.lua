@@ -173,7 +173,6 @@ return {
   ntt = "",
   nushell = "nushell",
   nxls = "",
-  ocamlls = "nodePackages.ocaml-language-server",
   ocamllsp = "ocamlPackages.ocaml-lsp",
   ols = "",
   omnisharp = {
