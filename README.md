@@ -68,12 +68,12 @@ require("lazy-lsp").setup {
   excluded_servers = {
     "ccls", "zk",
   },
-  prefer_local = true, -- Prefer locally installed servers over nix-shell
   -- Alternatively specify preferred servers for a filetype (others will be ignored).
   preferred_servers = {
-    haskell = { "hls" },
-    rust = { "rust_analyzer" },
+    markdown = {},
+    python = { "pyright", "ruff_lsp" },
   },
+  prefer_local = true, -- Prefer locally installed servers over nix-shell
   -- Default config passed to all servers to specify on_attach callback and other options.
   default_config = {
     flags = {
@@ -98,6 +98,12 @@ require("lazy-lsp").setup {
   },
 }
 ```
+
+## Curated servers
+
+The philosophy of this plugin is to enable all possible plugins by default to get the highest chance of LSP functionality being available, even at a cost of starting multiple servers for a single language. Any misbehaving or unwanted servers can be excluded one by one. 
+
+If this is not what you want, you can give a try to the [curated configuration](servers.md#curated-servers) that enables smaller selection of recommended servers.
 
 ## How it works
 
