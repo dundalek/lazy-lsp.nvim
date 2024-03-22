@@ -100,14 +100,7 @@ local function build_server_to_filetypes_index(server_to_filetypes)
   return index
 end
 
-local function server_configs(lspconfig, servers, opts, overrides)
-  opts = opts or {}
-  local excluded_servers = opts.excluded_servers or {}
-  local default_config = opts.default_config or {}
-  local configs = opts.configs or {}
-  local preferred_servers = opts.preferred_servers or {}
-  local prefer_local = opts.prefer_local or false
-
+local function enabled_filetypes_to_servers(servers, lspconfig, excluded_servers, preferred_servers)
   local included_servers = vim.tbl_extend("force", {}, servers)
   for _, server in ipairs(excluded_servers) do
     included_servers[server] = nil
@@ -118,13 +111,26 @@ local function server_configs(lspconfig, servers, opts, overrides)
     filetype_servers = type(filetype_servers) == "string" and { filetype_servers } or filetype_servers
     filetype_to_servers[filetype] = filetype_servers
   end
+  return filetype_to_servers
+end
+
+local function server_configs(lspconfig, servers, opts, overrides)
+  opts = opts or {}
+  local excluded_servers = opts.excluded_servers or {}
+  local default_config = opts.default_config or {}
+  local configs = opts.configs or {}
+  local preferred_servers = opts.preferred_servers or {}
+  local prefer_local = opts.prefer_local or false
+
+  local filetype_to_servers = enabled_filetypes_to_servers(servers, lspconfig, excluded_servers, preferred_servers)
   local server_to_filetypes = build_server_to_filetypes_index(filetype_to_servers)
 
   local returned_configs = {}
-  for lsp, nix_pkg in pairs(included_servers) do
+  for lsp, _ in pairs(server_to_filetypes) do
     -- Check if a server is excluded first, so that we don't look up the config
     -- and for deprecated servers we won't get a warning message.
     if server_to_filetypes[lsp] and lspconfig[lsp] then
+      local nix_pkg = servers[lsp]
       local lang_config = lspconfig[lsp]
       local user_config = configs[lsp]
       local config_override = overrides[lsp]
@@ -156,4 +162,5 @@ return {
   process_config = process_config,
   build_filetype_to_servers_index = build_filetype_to_servers_index,
   build_server_to_filetypes_index = build_server_to_filetypes_index,
+  enabled_filetypes_to_servers = enabled_filetypes_to_servers,
 }
