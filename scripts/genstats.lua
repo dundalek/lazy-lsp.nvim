@@ -16,7 +16,33 @@ for server, pkg in pairs(servers) do
   end
 end
 
-local filetype_to_servers = helpers.build_filetype_to_servers_index(available_servers, lspconfig)
+-- Curated recommendations
+local curated_opts = [[{
+  excluded_servers = {
+    "ccls",                            -- prefer clangd
+    "denols",                          -- prefer eslint and tsserver
+    "docker_compose_language_service", -- yamlls should be enough?
+    "flow",                            -- prefer eslint and tsserver
+    "ltex",                            -- grammar tool using too much CPU
+    "quick_lint_js",                   -- prefer eslint and tsserver
+    "rnix",                            -- archived on Jan 25, 2024
+    "scry",                            -- archived on Jun 1, 2023
+    "tailwindcss",                     -- associates with too many filetypes
+  },
+  preferred_servers = {
+    markdown = {},
+    python = { "pyright", "ruff_lsp" },
+  },
+}
+]]
+local opts = load("return " .. curated_opts)()
+
+local filetype_to_servers = helpers.enabled_filetypes_to_servers(
+  available_servers, lspconfig, {}, {}
+)
+local filetype_to_servers_curated = helpers.enabled_filetypes_to_servers(
+  available_servers, lspconfig, opts.excluded_servers, opts.preferred_servers
+)
 
 local filetypes_with_variants = {}
 for filetype, filetype_servers in pairs(filetype_to_servers) do
@@ -50,31 +76,48 @@ local function lsp_link(server)
   return 'https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#' .. server
 end
 
+local function write_server_list(f, servers)
+  table.sort(servers)
+  for i, server in ipairs(servers) do
+    if (i ~= 1) then f:write(', ') end
+    f:write(string.format('[%s](%s)', server, lsp_link(server)))
+  end
+end
+
 local f = assert(io.open('servers.md', 'w'))
 
 f:write([[
-## Filetypes
+
+## Curated servers
+
+You can use  the following configuration to enable a smaller selection of recommended servers that should work well for most users.
+
+```lua
+]] ..
+  curated_opts ..
+  [[
+```
+## Servers by filetypes
 
 Following table lists filetypes with more than one associated server.
-It can be used to decide which servers to specify using the `preferred_servers` configuration option.
+It can be used to decide which servers to specify using the `excluded_servers` and `preferred_servers` configuration options.
 
-| Filetype | Available servers |
-| - | - |
+| Filetype | Available servers | Curated selection |
+| - | - | - |
 ]])
 local filetypes = vim.tbl_keys(filetypes_with_variants)
 table.sort(filetypes)
 for _, filetype in ipairs(filetypes) do
-  local filetype_servers = filetypes_with_variants[filetype]
   f:write(string.format('| `%s` | ', filetype))
-  table.sort(filetype_servers)
-  for i, server in ipairs(filetype_servers) do
-    if (i ~= 1) then f:write(', ') end
-    f:write(string.format('[%s](%s)', server, lsp_link(server)))
-  end
+  write_server_list(f, filetypes_with_variants[filetype])
+
+  f:write(" | ")
+  write_server_list(f, filetype_to_servers_curated[filetype])
+
   f:write(" |\n")
 end
 
-f:write(string.format('\n## Supported: %d / %d\n\n', supported, total))
+f:write(string.format('\n## Available servers: %d / %d\n\n', supported, total))
 f:write('| Language Server | Nix package |\n')
 f:write('| - | - |\n')
 for _, server in ipairs(supported_servers) do
