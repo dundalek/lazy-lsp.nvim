@@ -14,6 +14,9 @@ for server, pkg in pairs(servers) do
   if pkg ~= "" then
     available_servers[server] = pkg
   end
+  if not lspconfig[server].document_config.default_config.filetypes then
+    print(string.format("Info: No filetypes for %s", server))
+  end
 end
 
 -- Curated recommendations

@@ -263,29 +263,45 @@ it("build_filetype_to_servers_index", function()
   }, normalize_table_values(filetype_to_servers))
 end)
 
-it("build_server_to_filetypes_index", function()
-  local filetype_to_servers = helpers.build_filetype_to_servers_index(fake_lspconfig, fake_lspconfig)
-  local server_to_filetypes = helpers.build_server_to_filetypes_index(filetype_to_servers)
+describe("build_server_to_filetypes_index", function()
+  it("returns same servers and filetypes", function()
+    local filetype_to_servers = helpers.build_filetype_to_servers_index(fake_lspconfig, fake_lspconfig)
+    local server_to_filetypes = helpers.build_server_to_filetypes_index(filetype_to_servers)
 
-  assert.same({
-    fakelsp = { "javascript", "python", "typescript" },
-    pylsp = { "python" },
-    pyright = { "python" },
-    tsserver = { "javascript", "typescript" },
-  }, normalize_table_values(server_to_filetypes))
-end)
+    assert.same({
+      fakelsp = { "javascript", "python", "typescript" },
+      pylsp = { "python" },
+      pyright = { "python" },
+      tsserver = { "javascript", "typescript" },
+    }, normalize_table_values(server_to_filetypes))
+  end)
 
-it("build_server_to_filetypes_index", function()
-  local filetype_to_servers = helpers.build_filetype_to_servers_index(fake_lspconfig, fake_lspconfig)
-  filetype_to_servers.python = { "pyright" }
-  filetype_to_servers.typescript = { "tsserver" }
-  local server_to_filetypes = helpers.build_server_to_filetypes_index(filetype_to_servers)
+  it("returns subset of servers with overrides", function()
+    local filetype_to_servers = helpers.build_filetype_to_servers_index(fake_lspconfig, fake_lspconfig)
+    filetype_to_servers.python = { "pyright" }
+    filetype_to_servers.typescript = { "tsserver" }
+    local server_to_filetypes = helpers.build_server_to_filetypes_index(filetype_to_servers)
 
-  assert.same({
-    fakelsp = { "javascript" },
-    pyright = { "python" },
-    tsserver = { "javascript", "typescript" },
-  }, normalize_table_values(server_to_filetypes))
+    assert.same({
+      fakelsp = { "javascript" },
+      pyright = { "python" },
+      tsserver = { "javascript", "typescript" },
+    }, normalize_table_values(server_to_filetypes))
+  end)
+
+  it("servers with no filetypes are omitted", function()
+    local fake_lspconfig = {
+      fakelsp_no_filetypes = {
+        document_config = {
+          default_config = { cmd = { "fakelsp-no-filetypes" } },
+        },
+      },
+    }
+    local filetype_to_servers = helpers.build_filetype_to_servers_index(fake_lspconfig, fake_lspconfig)
+    local server_to_filetypes = helpers.build_server_to_filetypes_index(filetype_to_servers)
+
+    assert.same({}, normalize_table_values(server_to_filetypes))
+  end)
 end)
 
 describe("server_configs", function()

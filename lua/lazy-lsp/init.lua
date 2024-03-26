@@ -5,6 +5,8 @@ local helpers = require("lazy-lsp.helpers")
 
 local function setup(opts)
   for server, config in pairs(helpers.server_configs(lspconfig, servers, opts, overrides)) do
+    assert(config.filetypes, "server " .. server .. " does not provide filetypes and is not omitted")
+
     if opts.experimental_lazy_setup ~= true or not config.filetypes then
       lspconfig[server].setup(config)
     else
