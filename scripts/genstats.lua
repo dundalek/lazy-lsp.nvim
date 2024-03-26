@@ -133,9 +133,17 @@ end
 
 f:close()
 
+-- Auto update stats in README
+f = assert(io.open('README.md', 'r+'))
+local content = f:read("*all")
+content = content:gsub(
+  "<!%-%- SERVER_COUNT_PLACEHOLDER %-%->.+<!%-%- SERVER_COUNT_PLACEHOLDER %-%->",
+  string.format("<!-- SERVER_COUNT_PLACEHOLDER -->%d out of %d<!-- SERVER_COUNT_PLACEHOLDER -->", supported, total)
+)
+f:seek("set")
+f:write(content)
+f:close()
+
 print("Supported:", supported)
 print("Missing:  ", missing)
 print("Total:    ", total)
-print()
-print("Don't forget to update stats in README.md!")
-print(string.format("%d out of %d", supported, total))
