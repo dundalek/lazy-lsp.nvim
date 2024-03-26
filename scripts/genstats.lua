@@ -90,7 +90,7 @@ f:write([[
 
 ## Curated servers
 
-You can use  the following configuration to enable a smaller selection of recommended servers that should work well for most users.
+You can use the following configuration to enable a smaller selection of recommended servers that should work well for most users.
 
 ```lua
 ]] ..
