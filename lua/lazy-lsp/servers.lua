@@ -152,7 +152,7 @@ return {
   marksman = "marksman",
   matlab_ls = "matlab-language-server",
   mdx_analyzer = "",
-  metals = "metals",
+  metals = { "metals", "jdk17" },
   millet = "millet",
   mint = "mint",
   mlir_lsp_server = "",
