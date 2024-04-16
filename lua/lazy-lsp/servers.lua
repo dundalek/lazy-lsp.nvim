@@ -227,7 +227,7 @@ return {
   rnix = "rnix-lsp",
   robotframework_ls = "",
   rubocop = "",
-  ruby_ls = "rubyPackages.ruby-lsp",
+  ruby_lsp = "rubyPackages.ruby-lsp",
   ruff_lsp = "ruff-lsp",
   rune_languageserver = "rune-languageserver",
   rust_analyzer = {
