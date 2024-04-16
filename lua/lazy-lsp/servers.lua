@@ -91,7 +91,7 @@ return {
   flux_lsp = "",
   foam_ls = "",
   fortls = "fortls",
-  fsautocomplete = "",
+  fsautocomplete = "fsautocomplete",
   fsharp_language_server = "",
   fstar = "fstar",
   futhark_lsp = "futhark",
