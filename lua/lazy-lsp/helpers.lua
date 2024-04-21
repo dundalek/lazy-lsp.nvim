@@ -109,7 +109,9 @@ local function enabled_filetypes_to_servers(servers, lspconfig, excluded_servers
   local filetype_to_servers = build_filetype_to_servers_index(included_servers, lspconfig)
   for filetype, filetype_servers in pairs(preferred_servers) do
     filetype_servers = type(filetype_servers) == "string" and { filetype_servers } or filetype_servers
-    filetype_to_servers[filetype] = filetype_servers
+    filetype_to_servers[filetype] = vim.tbl_filter(function(server)
+      return included_servers[server]
+    end, filetype_servers)
   end
   return filetype_to_servers
 end
