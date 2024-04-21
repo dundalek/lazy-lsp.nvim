@@ -87,9 +87,9 @@ local function build_filetype_to_servers_index(servers, lspconfig)
   return index
 end
 
-local function build_server_to_filetypes_index(server_to_filetypes)
+local function build_server_to_filetypes_index(filetype_to_servers)
   local index = {}
-  for filetype, servers in pairs(server_to_filetypes) do
+  for filetype, servers in pairs(filetype_to_servers) do
     for _, server in ipairs(servers) do
       if not index[server] then
         index[server] = {}
