@@ -376,6 +376,18 @@ describe("server_configs", function()
     assert.same({}, cfgs)
   end)
 
+  it("excluded_servers takes priority over preferred_servers", function()
+    local cfgs = helpers.server_configs(fake_lspconfig, fake_servers, {
+      excluded_servers = {
+        "pyright",
+      },
+      preferred_servers = {
+        python = { "pyright" },
+      },
+    }, fake_overrides)
+    assert.is_nil(cfgs.pyright)
+  end)
+
   describe("prefer_local", function()
     local empty_overrides = {}
     local locally_installed_binary = "git"
