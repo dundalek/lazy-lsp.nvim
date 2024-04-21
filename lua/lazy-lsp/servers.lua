@@ -1,4 +1,5 @@
 return {
+  agda_ls = "",
   aiken = "",
   als = "",
   anakin_language_server = "",
@@ -13,6 +14,7 @@ return {
   autotools_ls = "",
   awk_ls = "",
   azure_pipelines_ls = "",
+  basedpyright = "",
   bashls = "nodePackages.bash-language-server",
   beancount = "beancount-language-server",
   bicep = "",
@@ -66,6 +68,7 @@ return {
   dprint = "",
   drools_lsp = "",
   ds_pinyin_lsp = "",
+  earthlyls = "",
   ecsact = "",
   efm = "efm-langserver",
   elixirls = {
@@ -99,6 +102,8 @@ return {
   gdshader_lsp = "",
   ghcide = "",
   ghdl_ls = "",
+  ginko_ls = "",
+  gitlab_ci_ls = "",
   gleam = "gleam",
   glint = "",
   glsl_analyzer = "",
@@ -119,6 +124,7 @@ return {
   helm_ls = "helm-ls",
   hhvm = "",
   hie = "",
+  hlasm = "",
   hls = {
     "haskell-language-server",
     "ghc"
@@ -132,6 +138,7 @@ return {
   java_language_server = "java-language-server",
   jdtls = "jdt-language-server",
   jedi_language_server = "python3Packages.jedi-language-server",
+  jinja_lsp = "",
   jqls = "jq-lsp",
   jsonls = "nodePackages.vscode-langservers-extracted",
   jsonnet_ls = "jsonnet-language-server",
@@ -152,7 +159,11 @@ return {
   marksman = "marksman",
   matlab_ls = "matlab-language-server",
   mdx_analyzer = "",
-  metals = { "metals", "jdk17" },
+  mesonlsp = "",
+  metals = {
+    "metals",
+    "jdk17"
+  },
   millet = "millet",
   mint = "mint",
   mlir_lsp_server = "",
@@ -219,6 +230,7 @@ return {
   racket_langserver = "",
   raku_navigator = "",
   reason_ls = "",
+  regal = "",
   regols = "regols",
   relay_lsp = "",
   remark_ls = "",
@@ -228,6 +240,7 @@ return {
   robotframework_ls = "",
   rubocop = "",
   ruby_lsp = "rubyPackages.ruby-lsp",
+  ruff = "",
   ruff_lsp = "ruff-lsp",
   rune_languageserver = "rune-languageserver",
   rust_analyzer = {
@@ -251,6 +264,7 @@ return {
   solidity = "",
   solidity_ls = "",
   solidity_ls_nomicfoundation = "",
+  somesass_ls = "",
   sorbet = "",
   sourcekit = "sourcekit-lsp",
   sourcery = "",
@@ -259,6 +273,7 @@ return {
   sqlls = "",
   standardrb = "",
   starlark_rust = "",
+  starpls = "",
   statix = "",
   steep = "",
   stimulus_ls = "",
@@ -282,6 +297,8 @@ return {
   theme_check = "",
   thriftls = "",
   tilt_ls = "tilt",
+  tinymist = "",
+  tsp_server = "",
   tsserver = {
     "nodePackages.typescript-language-server",
     "nodePackages.typescript"
@@ -297,6 +314,7 @@ return {
   unocss = "",
   uvls = "",
   v_analyzer = "",
+  vacuum = "",
   vala_ls = "vala-language-server",
   vale_ls = "",
   vdmj = "",

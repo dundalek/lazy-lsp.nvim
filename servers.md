@@ -60,7 +60,7 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 | `python` | [jedi_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#jedi_language_server), [pylsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp), [pylyzer](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylyzer), [pyright](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright), [ruff_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff_lsp) | [pyright](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright), [ruff_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff_lsp) |
 | `reason` | [ocamllsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ocamllsp), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tailwindcss) | [ocamllsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ocamllsp) |
 | `rmd` | [ltex](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ltex), [r_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#r_language_server) | [r_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#r_language_server) |
-| `ruby` | [ruby_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruby_ls), [solargraph](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#solargraph), [syntax_tree](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#syntax_tree) | [ruby_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruby_ls), [solargraph](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#solargraph), [syntax_tree](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#syntax_tree) |
+| `ruby` | [ruby_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruby_lsp), [solargraph](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#solargraph), [syntax_tree](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#syntax_tree) | [ruby_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruby_lsp), [solargraph](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#solargraph), [syntax_tree](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#syntax_tree) |
 | `scss` | [cssls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#cssls), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tailwindcss) | [cssls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#cssls) |
 | `svelte` | [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint), [svelte](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#svelte), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tailwindcss) | [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint), [svelte](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#svelte) |
 | `systemverilog` | [svls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#svls), [verible](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#verible) | [svls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#svls), [verible](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#verible) |
@@ -74,7 +74,7 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 | `vue` | [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tailwindcss), [volar](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#volar), [vuels](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#vuels) | [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint), [volar](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#volar), [vuels](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#vuels) |
 | `yaml.docker-compose` | [docker_compose_language_service](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#docker_compose_language_service), [yamlls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#yamlls) | [yamlls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#yamlls) |
 
-## Available servers: 115 / 286
+## Available servers: 116 / 301
 
 | Language Server | Nix package |
 | - | - |
@@ -112,6 +112,7 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 | [fennel_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#fennel_ls) | [fennel-ls](https://search.nixos.org/packages?channel=unstable&query=fennel-ls&show=fennel-ls) |
 | [flow](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#flow) | [flow](https://search.nixos.org/packages?channel=unstable&query=flow&show=flow) |
 | [fortls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#fortls) | [fortls](https://search.nixos.org/packages?channel=unstable&query=fortls&show=fortls) |
+| [fsautocomplete](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#fsautocomplete) | [fsautocomplete](https://search.nixos.org/packages?channel=unstable&query=fsautocomplete&show=fsautocomplete) |
 | [fstar](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#fstar) | [fstar](https://search.nixos.org/packages?channel=unstable&query=fstar&show=fstar) |
 | [futhark_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#futhark_lsp) | [futhark](https://search.nixos.org/packages?channel=unstable&query=futhark&show=futhark) |
 | [gleam](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gleam) | [gleam](https://search.nixos.org/packages?channel=unstable&query=gleam&show=gleam) |
@@ -124,7 +125,7 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 | [intelephense](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#intelephense) | [nodePackages.intelephense](https://search.nixos.org/packages?channel=unstable&query=nodePackages.intelephense&show=nodePackages.intelephense) |
 | [java_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#java_language_server) | [java-language-server](https://search.nixos.org/packages?channel=unstable&query=java-language-server&show=java-language-server) |
 | [jdtls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#jdtls) | [jdt-language-server](https://search.nixos.org/packages?channel=unstable&query=jdt-language-server&show=jdt-language-server) |
-| [jedi_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#jedi_language_server) | [python39Packages.jedi-language-server](https://search.nixos.org/packages?channel=unstable&query=python39Packages.jedi-language-server&show=python39Packages.jedi-language-server) |
+| [jedi_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#jedi_language_server) | [python3Packages.jedi-language-server](https://search.nixos.org/packages?channel=unstable&query=python3Packages.jedi-language-server&show=python3Packages.jedi-language-server) |
 | [jqls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#jqls) | [jq-lsp](https://search.nixos.org/packages?channel=unstable&query=jq-lsp&show=jq-lsp) |
 | [jsonls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#jsonls) | [nodePackages.vscode-langservers-extracted](https://search.nixos.org/packages?channel=unstable&query=nodePackages.vscode-langservers-extracted&show=nodePackages.vscode-langservers-extracted) |
 | [jsonnet_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#jsonnet_ls) | [jsonnet-language-server](https://search.nixos.org/packages?channel=unstable&query=jsonnet-language-server&show=jsonnet-language-server) |
@@ -154,14 +155,14 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 | [prismals](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#prismals) | [nodePackages."@prisma/language-server"](https://search.nixos.org/packages?channel=unstable&query=nodePackages."@prisma/language-server"&show=nodePackages."@prisma/language-server") |
 | [psalm](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#psalm) | [php80Packages.psalm](https://search.nixos.org/packages?channel=unstable&query=php80Packages.psalm&show=php80Packages.psalm) |
 | [purescriptls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#purescriptls) | [nodePackages.purescript-language-server](https://search.nixos.org/packages?channel=unstable&query=nodePackages.purescript-language-server&show=nodePackages.purescript-language-server) |
-| [pylsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp) | [python39Packages.python-lsp-server](https://search.nixos.org/packages?channel=unstable&query=python39Packages.python-lsp-server&show=python39Packages.python-lsp-server) |
+| [pylsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp) | [python3Packages.python-lsp-server](https://search.nixos.org/packages?channel=unstable&query=python3Packages.python-lsp-server&show=python3Packages.python-lsp-server) |
 | [pylyzer](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylyzer) | [pylyzer](https://search.nixos.org/packages?channel=unstable&query=pylyzer&show=pylyzer) |
 | [pyright](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright) | [pyright](https://search.nixos.org/packages?channel=unstable&query=pyright&show=pyright) |
 | [quick_lint_js](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#quick_lint_js) | [quick-lint-js](https://search.nixos.org/packages?channel=unstable&query=quick-lint-js&show=quick-lint-js) |
 | [r_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#r_language_server) | [rPackages.languageserver](https://search.nixos.org/packages?channel=unstable&query=rPackages.languageserver&show=rPackages.languageserver) |
 | [regols](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#regols) | [regols](https://search.nixos.org/packages?channel=unstable&query=regols&show=regols) |
 | [rnix](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rnix) | [rnix-lsp](https://search.nixos.org/packages?channel=unstable&query=rnix-lsp&show=rnix-lsp) |
-| [ruby_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruby_ls) | [rubyPackages.ruby-lsp](https://search.nixos.org/packages?channel=unstable&query=rubyPackages.ruby-lsp&show=rubyPackages.ruby-lsp) |
+| [ruby_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruby_lsp) | [rubyPackages.ruby-lsp](https://search.nixos.org/packages?channel=unstable&query=rubyPackages.ruby-lsp&show=rubyPackages.ruby-lsp) |
 | [ruff_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff_lsp) | [ruff-lsp](https://search.nixos.org/packages?channel=unstable&query=ruff-lsp&show=ruff-lsp) |
 | [rune_languageserver](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rune_languageserver) | [rune-languageserver](https://search.nixos.org/packages?channel=unstable&query=rune-languageserver&show=rune-languageserver) |
 | [rust_analyzer](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rust_analyzer) | [rust-analyzer](https://search.nixos.org/packages?channel=unstable&query=rust-analyzer&show=rust-analyzer) |
@@ -194,8 +195,9 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 | [zk](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#zk) | [zk](https://search.nixos.org/packages?channel=unstable&query=zk&show=zk) |
 | [zls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#zls) | [zls](https://search.nixos.org/packages?channel=unstable&query=zls&show=zls) |
 
-## Missing: 171
+## Missing: 185
 
+- [agda_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#agda_ls)
 - [aiken](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#aiken)
 - [als](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#als)
 - [anakin_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#anakin_language_server)
@@ -206,6 +208,7 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [autotools_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#autotools_ls)
 - [awk_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#awk_ls)
 - [azure_pipelines_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#azure_pipelines_ls)
+- [basedpyright](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#basedpyright)
 - [bicep](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bicep)
 - [biome](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#biome)
 - [bqnlsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bqnlsp)
@@ -234,6 +237,7 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [dprint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#dprint)
 - [drools_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#drools_lsp)
 - [ds_pinyin_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ds_pinyin_lsp)
+- [earthlyls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#earthlyls)
 - [ecsact](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ecsact)
 - [elp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#elp)
 - [ember](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ember)
@@ -245,12 +249,13 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [fennel_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#fennel_language_server)
 - [flux_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#flux_lsp)
 - [foam_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#foam_ls)
-- [fsautocomplete](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#fsautocomplete)
 - [fsharp_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#fsharp_language_server)
 - [gdscript](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gdscript)
 - [gdshader_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gdshader_lsp)
 - [ghcide](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ghcide)
 - [ghdl_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ghdl_ls)
+- [ginko_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ginko_ls)
+- [gitlab_ci_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#gitlab_ci_ls)
 - [glint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#glint)
 - [glsl_analyzer](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#glsl_analyzer)
 - [golangci_lint_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#golangci_lint_ls)
@@ -264,9 +269,11 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [hdl_checker](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#hdl_checker)
 - [hhvm](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#hhvm)
 - [hie](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#hie)
+- [hlasm](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#hlasm)
 - [hoon_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#hoon_ls)
 - [htmx](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#htmx)
 - [hydra_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#hydra_lsp)
+- [jinja_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#jinja_lsp)
 - [julials](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#julials)
 - [lean3ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#lean3ls)
 - [leanls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#leanls)
@@ -278,6 +285,7 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [m68k](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#m68k)
 - [markdown_oxide](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#markdown_oxide)
 - [mdx_analyzer](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#mdx_analyzer)
+- [mesonlsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#mesonlsp)
 - [mlir_lsp_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#mlir_lsp_server)
 - [mlir_pdll_lsp_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#mlir_pdll_lsp_server)
 - [mm0_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#mm0_ls)
@@ -311,12 +319,14 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [racket_langserver](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#racket_langserver)
 - [raku_navigator](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#raku_navigator)
 - [reason_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#reason_ls)
+- [regal](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#regal)
 - [relay_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#relay_lsp)
 - [remark_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#remark_ls)
 - [rescriptls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rescriptls)
 - [rls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rls)
 - [robotframework_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#robotframework_ls)
 - [rubocop](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#rubocop)
+- [ruff](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ruff)
 - [salt_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#salt_ls)
 - [scheme_langserver](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#scheme_langserver)
 - [serve_d](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#serve_d)
@@ -329,6 +339,7 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [solidity](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#solidity)
 - [solidity_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#solidity_ls)
 - [solidity_ls_nomicfoundation](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#solidity_ls_nomicfoundation)
+- [somesass_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#somesass_ls)
 - [sorbet](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sorbet)
 - [sourcery](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sourcery)
 - [spectral](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#spectral)
@@ -336,6 +347,7 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [sqlls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sqlls)
 - [standardrb](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#standardrb)
 - [starlark_rust](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#starlark_rust)
+- [starpls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#starpls)
 - [statix](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#statix)
 - [steep](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#steep)
 - [stimulus_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#stimulus_ls)
@@ -348,6 +360,8 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [textlsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#textlsp)
 - [theme_check](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#theme_check)
 - [thriftls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#thriftls)
+- [tinymist](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tinymist)
+- [tsp_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsp_server)
 - [ttags](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ttags)
 - [turtle_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#turtle_ls)
 - [twiggy_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#twiggy_language_server)
@@ -358,6 +372,7 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [unocss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#unocss)
 - [uvls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#uvls)
 - [v_analyzer](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#v_analyzer)
+- [vacuum](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#vacuum)
 - [vale_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#vale_ls)
 - [vdmj](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#vdmj)
 - [veridian](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#veridian)
