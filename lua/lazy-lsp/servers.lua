@@ -246,6 +246,7 @@ return {
   rust_analyzer = {
     "rust-analyzer",
     "cargo",
+    "rustc",
     "rustfmt"
   },
   salt_ls = "",
