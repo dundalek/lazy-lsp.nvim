@@ -253,7 +253,10 @@ return {
   robotframework_ls = "",
   roc_ls = "",
   rubocop = "",
-  ruby_lsp = "rubyPackages.ruby-lsp",
+  ruby_lsp = {
+    "rubyPackages.ruby-lsp",
+    "bundler"
+  },
   ruff = "",
   ruff_lsp = "ruff-lsp",
   rune_languageserver = "rune-languageserver",
