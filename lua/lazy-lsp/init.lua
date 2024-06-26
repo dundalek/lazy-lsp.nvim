@@ -1,9 +1,9 @@
-local lspconfig = require("lspconfig")
-local servers = require("lazy-lsp.servers")
-local overrides = require("lazy-lsp.overrides")
 local helpers = require("lazy-lsp.helpers")
 
 local function setup(opts)
+  local lspconfig = require("lspconfig")
+  local servers = require("lazy-lsp.servers")
+  local overrides = require("lazy-lsp.overrides")
   for server, config in pairs(helpers.server_configs(lspconfig, servers, opts, overrides)) do
     assert(config.filetypes, "server " .. server .. " does not provide filetypes and is not omitted")
 
