@@ -28,7 +28,6 @@ local curated_opts = [[{
     "flow",                            -- prefer eslint and tsserver
     "ltex",                            -- grammar tool using too much CPU
     "quick_lint_js",                   -- prefer eslint and tsserver
-    "rnix",                            -- archived on Jan 25, 2024
     "scry",                            -- archived on Jun 1, 2023
     "tailwindcss",                     -- associates with too many filetypes
   },

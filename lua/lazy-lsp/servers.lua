@@ -253,7 +253,6 @@ return {
   remark_ls = "",
   rescriptls = "",
   rls = "",
-  rnix = "rnix-lsp",
   robotframework_ls = "",
   roc_ls = "",
   rubocop = "",
