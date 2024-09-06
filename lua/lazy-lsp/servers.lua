@@ -90,8 +90,7 @@ return {
   erlangls = "erlang-ls",
   esbonio = "",
   eslint = {
-    "nodePackages.vscode-langservers-extracted",
-    "nodePackages.eslint"
+    "nodePackages.vscode-langservers-extracted"
   },
   facility_language_server = "",
   fennel_language_server = "",
