@@ -321,7 +321,10 @@ return {
   thriftls = "",
   tilt_ls = "tilt",
   tinymist = "tinymist",
-  ts_ls = "",
+  ts_ls = {
+    "nodePackages.typescript-language-server",
+    "nodePackages.typescript"
+  },
   tsp_server = "",
   ttags = "",
   turtle_ls = "",
