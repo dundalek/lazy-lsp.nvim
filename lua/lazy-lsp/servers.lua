@@ -1,7 +1,6 @@
 return {
   agda_ls = "",
   aiken = "",
-  als = "",
   anakin_language_server = "",
   angularls = "",
   ansiblels = "ansible-language-server",

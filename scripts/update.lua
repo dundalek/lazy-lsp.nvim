@@ -24,7 +24,7 @@ for k, v in pairs(lazy_servers) do
 end
 
 -- Remove following so that they are not automatically added which would cause warning messages on neovim startup
-local ignored = { "rome", "sqls", "ocamlls", "rnix" }
+local ignored = { "rome", "sqls", "ocamlls", "rnix", "als" }
 print("Ignoring deprecated:", table.concat(ignored, ", "))
 for _, v in ipairs(ignored) do
   servers[v] = nil
