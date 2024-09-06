@@ -18,7 +18,7 @@ return {
   ballerina = "",
   basedpyright = "basedpyright",
   bashls = "nodePackages.bash-language-server",
-  ["bazelrc-lsp"] = "",
+  bazelrc_lsp = "",
   beancount = "beancount-language-server",
   bicep = "",
   biome = "",
@@ -322,11 +322,8 @@ return {
   thriftls = "",
   tilt_ls = "tilt",
   tinymist = "tinymist",
+  ts_ls = "",
   tsp_server = "",
-  tsserver = {
-    "nodePackages.typescript-language-server",
-    "nodePackages.typescript"
-  },
   ttags = "",
   turtle_ls = "",
   tvm_ffi_navigator = "",
