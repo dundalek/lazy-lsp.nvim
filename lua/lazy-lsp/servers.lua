@@ -141,7 +141,7 @@ return {
   html = "vscode-langservers-extracted",
   htmx = "",
   hydra_lsp = "",
-  hyprls = "",
+  hyprls = "hyprls",
   idris2_lsp = "idris2Packages.idris2Lsp",
   intelephense = "nodePackages.intelephense",
   janet_lsp = "",
@@ -169,7 +169,7 @@ return {
   marksman = "marksman",
   matlab_ls = "matlab-language-server",
   mdx_analyzer = "",
-  mesonlsp = "",
+  mesonlsp = "mesonlsp",
   metals = {
     "metals",
     "jdk17"
@@ -299,7 +299,7 @@ return {
   statix = "",
   steep = "",
   stimulus_ls = "",
-  stylelint_lsp = "",
+  stylelint_lsp = "stylelint-lsp",
   superhtml = "",
   svelte = "nodePackages.svelte-language-server",
   svlangserver = "",
