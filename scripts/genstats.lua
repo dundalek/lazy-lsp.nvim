@@ -23,12 +23,11 @@ end
 local curated_opts = [[{
   excluded_servers = {
     "ccls",                            -- prefer clangd
-    "denols",                          -- prefer eslint and tsserver
+    "denols",                          -- prefer eslint and ts_ls
     "docker_compose_language_service", -- yamlls should be enough?
-    "flow",                            -- prefer eslint and tsserver
+    "flow",                            -- prefer eslint and ts_ls
     "ltex",                            -- grammar tool using too much CPU
-    "quick_lint_js",                   -- prefer eslint and tsserver
-    "rnix",                            -- archived on Jan 25, 2024
+    "quick_lint_js",                   -- prefer eslint and ts_ls
     "scry",                            -- archived on Jun 1, 2023
     "tailwindcss",                     -- associates with too many filetypes
   },

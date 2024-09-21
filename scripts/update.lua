@@ -24,10 +24,11 @@ for k, v in pairs(lazy_servers) do
 end
 
 -- Remove following so that they are not automatically added which would cause warning messages on neovim startup
-print("Ignoring deprecated: `rome`, `sqls`, `ocamlls`")
-servers.rome = nil
-servers.sqls = nil
-servers.ocamlls = nil -- git repo vanished and nix package removed
+local ignored = { "rome", "sqls", "ocamlls", "rnix", "als" }
+print("Ignoring deprecated:", table.concat(ignored, ", "))
+for _, v in ipairs(ignored) do
+  servers[v] = nil
+end
 
 local f = assert(io.open(servers_file, 'w'))
 f:write('return ' .. serpent.block(servers, { comment = false }) .. '\n')
