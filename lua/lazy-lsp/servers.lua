@@ -20,7 +20,7 @@ return {
   bazelrc_lsp = "",
   beancount = "beancount-language-server",
   bicep = "",
-  biome = "",
+  biome = "biome",
   bitbake_language_server = "",
   bitbake_ls = "",
   blueprint_ls = "blueprint-compiler",
