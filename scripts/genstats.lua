@@ -76,7 +76,7 @@ table.sort(supported_servers)
 table.sort(missing_servers)
 
 local function lsp_link(server)
-  return 'https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#' .. server
+  return 'https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#' .. server
 end
 
 local function write_server_list(f, servers)
