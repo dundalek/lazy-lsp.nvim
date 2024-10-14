@@ -293,7 +293,7 @@ return {
   spectral = "",
   spyglassmc_language_server = "",
   sqlls = "",
-  standardrb = "",
+  standardrb = "rubyPackages.standard",
   starlark_rust = "",
   starpls = "",
   statix = "",

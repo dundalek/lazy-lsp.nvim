@@ -88,7 +88,7 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 | `vue` | [biome](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#biome), [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint), [stylelint_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#stylelint_lsp), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tailwindcss), [volar](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#volar), [vuels](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#vuels) | [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#eslint), [stylelint_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#stylelint_lsp), [volar](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#volar), [vuels](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#vuels) |
 | `yaml.docker-compose` | [docker_compose_language_service](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#docker_compose_language_service), [yamlls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#yamlls) | [yamlls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#yamlls) |
 
-## Available servers: 124 / 321
+## Available servers: 125 / 321
 
 | Language Server | Nix package |
 | - | - |
@@ -191,6 +191,7 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 | [solargraph](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#solargraph) | [rubyPackages.solargraph](https://search.nixos.org/packages?channel=unstable&query=rubyPackages.solargraph&show=rubyPackages.solargraph) |
 | [solc](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#solc) | [solc](https://search.nixos.org/packages?channel=unstable&query=solc&show=solc) |
 | [sourcekit](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sourcekit) | [sourcekit-lsp](https://search.nixos.org/packages?channel=unstable&query=sourcekit-lsp&show=sourcekit-lsp) |
+| [standardrb](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#standardrb) | [rubyPackages.standard](https://search.nixos.org/packages?channel=unstable&show=rubyPackages.standard) |
 | [stylelint_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#stylelint_lsp) | [stylelint-lsp](https://search.nixos.org/packages?channel=unstable&query=stylelint-lsp&show=stylelint-lsp) |
 | [svelte](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#svelte) | [svelte-language-server](https://search.nixos.org/packages?channel=unstable&query=svelte-language-server&show=svelte-language-server) |
 | [svls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#svls) | [svls](https://search.nixos.org/packages?channel=unstable&query=svls&show=svls) |
@@ -217,7 +218,7 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 | [zk](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#zk) | [zk](https://search.nixos.org/packages?channel=unstable&query=zk&show=zk) |
 | [zls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#zls) | [zls](https://search.nixos.org/packages?channel=unstable&query=zls&show=zls) |
 
-## Missing: 197
+## Missing: 196
 
 - [agda_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#agda_ls)
 - [aiken](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#aiken)
@@ -379,7 +380,6 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [spectral](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#spectral)
 - [spyglassmc_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#spyglassmc_language_server)
 - [sqlls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sqlls)
-- [standardrb](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#standardrb)
 - [starlark_rust](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#starlark_rust)
 - [starpls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#starpls)
 - [statix](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#statix)
