@@ -34,7 +34,7 @@ local curated_opts = [[{
   },
   preferred_servers = {
     markdown = {},
-    python = { "basedpyright", "ruff_lsp" },
+    python = { "basedpyright" },
   },
 }
 ]]

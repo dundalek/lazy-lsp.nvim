@@ -29,7 +29,6 @@ return {
   bsl_ls = "",
   buck2 = "",
   buddy_ls = "",
-  bufls = "buf-language-server",
   bzl = "",
   cadence = "",
   cairo_ls = "",
@@ -260,7 +259,6 @@ return {
     "bundler"
   },
   ruff = "",
-  ruff_lsp = "ruff-lsp",
   rune_languageserver = "rune-languageserver",
   rust_analyzer = {
     "rust-analyzer",

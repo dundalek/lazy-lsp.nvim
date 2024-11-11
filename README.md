@@ -6,7 +6,7 @@ To ease the setup even further it can be complemented with [lsp-zero.nvim](https
 
 Language servers are loaded in the background without a need of a manual user intervention. They are not installed upfront, but only on-demand after a source file for a given language is opened. The plugin works by relying on Nix package manager which works on Linux, macOS and Windows WSL.
 
-Currently available <!-- SERVER_COUNT_PLACEHOLDER -->125 out of 321<!-- SERVER_COUNT_PLACEHOLDER --> servers in lspconfig, see the full list of [supported servers](./servers.md).
+Currently available <!-- SERVER_COUNT_PLACEHOLDER -->123 out of 319<!-- SERVER_COUNT_PLACEHOLDER --> servers in lspconfig, see the full list of [supported servers](./servers.md).
 
 ## Install
 
@@ -71,7 +71,7 @@ require("lazy-lsp").setup {
   -- Alternatively specify preferred servers for a filetype (others will be ignored).
   preferred_servers = {
     markdown = {},
-    python = { "pyright", "ruff_lsp" },
+    python = { "pyright" },
   },
   prefer_local = true, -- Prefer locally installed servers over nix-shell
   -- Default config passed to all servers to specify on_attach callback and other options.
