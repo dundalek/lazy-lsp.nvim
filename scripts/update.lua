@@ -3,7 +3,7 @@
 local serpent = require("serpent")
 
 local servers_file = 'lua/lazy-lsp/servers.lua'
-local configurations_directory = 'tmp/nvim-lspconfig/lua/lspconfig/server_configurations'
+local configurations_directory = 'tmp/nvim-lspconfig/lua/lspconfig/configs'
 
 local lazy_servers = dofile(servers_file)
 local servers = {}
