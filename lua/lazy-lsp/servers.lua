@@ -31,7 +31,7 @@ return {
   bsl_ls = "",
   buck2 = "",
   buddy_ls = "",
-  buf_ls = "",
+  buf_ls = "buf",
   bzl = "",
   c3_lsp = "",
   cadence = "",
@@ -270,7 +270,7 @@ return {
     "rubyPackages.ruby-lsp",
     "bundler"
   },
-  ruff = "",
+  ruff = "ruff",
   rune_languageserver = "rune-languageserver",
   rust_analyzer = {
     "rust-analyzer",
