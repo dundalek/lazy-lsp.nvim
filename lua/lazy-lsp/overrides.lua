@@ -4,6 +4,9 @@ local util = require("lspconfig/util")
 local helpers = require("lazy-lsp.helpers")
 
 return {
+  c3_lsp = {
+    cmd = { "c3-lsp" },
+  },
   elixirls = {
     cmd = { "elixir-ls" },
   },

@@ -64,7 +64,7 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 | `perl` | [perlls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#perlls), [perlnavigator](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#perlnavigator), [perlpls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#perlpls) | [perlls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#perlls), [perlnavigator](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#perlnavigator), [perlpls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#perlpls) |
 | `php` | [intelephense](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#intelephense), [phpactor](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#phpactor), [psalm](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#psalm), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss) | [intelephense](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#intelephense), [phpactor](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#phpactor), [psalm](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#psalm) |
 | `plaintex` | [digestif](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#digestif), [ltex](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ltex), [texlab](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#texlab) | [digestif](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#digestif), [texlab](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#texlab) |
-| `proto` | [buf_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#buf_ls), [clangd](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#clangd) | [buf_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#buf_ls), [clangd](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#clangd) |
+| `proto` | [buf_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#buf_ls), [clangd](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#clangd), [protols](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#protols) | [buf_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#buf_ls), [clangd](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#clangd), [protols](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#protols) |
 | `python` | [basedpyright](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#basedpyright), [jedi_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jedi_language_server), [pylsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pylsp), [pylyzer](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pylyzer), [pyright](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pyright), [ruff](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruff) | [basedpyright](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#basedpyright), [ruff](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruff) |
 | `reason` | [ocamllsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ocamllsp), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss) | [ocamllsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ocamllsp) |
 | `rego` | [regal](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#regal), [regols](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#regols) | [regal](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#regal), [regols](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#regols) |
@@ -88,7 +88,7 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 | `vue` | [biome](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#biome), [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [stylelint_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#stylelint_lsp), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss), [volar](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#volar), [vuels](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#vuels) | [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [stylelint_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#stylelint_lsp), [volar](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#volar), [vuels](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#vuels) |
 | `yaml.docker-compose` | [docker_compose_language_service](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#docker_compose_language_service), [yamlls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls) | [yamlls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls) |
 
-## Available servers: 125 / 336
+## Available servers: 128 / 336
 
 | Language Server | Nix package |
 | - | - |
@@ -102,6 +102,7 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 | [biome](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#biome) | [biome](https://search.nixos.org/packages?channel=unstable&query=biome&show=biome) |
 | [blueprint_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#blueprint_ls) | [blueprint-compiler](https://search.nixos.org/packages?channel=unstable&query=blueprint-compiler&show=blueprint-compiler) |
 | [buf_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#buf_ls) | [buf](https://search.nixos.org/packages?channel=unstable&query=buf&show=buf) |
+| [c3_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#c3_lsp) | [c3c](https://search.nixos.org/packages?channel=unstable&query=c3c&show=c3c) |
 | [ccls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ccls) | [ccls](https://search.nixos.org/packages?channel=unstable&query=ccls&show=ccls) |
 | [clangd](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#clangd) | [clang-tools](https://search.nixos.org/packages?channel=unstable&query=clang-tools&show=clang-tools) |
 | [clojure_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#clojure_lsp) | [clojure-lsp](https://search.nixos.org/packages?channel=unstable&query=clojure-lsp&show=clojure-lsp) |
@@ -173,6 +174,7 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 | [phpactor](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#phpactor) | [phpactor](https://search.nixos.org/packages?channel=unstable&query=phpactor&show=phpactor) |
 | [postgres_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#postgres_lsp) | [postgres-lsp](https://search.nixos.org/packages?channel=unstable&query=postgres-lsp&show=postgres-lsp) |
 | [prismals](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#prismals) | [nodePackages."@prisma/language-server"](https://search.nixos.org/packages?channel=unstable&query=nodePackages."@prisma/language-server"&show=nodePackages."@prisma/language-server") |
+| [protols](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#protols) | [protols](https://search.nixos.org/packages?channel=unstable&query=protols&show=protols) |
 | [psalm](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#psalm) | [phpPackages.psalm](https://search.nixos.org/packages?channel=unstable&query=phpPackages.psalm&show=phpPackages.psalm) |
 | [purescriptls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#purescriptls) | [nodePackages.purescript-language-server](https://search.nixos.org/packages?channel=unstable&query=nodePackages.purescript-language-server&show=nodePackages.purescript-language-server) |
 | [pylsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pylsp) | [python3Packages.python-lsp-server](https://search.nixos.org/packages?channel=unstable&query=python3Packages.python-lsp-server&show=python3Packages.python-lsp-server) |
@@ -203,6 +205,7 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 | [terraformls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#terraformls) | [terraform-ls](https://search.nixos.org/packages?channel=unstable&query=terraform-ls&show=terraform-ls) |
 | [texlab](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#texlab) | [texlab](https://search.nixos.org/packages?channel=unstable&query=texlab&show=texlab) |
 | [tflint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tflint) | [tflint](https://search.nixos.org/packages?channel=unstable&query=tflint&show=tflint) |
+| [thriftls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#thriftls) | [thrift-ls](https://search.nixos.org/packages?channel=unstable&query=thrift-ls&show=thrift-ls) |
 | [tilt_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tilt_ls) | [tilt](https://search.nixos.org/packages?channel=unstable&query=tilt&show=tilt) |
 | [tinymist](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tinymist) | [tinymist](https://search.nixos.org/packages?channel=unstable&query=tinymist&show=tinymist) |
 | [ts_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls) | [typescript-language-server](https://search.nixos.org/packages?channel=unstable&query=typescript-language-server&show=typescript-language-server) |
@@ -218,7 +221,7 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 | [zk](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#zk) | [zk](https://search.nixos.org/packages?channel=unstable&query=zk&show=zk) |
 | [zls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#zls) | [zls](https://search.nixos.org/packages?channel=unstable&query=zls&show=zls) |
 
-## Missing: 211
+## Missing: 208
 
 - [ada_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ada_ls)
 - [agda_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#agda_ls)
@@ -244,7 +247,6 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [buck2](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#buck2)
 - [buddy_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#buddy_ls)
 - [bzl](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#bzl)
-- [c3_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#c3_lsp)
 - [cadence](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cadence)
 - [cairo_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cairo_ls)
 - [cds_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cds_lsp)
@@ -353,7 +355,6 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [powershell_es](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#powershell_es)
 - [prolog_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#prolog_ls)
 - [prosemd_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#prosemd_lsp)
-- [protols](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#protols)
 - [pug](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pug)
 - [puppet](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#puppet)
 - [pyre](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pyre)
@@ -403,7 +404,6 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [templ](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#templ)
 - [textlsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#textlsp)
 - [theme_check](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#theme_check)
-- [thriftls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#thriftls)
 - [ts_query_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_query_ls)
 - [tsp_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tsp_server)
 - [ttags](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ttags)
