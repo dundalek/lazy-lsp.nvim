@@ -304,6 +304,22 @@ describe("build_server_to_filetypes_index", function()
   end)
 end)
 
+describe("enabled_filetypes_to_servers", function()
+  it("calculates filetype to servers mapping for defined packages", function()
+    local servers = { pylsp = "python39Packages.python-lsp-server" }
+    local mapping = helpers.enabled_filetypes_to_servers(servers, fake_lspconfig, {}, {})
+    assert.same({
+      python = { "pylsp" },
+    }, mapping)
+  end)
+
+  it("excludes filetype to servers mapping for missing packages", function()
+    local servers = { pylsp = "" }
+    local mapping = helpers.enabled_filetypes_to_servers(servers, fake_lspconfig, {}, {})
+    assert.same({}, mapping)
+  end)
+end)
+
 describe("server_configs", function()
   it("augments commands with nix-shell", function()
     local cfg = helpers.server_configs(fake_lspconfig, fake_servers, {}, fake_overrides)

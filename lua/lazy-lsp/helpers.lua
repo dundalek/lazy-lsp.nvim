@@ -106,7 +106,13 @@ local function build_server_to_filetypes_index(filetype_to_servers)
 end
 
 local function enabled_filetypes_to_servers(servers, lspconfig, excluded_servers, preferred_servers)
-  local included_servers = vim.tbl_extend("force", {}, servers)
+  local included_servers = {}
+  for server, nix_pkg in pairs(servers) do
+    -- check to exclude servers for which we don't have a nix package
+    if nix_pkg ~= "" then
+      included_servers[server] = true
+    end
+  end
   for _, server in ipairs(excluded_servers) do
     included_servers[server] = nil
   end
