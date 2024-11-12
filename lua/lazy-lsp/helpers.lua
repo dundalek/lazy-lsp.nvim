@@ -66,10 +66,15 @@ local function process_config(
   return nil
 end
 
+local function is_config_available(lspconfig, server)
+  -- For deprecated servers we might get lspconfig entry, but without document_config
+  return lspconfig[server] and lspconfig[server].document_config
+end
+
 local function build_filetype_to_servers_index(servers, lspconfig)
   local index = {}
   for server, _ in pairs(servers) do
-    if lspconfig[server] then
+    if is_config_available(lspconfig, server) then
       local filetypes = lspconfig[server].document_config.default_config.filetypes
       if filetypes then
         for _, filetype in ipairs(filetypes) do
@@ -131,7 +136,7 @@ local function server_configs(lspconfig, servers, opts, overrides)
   for lsp, _ in pairs(server_to_filetypes) do
     -- Check if a server is excluded first, so that we don't look up the config
     -- and for deprecated servers we won't get a warning message.
-    if server_to_filetypes[lsp] and lspconfig[lsp] then
+    if server_to_filetypes[lsp] and is_config_available(lspconfig, lsp) then
       local nix_pkg = servers[lsp]
       local lang_config = lspconfig[lsp]
       local user_config = configs[lsp]
