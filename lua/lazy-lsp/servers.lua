@@ -33,7 +33,10 @@ return {
   buddy_ls = "",
   buf_ls = "buf",
   bzl = "",
-  c3_lsp = { "c3c", "c3-lsp" },
+  c3_lsp = {
+    "c3c",
+    "c3-lsp"
+  },
   cadence = "",
   cairo_ls = "",
   ccls = "ccls",
@@ -343,7 +346,6 @@ return {
   twiggy_language_server = "",
   typeprof = "",
   typos_lsp = "",
-  typst_lsp = "typst-lsp",
   uiua = "",
   ungrammar_languageserver = "",
   unison = "",
