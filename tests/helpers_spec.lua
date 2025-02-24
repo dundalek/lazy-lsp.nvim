@@ -5,7 +5,52 @@ local function make_config(config)
   return config
 end
 
+local nix_conf_var = "NIX_CONFIG"
+local nix_conf_dir_var = "NIX_CONF_DIR"
+vim.uv.os_unsetenv(nix_conf_var)
+vim.uv.os_setenv(nix_conf_dir_var, "/dev/null")
+
 describe("lazy-lsp", function()
+  it("in_shell with `nix shell` command", function()
+    local nix_dir = vim.fs.joinpath(vim.uv.cwd(), ".tests", "nix")
+    vim.uv.os_setenv(nix_conf_dir_var, nix_dir)
+    vim.uv.os_setenv(nix_conf_var, "extra-experimental-features = nix-command flakes")
+
+    assert(vim.fn.system({
+      "nix",
+      "registry",
+      "add",
+      "--registry",
+      vim.fs.joinpath(nix_dir, "registry.json"),
+      "nixpkgs",
+      "path:/nix/store/smth",
+    }))
+
+    package.loaded["lazy-lsp.helpers"] = nil
+    helpers = require("lazy-lsp.helpers")
+
+    assert.same(
+      { "nix", "--flake-registry", "", "shell", "nixpkgs#nix_pkg_a", "--command", "cmd_a" },
+      helpers.in_shell({ "nix_pkg_a" }, { "cmd_a" })
+    )
+
+    assert.same(
+      { "nix", "--flake-registry", "", "shell", "nixpkgs#nix_pkg_a", "--command", "cmd_a", "arg_a" },
+      helpers.in_shell({ "nix_pkg_a" }, { "cmd_a", "arg_a" })
+    )
+
+    assert.same(
+      { "nix", "--flake-registry", "", "shell", "nixpkgs#nix_pkg_a", "nixpkgs#nix_pkg_b", "--command", "cmd_a" },
+      helpers.in_shell({ "nix_pkg_a", "nix_pkg_b" }, { "cmd_a" })
+    )
+
+    vim.uv.os_setenv(nix_conf_dir_var, "/dev/null")
+    vim.uv.os_unsetenv(nix_conf_var)
+
+    package.loaded["lazy-lsp.helpers"] = nil
+    helpers = require("lazy-lsp.helpers")
+  end)
+
   it("escape_shell_arg", function()
     assert.same("'hello world'", helpers.escape_shell_arg("hello world"))
     assert.same("'h\"i'", helpers.escape_shell_arg('h"i'))

@@ -107,7 +107,7 @@ If this is not what you want, you can give a try to the [curated configuration](
 
 ## How it works
 
-`lazy-lsp` registers all available configurations from lspconfig to start LSP servers by wrapping the commands in a [nix-shell](https://nixos.org/manual/nix/unstable/command-ref/nix-shell.html) environment. The nix-shell prepares the environment by pulling all specified dependencies regardless of what is installed on the host system and avoids packages clashes. The first time a server is run there is a delay until dependencies are downloaded, but on subsequent runs the time to prepare the shell environment is negligible.
+`lazy-lsp` registers all available configurations from lspconfig to start LSP servers by wrapping the commands in a [`nix shell`](https://nix.dev/manual/nix/latest/command-ref/new-cli/nix3-env-shell) or an older [nix-shell](https://nixos.org/manual/nix/unstable/command-ref/nix-shell.html) environment. The nix shell prepares the environment by pulling all specified dependencies regardless of what is installed on the host system and avoids packages clashes. The first time a server is run there is a delay until dependencies are downloaded, but on subsequent runs the time to prepare the shell environment is negligible.
 
 ## Versions
 
