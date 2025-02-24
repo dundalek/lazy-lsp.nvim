@@ -16,11 +16,55 @@ local function escape_shell_args(args)
   return table.concat(escaped, " ")
 end
 
+local cache_nix_command_available = nil
+-- Check whether both `nix` command and `nixpkgs` flake are available
+---@return boolean?
+local function nix_command_available()
+  if cache_nix_command_available ~= nil then
+    return cache_nix_command_available
+  end
+  cache_nix_command_available = false
+
+  local registry = vim.fn.system({ "nix", "--flake-registry", "", "registry", "list" })
+  if vim.v.shell_error == 0 then
+    for flake in vim.gsplit(registry, "\n") do
+      local flake_url = string.match(flake, "^%S+ flake:nixpkgs (.*)")
+      if flake_url then
+        -- And we won't accidentally fetch `nixpkgs-unstable` as it used to be.
+        -- Only since NixOS 24.05, system has its nixpkgs flake in the registry by default
+        if string.match(flake_url, "^path:") then
+          cache_nix_command_available = true
+        end
+        break
+      end
+    end
+  end
+  return cache_nix_command_available
+end
+
+---@param nix_pkgs string[]
+---@param cmd string[]
+---@return string[]
 local function in_shell(nix_pkgs, cmd)
-  local nix_cmd = { "nix-shell", "-p" }
-  vim.list_extend(nix_cmd, nix_pkgs)
-  table.insert(nix_cmd, "--run")
-  table.insert(nix_cmd, escape_shell_args(cmd))
+  if #nix_pkgs == 0 then
+    error("No nix pkg provided")
+    return {}
+  end
+
+  local nix_cmd = {}
+  if nix_command_available() then
+    nix_cmd = { "nix", "--flake-registry", "", "shell" }
+    for _, nix_pkg in ipairs(nix_pkgs) do
+      table.insert(nix_cmd, "nixpkgs#" .. nix_pkg)
+    end
+    table.insert(nix_cmd, "--command")
+    vim.list_extend(nix_cmd, cmd)
+  else
+    nix_cmd = { "nix-shell", "-p" }
+    vim.list_extend(nix_cmd, nix_pkgs)
+    table.insert(nix_cmd, "--run")
+    table.insert(nix_cmd, escape_shell_args(cmd))
+  end
   return nix_cmd
 end
 
@@ -48,8 +92,8 @@ local function process_config(
 
     config.on_new_config = function(new_config, root_path)
       pcall(original_on_new_config, new_config, root_path)
-      -- Don't wrap with nix-shell if user callback already wrapped it
-      if new_config.cmd[1] ~= "nix-shell" then
+      -- Don't wrap with nix shell if user callback already wrapped it
+      if not vim.list_contains({ "nix", "nix-shell" }, new_config.cmd[1]) then
         if prefer_local == false or vim.fn.executable(new_config.cmd[1]) == 0 then
           local nix_pkgs = type(nix_pkg) == "string" and { nix_pkg } or nix_pkg
           new_config.cmd = in_shell(nix_pkgs, new_config.cmd)
