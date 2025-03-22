@@ -291,7 +291,7 @@ return {
     "rustfmt"
   },
   salt_ls = "",
-  scheme_langserver = "",
+  scheme_langserver = "akkuPackages.scheme-langserver",
   scry = "scry",
   selene3p_ls = "",
   serve_d = "",
