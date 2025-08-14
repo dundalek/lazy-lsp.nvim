@@ -70,13 +70,13 @@ end
 
 -- should rename to something indicating that it is for an individual config
 local function process_config(
-  lang_config,
-  user_config,
-  default_config,
-  nix_pkg,
-  filetypes,
-  config_override,
-  prefer_local
+    lang_config,
+    user_config,
+    default_config,
+    nix_pkg,
+    filetypes,
+    config_override,
+    prefer_local
 )
   local config = vim.tbl_extend(
     "keep",
@@ -177,7 +177,7 @@ local function server_configs(lspconfig, servers, opts, overrides)
   local default_config = opts.default_config or {}
   local configs = opts.configs or {}
   local preferred_servers = opts.preferred_servers or {}
-  local prefer_local = opts.prefer_local or false
+  local prefer_local = opts.prefer_local ~= false -- default: true
 
   local filetype_to_servers = enabled_filetypes_to_servers(servers, lspconfig, excluded_servers, preferred_servers)
   local server_to_filetypes = build_server_to_filetypes_index(filetype_to_servers)

@@ -73,7 +73,6 @@ require("lazy-lsp").setup {
     markdown = {},
     python = { "pyright" },
   },
-  prefer_local = true, -- Prefer locally installed servers over nix-shell
   -- Default config passed to all servers to specify on_attach callback and other options.
   default_config = {
     flags = {
@@ -96,6 +95,7 @@ require("lazy-lsp").setup {
       },
     },
   },
+  prefer_local = true, -- Prefer locally installed servers over nix-shell (default: true)
 }
 ```
 

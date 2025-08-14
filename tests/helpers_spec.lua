@@ -460,9 +460,9 @@ describe("server_configs", function()
       },
     }
 
-    it("wraps in shell by default", function()
+    it("prefers local binary by default", function()
       local cfgs = helpers.server_configs(lspconfig_with_binary, fake_servers, {}, empty_overrides)
-      assert.same({ "nix-shell", "-p", "fakelsp-package", "--run", "'git'" }, make_config(cfgs.fakelsp).cmd)
+      assert.same({ "git" }, make_config(cfgs.fakelsp).cmd)
     end)
 
     it("wraps in shell when option false", function()
