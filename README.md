@@ -163,14 +163,14 @@ scripts/genstats.lua
 
 Using Plenary for testing, see the [Testing Guide](https://github.com/nvim-lua/plenary.nvim/blob/master/TESTS_README.md) for details.
 
-Run tests:
+Run tests (using [Babashka](https://babashka.org/) task runner):
 
 ```
-scripts/test
+bb test:once
 ```
 
 Run tests in watch mode:
 
 ```
-scripts/test-watch
+bb test
 ```

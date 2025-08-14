@@ -1,0 +1,12 @@
+-- -*- lua -*-
+-- vim: set filetype=lua:
+return {
+  modules = {
+    ["lazy-lsp.*"] = "lua",
+  },
+  runreport = true,
+
+  -- html reporter seems to be broken when using luacov from luajitPackages.luacov nix package
+  -- reporter = "html",
+  -- reportfile = "luacov.report.html",
+}

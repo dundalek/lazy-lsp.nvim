@@ -1,0 +1,4 @@
+{:tasks {test (shell "watchexec -e lua -- bb test:once")
+         test:once (shell "vusted tests")
+         test:coverage (do (shell "vusted --coverage tests")
+                           (print (slurp "luacov.report.out")))}}

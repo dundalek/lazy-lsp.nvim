@@ -1,2 +1,4 @@
 /tmp
 /.tests
+luacov.*
+.clj-kondo

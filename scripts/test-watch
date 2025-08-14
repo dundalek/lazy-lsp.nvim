@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-
-watchexec -e lua -- scripts/test
