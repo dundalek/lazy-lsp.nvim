@@ -16,6 +16,14 @@ require("lazy-lsp").setup {
 }
 ```
 
+## Using UNFREE packages
+
+Unfree LSPs like Intelephense for PHP fail to install by default with nix.
+
+Possible workarounds are:
+- Start nvim with unfree option like `NIXPKGS_ALLOW_UNFREE=1 nvim`.
+- Or install the package globally like `NIXPKGS_ALLOW_UNFREE=1 nix-env -i intelephense` and lazy-lsp will use it instead of calling nix-shell.
+
 ## Additional Linters and Formatters (EFM)
 
 You can use [efm-langserver](https://github.com/mattn/efm-langserver) to set up additional formatters and linters when LSP implementation is not available.
