@@ -216,7 +216,6 @@ return {
   -- Internal, only for testing
   escape_shell_arg = escape_shell_arg,
   escape_shell_args = escape_shell_args,
-  process_config = process_config,
   build_filetype_to_servers_index = build_filetype_to_servers_index,
   build_server_to_filetypes_index = build_server_to_filetypes_index,
   enabled_filetypes_to_servers = enabled_filetypes_to_servers,

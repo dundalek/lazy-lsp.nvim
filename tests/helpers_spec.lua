@@ -65,199 +65,208 @@ describe("lazy-lsp", function()
   end)
 
   describe("process_config", function()
-    local lang_config = { document_config = { default_config = { cmd = { "ls_original_cmd" } } } }
-    local empty_default_config = {}
+    local testserver_lspconfig = {
+      testserver = { document_config = { default_config = { cmd = { "ls_original_cmd" }, filetypes = { "test" } } } },
+    }
 
     it("uses cmd from lspconfig", function()
+      local cfg = helpers.server_configs(testserver_lspconfig, { testserver = "nix_pkg_name" }, {}, {})
       assert.same(
         { "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_original_cmd'" },
-        make_config(helpers.process_config(lang_config, nil, empty_default_config, "nix_pkg_name")).cmd
+        make_config(cfg.testserver).cmd
       )
     end)
 
     it("servers config can specify multiple nix packages", function()
+      local cfg = helpers.server_configs(testserver_lspconfig, { testserver = { "nix_pkg_a", "nix_pkg_b" } }, {}, {})
       assert.same(
         { "nix-shell", "-p", "nix_pkg_a", "nix_pkg_b", "--run", "'ls_original_cmd'" },
-        make_config(helpers.process_config(lang_config, nil, empty_default_config, { "nix_pkg_a", "nix_pkg_b" })).cmd
+        make_config(cfg.testserver).cmd
       )
     end)
 
     it("servers config can override cmd", function()
-      assert.same(
-        { "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_server_cmd'" },
-        make_config(
-          helpers.process_config(
-            lang_config,
-            nil,
-            empty_default_config,
-            { "nix_pkg_name" },
-            nil,
-            { cmd = { "ls_server_cmd" } }
-          )
-        ).cmd
+      local cfg = helpers.server_configs(
+        testserver_lspconfig,
+        { testserver = { "nix_pkg_name" } },
+        {},
+        { testserver = { cmd = { "ls_server_cmd" } } }
       )
+      assert.same({ "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_server_cmd'" }, make_config(cfg.testserver).cmd)
     end)
 
     it("servers config can override cmd including arguments", function()
+      local cfg = helpers.server_configs(
+        testserver_lspconfig,
+        { testserver = { "nix_pkg_name" } },
+        {},
+        { testserver = { cmd = { "ls_server_cmd", "--lsp" } } }
+      )
       assert.same(
         { "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_server_cmd' '--lsp'" },
-        make_config(
-          helpers.process_config(
-            lang_config,
-            nil,
-            empty_default_config,
-            { "nix_pkg_name" },
-            nil,
-            { cmd = { "ls_server_cmd", "--lsp" } }
-          )
-        ).cmd
+        make_config(cfg.testserver).cmd
       )
     end)
 
     it("user specified cmd takes override priority", function()
-      assert.same(
-        { "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_user_cmd'" },
-        make_config(
-          helpers.process_config(
-            lang_config,
-            { cmd = { "ls_user_cmd" } },
-            empty_default_config,
-            { "nix_pkg_name" },
-            nil,
-            { cmd = { "ls_server_cmd" } }
-          )
-        ).cmd
+      local cfg = helpers.server_configs(
+        testserver_lspconfig,
+        { testserver = { "nix_pkg_name" } },
+        { configs = { testserver = { cmd = { "ls_user_cmd" } } } },
+        { testserver = { cmd = { "ls_server_cmd" } } }
       )
+      assert.same({ "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_user_cmd'" }, make_config(cfg.testserver).cmd)
     end)
 
     it("when nix pkg is not available returns (will not setup ls)", function()
-      assert.equals(nil, helpers.process_config(lang_config, nil, empty_default_config, ""))
-    end)
-
-    it("uses users config when nix pkg is not available", function()
-      assert.same(
-        { cmd = { "ls_user_cmd" } },
-        helpers.process_config(lang_config, { cmd = { "ls_user_cmd" } }, empty_default_config, "")
-      )
+      local cfg = helpers.server_configs(testserver_lspconfig, { testserver = "" }, {}, {})
+      assert.equals(nil, cfg.testserver)
     end)
 
     it("merges default_config values", function()
-      assert.same(
-        nil,
-        helpers.process_config(lang_config, nil, empty_default_config, "nix_pkg_name").some_undefined_parameter
+      local cfg = helpers.server_configs(testserver_lspconfig, { testserver = "nix_pkg_name" }, {}, {})
+      assert.same(nil, cfg.testserver.some_undefined_parameter)
+
+      local cfg_with_param = helpers.server_configs(
+        testserver_lspconfig,
+        { testserver = "nix_pkg_name" },
+        { default_config = { some_parameter = "some-value" } },
+        {}
       )
-      assert.same(
-        "some-value",
-        helpers.process_config(lang_config, nil, { some_parameter = "some-value" }, "nix_pkg_name").some_parameter
-      )
+      assert.same("some-value", cfg_with_param.testserver.some_parameter)
     end)
 
     it("merges default_config values when user config override is present", function()
-      assert.same(
-        "some-value",
-        helpers.process_config(
-          lang_config,
-          { cmd = { "ls_user_cmd" } },
-          { some_parameter = "some-value" },
-          "nix_pkg_name"
-        ).some_parameter
+      local cfg = helpers.server_configs(
+        testserver_lspconfig,
+        { testserver = "nix_pkg_name" },
+        {
+          configs = { testserver = { cmd = { "ls_user_cmd" } } },
+          default_config = { some_parameter = "some-value" },
+        },
+        {}
       )
+      assert.same("some-value", cfg.testserver.some_parameter)
     end)
 
     it("on_new_config does not error when lang config has no on_new_config function", function()
-      local config = helpers.process_config(lang_config, nil, empty_default_config, "nix_pkg_name")
-      config.on_new_config(config, "/some/root/path")
-      assert.same({ "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_original_cmd'" }, config.cmd)
+      local cfg = helpers.server_configs(testserver_lspconfig, { testserver = "nix_pkg_name" }, {}, {})
+      cfg.testserver.on_new_config(cfg.testserver, "/some/root/path")
+      assert.same({ "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_original_cmd'" }, cfg.testserver.cmd)
     end)
 
     it("on_new_config keeps original cmd if call back does not update it", function()
-      local lang_config_with_on_new_config = {
-        document_config = {
-          default_config = {
-            cmd = { "ls_original_cmd" },
-            on_new_config = function(new_config, root_path) end,
+      local lspconfig_with_on_new_config = {
+        testserver = {
+          document_config = {
+            default_config = {
+              cmd = { "ls_original_cmd" },
+              filetypes = { "test" },
+              on_new_config = function(new_config, root_path) end,
+            },
           },
         },
       }
-      local config = helpers.process_config(lang_config_with_on_new_config, nil, empty_default_config, "nix_pkg_name")
-      config.on_new_config(config, "/some/root/path")
-      assert.same({ "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_original_cmd'" }, config.cmd)
+      local cfg = helpers.server_configs(lspconfig_with_on_new_config, { testserver = "nix_pkg_name" }, {}, {})
+      cfg.testserver.on_new_config(cfg.testserver, "/some/root/path")
+      assert.same({ "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_original_cmd'" }, cfg.testserver.cmd)
     end)
 
     it("on_new_config updates cmd when callback appends to it (e.g. omnisharp)", function()
-      local lang_config_with_on_new_config = {
-        document_config = {
-          default_config = {
-            cmd = { "ls_original_cmd" },
-            on_new_config = function(new_config, root_path)
-              table.insert(new_config.cmd, "--path")
-              table.insert(new_config.cmd, root_path)
-            end,
+      local lspconfig_with_on_new_config = {
+        testserver = {
+          document_config = {
+            default_config = {
+              cmd = { "ls_original_cmd" },
+              filetypes = { "test" },
+              on_new_config = function(new_config, root_path)
+                table.insert(new_config.cmd, "--path")
+                table.insert(new_config.cmd, root_path)
+              end,
+            },
           },
         },
       }
-      local config = helpers.process_config(lang_config_with_on_new_config, nil, empty_default_config, "nix_pkg_name")
-      config.on_new_config(config, "/some/root/path")
+      local cfg = helpers.server_configs(lspconfig_with_on_new_config, { testserver = "nix_pkg_name" }, {}, {})
+      cfg.testserver.on_new_config(cfg.testserver, "/some/root/path")
       assert.same(
         { "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_original_cmd' '--path' '/some/root/path'" },
-        config.cmd
+        cfg.testserver.cmd
       )
     end)
 
-    it("on_new_config updates cmd when callback build a new one (e.g. eslint, codeqlls)", function()
-      local lang_config_with_on_new_config = {
-        document_config = {
-          default_config = {
-            cmd = { "ls_original_cmd" },
-            on_new_config = function(new_config, root_path)
-              new_config.cmd = { "new_cmd", "--path", root_path }
-            end,
+    it("on_new_config updates cmd when callback builds a new one (e.g. eslint, codeqlls)", function()
+      local lspconfig_with_on_new_config = {
+        testserver = {
+          document_config = {
+            default_config = {
+              cmd = { "ls_original_cmd" },
+              filetypes = { "test" },
+              on_new_config = function(new_config, root_path)
+                new_config.cmd = { "new_cmd", "--path", root_path }
+              end,
+            },
           },
         },
       }
-      local config = helpers.process_config(lang_config_with_on_new_config, nil, empty_default_config, "nix_pkg_name")
-      config.on_new_config(config, "/some/root/path")
-      assert.same({ "nix-shell", "-p", "nix_pkg_name", "--run", "'new_cmd' '--path' '/some/root/path'" }, config.cmd)
+      local cfg = helpers.server_configs(lspconfig_with_on_new_config, { testserver = "nix_pkg_name" }, {}, {})
+      cfg.testserver.on_new_config(cfg.testserver, "/some/root/path")
+      assert.same({ "nix-shell", "-p", "nix_pkg_name", "--run", "'new_cmd' '--path' '/some/root/path'" },
+        cfg.testserver.cmd)
     end)
 
     it("on_new_config from user config takes precedence", function()
-      local lang_config_with_on_new_config = {
-        document_config = {
-          default_config = {
-            cmd = { "ls_original_cmd" },
-            on_new_config = function(new_config, root_path)
-              new_config.cmd = { "default_config_cmd", "--path", root_path }
-            end,
+      local lspconfig_with_on_new_config = {
+        testserver = {
+          document_config = {
+            default_config = {
+              cmd = { "ls_original_cmd" },
+              filetypes = { "test" },
+              on_new_config = function(new_config, root_path)
+                new_config.cmd = { "default_config_cmd", "--path", root_path }
+              end,
+            },
           },
         },
       }
-      local user_config_with_on_new_config = {
-        on_new_config = function(new_config, root_path)
-          new_config.cmd = { "user_config_cmd", "--path", root_path }
-        end,
-      }
-      local config = helpers.process_config(
-        lang_config_with_on_new_config,
-        user_config_with_on_new_config,
-        empty_default_config,
-        "nix_pkg_name"
+      local cfg = helpers.server_configs(
+        lspconfig_with_on_new_config,
+        { testserver = "nix_pkg_name" },
+        {
+          configs = {
+            testserver = {
+              on_new_config = function(new_config, root_path)
+                new_config.cmd = { "user_config_cmd", "--path", root_path }
+              end,
+            },
+          },
+        },
+        {}
       )
-      config.on_new_config(config, "/some/root/path")
+      cfg.testserver.on_new_config(cfg.testserver, "/some/root/path")
       assert.same(
         { "nix-shell", "-p", "nix_pkg_name", "--run", "'user_config_cmd' '--path' '/some/root/path'" },
-        config.cmd
+        cfg.testserver.cmd
       )
     end)
 
     it("don't wrap result from on_new_config if it is already wrapped", function()
-      local user_config = {
-        on_new_config = function(new_config, root_path)
-          new_config.cmd = helpers.in_shell({ "user_pkg_name" }, new_config.cmd)
-        end,
-      }
-      local config = helpers.process_config(lang_config, user_config, empty_default_config, "nix_pkg_name")
-      config.on_new_config(config, "")
-      assert.same({ "nix-shell", "-p", "user_pkg_name", "--run", "'ls_original_cmd'" }, config.cmd)
+      local cfg = helpers.server_configs(
+        testserver_lspconfig,
+        { testserver = "nix_pkg_name" },
+        {
+          configs = {
+            testserver = {
+              on_new_config = function(new_config, root_path)
+                new_config.cmd = helpers.in_shell({ "user_pkg_name" }, new_config.cmd)
+              end,
+            },
+          },
+        },
+        {}
+      )
+      cfg.testserver.on_new_config(cfg.testserver, "")
+      assert.same({ "nix-shell", "-p", "user_pkg_name", "--run", "'ls_original_cmd'" }, cfg.testserver.cmd)
     end)
   end)
 end)
