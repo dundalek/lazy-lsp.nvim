@@ -68,48 +68,6 @@ local function in_shell(nix_pkgs, cmd)
   return nix_cmd
 end
 
--- should rename to something indicating that it is for an individual config
-local function process_config(
-    lang_config,
-    user_config,
-    default_config,
-    nix_pkg,
-    filetypes,
-    config_override,
-    prefer_local
-)
-  local config = vim.tbl_extend(
-    "keep",
-    user_config or {},
-    { filetypes = filetypes },
-    config_override or {},
-    default_config,
-    lang_config.document_config.default_config
-  )
-
-  if nix_pkg ~= "" and config.cmd then
-    local original_on_new_config = config.on_new_config
-
-    config.on_new_config = function(new_config, root_path)
-      pcall(original_on_new_config, new_config, root_path)
-      -- Don't wrap with nix shell if user callback already wrapped it
-      if not vim.list_contains({ "nix", "nix-shell" }, new_config.cmd[1]) then
-        if prefer_local == false or vim.fn.executable(new_config.cmd[1]) == 0 then
-          local nix_pkgs = type(nix_pkg) == "string" and { nix_pkg } or nix_pkg
-          new_config.cmd = in_shell(nix_pkgs, new_config.cmd)
-        end
-      end
-    end
-
-    return config
-  elseif user_config then
-    config = vim.tbl_extend("keep", user_config, default_config)
-    return config
-  end
-
-  return nil
-end
-
 local function is_config_available(lspconfig, server)
   -- For deprecated servers we might get lspconfig entry, but without document_config
   return lspconfig[server] and lspconfig[server].document_config
@@ -198,17 +156,32 @@ local function server_configs(lspconfig, servers, opts, overrides)
       local user_config = configs[lsp]
       local config_override = overrides[lsp]
 
-      local config = process_config(
-        lang_config,
-        user_config,
+      local config = vim.tbl_extend(
+        "keep",
+        user_config or {},
+        { filetypes = server_to_filetypes[lsp] },
+        config_override or {},
         default_config,
-        nix_pkg,
-        server_to_filetypes[lsp],
-        config_override,
-        prefer_local
+        lang_config.document_config.default_config
       )
-      if config then
+
+      if nix_pkg ~= "" and config.cmd then
+        local original_on_new_config = config.on_new_config
+
+        config.on_new_config = function(new_config, root_path)
+          pcall(original_on_new_config, new_config, root_path)
+          -- Don't wrap with nix shell if user callback already wrapped it
+          if not vim.list_contains({ "nix", "nix-shell" }, new_config.cmd[1]) then
+            if prefer_local == false or vim.fn.executable(new_config.cmd[1]) == 0 then
+              local nix_pkgs = type(nix_pkg) == "string" and { nix_pkg } or nix_pkg
+              new_config.cmd = in_shell(nix_pkgs, new_config.cmd)
+            end
+          end
+        end
+
         returned_configs[lsp] = config
+      elseif user_config then
+        returned_configs[lsp] = vim.tbl_extend("keep", user_config, default_config)
       end
     end
   end
