@@ -14,8 +14,11 @@ for server, pkg in pairs(servers) do
   if pkg ~= "" then
     available_servers[server] = pkg
   end
-  if not lspconfig[server].document_config.default_config.filetypes then
-    print(string.format("Info: No filetypes for %s", server))
+  local config = lspconfig[server]
+  if config and config.document_config then
+    if not config.document_config.default_config.filetypes then
+      print(string.format("Info: No filetypes for %s", server))
+    end
   end
 end
 
@@ -41,11 +44,12 @@ local curated_opts = [[{
 ]]
 local opts = load("return " .. curated_opts)()
 
+local server_filetypes = helpers.make_server_filetypes_fn(lspconfig)
 local filetype_to_servers = helpers.enabled_filetypes_to_servers(
-  available_servers, lspconfig, {}, {}
+  available_servers, server_filetypes, {}, {}
 )
 local filetype_to_servers_curated = helpers.enabled_filetypes_to_servers(
-  available_servers, lspconfig, opts.excluded_servers, opts.preferred_servers
+  available_servers, server_filetypes, opts.excluded_servers, opts.preferred_servers
 )
 
 local filetypes_with_variants = {}
