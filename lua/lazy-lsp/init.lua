@@ -1,6 +1,6 @@
 local helpers = require("lazy-lsp.helpers")
 
-local function setup(opts)
+local function setup_with_lspconfig(opts)
   local lspconfig = require("lspconfig")
   local servers = require("lazy-lsp.servers")
   local overrides = require("lazy-lsp.overrides")
@@ -32,6 +32,34 @@ local function setup(opts)
       desc = string.format("Lazily setup %s lsp server", server),
     })
   end
+end
+
+local function setup_with_vim_lsp_config(opts)
+  local servers = require("lazy-lsp.servers")
+  local overrides = require("lazy-lsp.overrides")
+  for server, config in pairs(helpers.vim_lsp_server_configs(vim.lsp.config, servers, opts, overrides)) do
+    assert(config.filetypes, "server " .. server .. " does not provide filetypes and is not omitted")
+
+    -- For Neovim 0.11+
+    vim.lsp.config(server, config)
+    vim.lsp.enable(server)
+  end
+end
+
+local function setup(opts)
+  opts = opts or {}
+  if opts.use_vim_lsp_config then
+    if vim.lsp.config then
+      setup_with_vim_lsp_config(opts)
+      return
+    else
+      vim.notify(
+        "lazy-lsp: use_vim_lsp_config is set but vim.lsp.config is not available. Falling back to lspconfig.",
+        vim.log.levels.WARN
+      )
+    end
+  end
+  setup_with_lspconfig(opts)
 end
 
 return {

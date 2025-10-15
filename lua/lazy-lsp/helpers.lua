@@ -188,14 +188,75 @@ local function server_configs(lspconfig, servers, opts, overrides)
   return returned_configs
 end
 
+local function make_vim_lsp_server_filetypes_fn(vim_lsp_config)
+  return function(server)
+    local config = vim_lsp_config[server]
+    return config and config.filetypes
+  end
+end
+
+local function vim_lsp_server_configs(vim_lsp_config, servers, opts, overrides)
+  opts = opts or {}
+  local excluded_servers = opts.excluded_servers or {}
+  local default_config = opts.default_config or {}
+  local configs = opts.configs or {}
+  local preferred_servers = opts.preferred_servers or {}
+  local prefer_local = opts.prefer_local ~= false -- default: true
+
+  local server_filetypes = make_vim_lsp_server_filetypes_fn(vim_lsp_config)
+  local filetype_to_servers = enabled_filetypes_to_servers(servers, server_filetypes, excluded_servers, preferred_servers)
+  local server_to_filetypes = build_server_to_filetypes_index(filetype_to_servers)
+
+  local returned_configs = {}
+  for lsp, _ in pairs(server_to_filetypes) do
+    if server_to_filetypes[lsp] and vim_lsp_config[lsp] ~= nil then
+      local nix_pkg = servers[lsp]
+      local vim_config = vim_lsp_config[lsp]
+      local user_config = configs[lsp]
+      local config_override = overrides[lsp]
+
+      local config = vim.tbl_extend(
+        "keep",
+        user_config or {},
+        { filetypes = server_to_filetypes[lsp] },
+        config_override or {},
+        default_config,
+        vim_config or {}
+      )
+
+      if nix_pkg ~= "" and config.cmd then
+        if type(config.cmd) == "table" then
+          -- For Neovim 0.11 API, override cmd statically without using on_new_config hook
+          local original_cmd = config.cmd
+          if prefer_local == false or vim.fn.executable(original_cmd[1]) == 0 then
+            local nix_pkgs = type(nix_pkg) == "string" and { nix_pkg } or nix_pkg
+            -- Don't wrap with nix shell if cmd is already wrapped
+            if not vim.list_contains({ "nix", "nix-shell" }, original_cmd[1]) then
+              config.cmd = in_shell(nix_pkgs, original_cmd)
+            end
+          end
+          returned_configs[lsp] = config
+        else
+          vim.notify("lazy-lsp: " .. lsp .. " has dynamic cmd, config will not work", vim.log.levels.WARN)
+        end
+      elseif user_config then
+        returned_configs[lsp] = vim.tbl_extend("keep", user_config, default_config)
+      end
+    end
+  end
+  return returned_configs
+end
+
 return {
   server_configs = server_configs,
+  vim_lsp_server_configs = vim_lsp_server_configs,
   in_shell = in_shell,
   replace_first = replace_first,
   -- Internal, only for testing
   escape_shell_arg = escape_shell_arg,
   escape_shell_args = escape_shell_args,
   make_server_filetypes_fn = make_server_filetypes_fn,
+  make_vim_lsp_server_filetypes_fn = make_vim_lsp_server_filetypes_fn,
   build_filetype_to_servers_index = build_filetype_to_servers_index,
   build_server_to_filetypes_index = build_server_to_filetypes_index,
   enabled_filetypes_to_servers = enabled_filetypes_to_servers,
