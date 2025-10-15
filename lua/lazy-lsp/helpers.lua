@@ -70,13 +70,13 @@ end
 
 -- should rename to something indicating that it is for an individual config
 local function process_config(
-  lang_config,
-  user_config,
-  default_config,
-  nix_pkg,
-  filetypes,
-  config_override,
-  prefer_local
+    lang_config,
+    user_config,
+    default_config,
+    nix_pkg,
+    filetypes,
+    config_override,
+    prefer_local
 )
   local config = vim.tbl_extend(
     "keep",
@@ -115,22 +115,27 @@ local function is_config_available(lspconfig, server)
   return lspconfig[server] and lspconfig[server].document_config
 end
 
-local function build_filetype_to_servers_index(servers, lspconfig)
+local function make_server_filetypes_fn(lspconfig)
+  return function(server)
+    return lspconfig[server] and lspconfig[server].document_config and
+        lspconfig[server].document_config.default_config.filetypes
+  end
+end
+
+local function build_filetype_to_servers_index(servers, server_filetypes)
   local index = {}
   for server, _ in pairs(servers) do
-    if is_config_available(lspconfig, server) then
-      local filetypes = lspconfig[server].document_config.default_config.filetypes
-      if filetypes then
-        for _, filetype in ipairs(filetypes) do
-          if not index[filetype] then
-            index[filetype] = {}
-          end
-          table.insert(index[filetype], server)
+    local filetypes = server_filetypes(server)
+    if filetypes then
+      for _, filetype in ipairs(filetypes) do
+        if not index[filetype] then
+          index[filetype] = {}
         end
-      else
-        -- what would be a good way to log this?
-        -- print("no filetypes for", server)
+        table.insert(index[filetype], server)
       end
+    else
+      -- what would be a good way to log this?
+      -- print("no filetypes for", server)
     end
   end
   return index
@@ -149,7 +154,7 @@ local function build_server_to_filetypes_index(filetype_to_servers)
   return index
 end
 
-local function enabled_filetypes_to_servers(servers, lspconfig, excluded_servers, preferred_servers)
+local function enabled_filetypes_to_servers(servers, server_filetypes, excluded_servers, preferred_servers)
   local included_servers = {}
   for server, nix_pkg in pairs(servers) do
     -- check to exclude servers for which we don't have a nix package
@@ -161,7 +166,7 @@ local function enabled_filetypes_to_servers(servers, lspconfig, excluded_servers
     included_servers[server] = nil
   end
 
-  local filetype_to_servers = build_filetype_to_servers_index(included_servers, lspconfig)
+  local filetype_to_servers = build_filetype_to_servers_index(included_servers, server_filetypes)
   for filetype, filetype_servers in pairs(preferred_servers) do
     filetype_servers = type(filetype_servers) == "string" and { filetype_servers } or filetype_servers
     filetype_to_servers[filetype] = vim.tbl_filter(function(server)
@@ -179,7 +184,8 @@ local function server_configs(lspconfig, servers, opts, overrides)
   local preferred_servers = opts.preferred_servers or {}
   local prefer_local = opts.prefer_local ~= false -- default: true
 
-  local filetype_to_servers = enabled_filetypes_to_servers(servers, lspconfig, excluded_servers, preferred_servers)
+  local server_filetypes = make_server_filetypes_fn(lspconfig)
+  local filetype_to_servers = enabled_filetypes_to_servers(servers, server_filetypes, excluded_servers, preferred_servers)
   local server_to_filetypes = build_server_to_filetypes_index(filetype_to_servers)
 
   local returned_configs = {}
@@ -216,6 +222,7 @@ return {
   -- Internal, only for testing
   escape_shell_arg = escape_shell_arg,
   escape_shell_args = escape_shell_args,
+  make_server_filetypes_fn = make_server_filetypes_fn,
   build_filetype_to_servers_index = build_filetype_to_servers_index,
   build_server_to_filetypes_index = build_server_to_filetypes_index,
   enabled_filetypes_to_servers = enabled_filetypes_to_servers,

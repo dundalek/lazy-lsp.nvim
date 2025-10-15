@@ -82,6 +82,8 @@ local fake_lspconfig = {
   },
 }
 
+local fake_server_filetypes = helpers.make_server_filetypes_fn(fake_lspconfig)
+
 local fake_servers = {
   pylsp = "python39Packages.python-lsp-server",
   pyright = "pyright",
@@ -102,7 +104,7 @@ local function normalize_table_values(tbl)
 end
 
 it("build_filetype_to_servers_index", function()
-  local filetype_to_servers = helpers.build_filetype_to_servers_index(fake_lspconfig, fake_lspconfig)
+  local filetype_to_servers = helpers.build_filetype_to_servers_index(fake_lspconfig, fake_server_filetypes)
 
   assert.same({
     javascript = { "fakelsp", "tsserver" },
@@ -113,7 +115,7 @@ end)
 
 describe("build_server_to_filetypes_index", function()
   it("returns same servers and filetypes", function()
-    local filetype_to_servers = helpers.build_filetype_to_servers_index(fake_lspconfig, fake_lspconfig)
+    local filetype_to_servers = helpers.build_filetype_to_servers_index(fake_lspconfig, fake_server_filetypes)
     local server_to_filetypes = helpers.build_server_to_filetypes_index(filetype_to_servers)
 
     assert.same({
@@ -125,7 +127,7 @@ describe("build_server_to_filetypes_index", function()
   end)
 
   it("returns subset of servers with overrides", function()
-    local filetype_to_servers = helpers.build_filetype_to_servers_index(fake_lspconfig, fake_lspconfig)
+    local filetype_to_servers = helpers.build_filetype_to_servers_index(fake_lspconfig, fake_server_filetypes)
     filetype_to_servers.python = { "pyright" }
     filetype_to_servers.typescript = { "tsserver" }
     local server_to_filetypes = helpers.build_server_to_filetypes_index(filetype_to_servers)
@@ -145,7 +147,8 @@ describe("build_server_to_filetypes_index", function()
         },
       },
     }
-    local filetype_to_servers = helpers.build_filetype_to_servers_index(fake_lspconfig, fake_lspconfig)
+    local fake_server_filetypes = helpers.make_server_filetypes_fn(fake_lspconfig)
+    local filetype_to_servers = helpers.build_filetype_to_servers_index(fake_lspconfig, fake_server_filetypes)
     local server_to_filetypes = helpers.build_server_to_filetypes_index(filetype_to_servers)
 
     assert.same({}, normalize_table_values(server_to_filetypes))
@@ -155,7 +158,7 @@ end)
 describe("enabled_filetypes_to_servers", function()
   it("calculates filetype to servers mapping for defined packages", function()
     local servers = { pylsp = "python39Packages.python-lsp-server" }
-    local mapping = helpers.enabled_filetypes_to_servers(servers, fake_lspconfig, {}, {})
+    local mapping = helpers.enabled_filetypes_to_servers(servers, fake_server_filetypes, {}, {})
     assert.same({
       python = { "pylsp" },
     }, mapping)
@@ -163,7 +166,7 @@ describe("enabled_filetypes_to_servers", function()
 
   it("excludes filetype to servers mapping for missing packages", function()
     local servers = { pylsp = "" }
-    local mapping = helpers.enabled_filetypes_to_servers(servers, fake_lspconfig, {}, {})
+    local mapping = helpers.enabled_filetypes_to_servers(servers, fake_server_filetypes, {}, {})
     assert.same({}, mapping)
   end)
 end)
@@ -474,7 +477,7 @@ describe("server_configs", function()
 
     it("wraps in shell when option false", function()
       local cfgs =
-        helpers.server_configs(lspconfig_with_binary, fake_servers, { prefer_local = false }, empty_overrides)
+          helpers.server_configs(lspconfig_with_binary, fake_servers, { prefer_local = false }, empty_overrides)
       assert.same({ "nix-shell", "-p", "fakelsp-package", "--run", "'git'" }, make_config(cfgs.fakelsp).cmd)
     end)
 
@@ -493,7 +496,7 @@ describe("server_configs", function()
     }
     it("wraps in shell when binary not found", function()
       local cfgs =
-        helpers.server_configs(lspconfig_without_binary, fake_servers, { prefer_local = true }, empty_overrides)
+          helpers.server_configs(lspconfig_without_binary, fake_servers, { prefer_local = true }, empty_overrides)
       assert.same(
         { "nix-shell", "-p", "fakelsp-package", "--run", "'this-does-not-exist'" },
         make_config(cfgs.fakelsp).cmd
