@@ -178,10 +178,7 @@ describe("server_configs", function()
 
   it("uses cmd from lspconfig", function()
     local cfg = helpers.server_configs(testserver_lspconfig, { testserver = "nix_pkg_name" }, {}, {})
-    assert.same(
-      { "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_original_cmd'" },
-      make_config(cfg.testserver).cmd
-    )
+    assert.same({ "nix-shell", "-p", "nix_pkg_name", "--run", "'ls_original_cmd'" }, make_config(cfg.testserver).cmd)
   end)
 
   it("servers config can specify multiple nix packages", function()
@@ -244,15 +241,10 @@ describe("server_configs", function()
   end)
 
   it("merges default_config values when user config override is present", function()
-    local cfg = helpers.server_configs(
-      testserver_lspconfig,
-      { testserver = "nix_pkg_name" },
-      {
-        configs = { testserver = { cmd = { "ls_user_cmd" } } },
-        default_config = { some_parameter = "some-value" },
-      },
-      {}
-    )
+    local cfg = helpers.server_configs(testserver_lspconfig, { testserver = "nix_pkg_name" }, {
+      configs = { testserver = { cmd = { "ls_user_cmd" } } },
+      default_config = { some_parameter = "some-value" },
+    }, {})
     assert.same("some-value", cfg.testserver.some_parameter)
   end)
 
@@ -318,8 +310,10 @@ describe("server_configs", function()
     }
     local cfg = helpers.server_configs(lspconfig_with_on_new_config, { testserver = "nix_pkg_name" }, {}, {})
     cfg.testserver.on_new_config(cfg.testserver, "/some/root/path")
-    assert.same({ "nix-shell", "-p", "nix_pkg_name", "--run", "'new_cmd' '--path' '/some/root/path'" },
-      cfg.testserver.cmd)
+    assert.same(
+      { "nix-shell", "-p", "nix_pkg_name", "--run", "'new_cmd' '--path' '/some/root/path'" },
+      cfg.testserver.cmd
+    )
   end)
 
   it("on_new_config from user config takes precedence", function()
@@ -336,20 +330,15 @@ describe("server_configs", function()
         },
       },
     }
-    local cfg = helpers.server_configs(
-      lspconfig_with_on_new_config,
-      { testserver = "nix_pkg_name" },
-      {
-        configs = {
-          testserver = {
-            on_new_config = function(new_config, root_path)
-              new_config.cmd = { "user_config_cmd", "--path", root_path }
-            end,
-          },
+    local cfg = helpers.server_configs(lspconfig_with_on_new_config, { testserver = "nix_pkg_name" }, {
+      configs = {
+        testserver = {
+          on_new_config = function(new_config, root_path)
+            new_config.cmd = { "user_config_cmd", "--path", root_path }
+          end,
         },
       },
-      {}
-    )
+    }, {})
     cfg.testserver.on_new_config(cfg.testserver, "/some/root/path")
     assert.same(
       { "nix-shell", "-p", "nix_pkg_name", "--run", "'user_config_cmd' '--path' '/some/root/path'" },
@@ -358,20 +347,15 @@ describe("server_configs", function()
   end)
 
   it("don't wrap result from on_new_config if it is already wrapped", function()
-    local cfg = helpers.server_configs(
-      testserver_lspconfig,
-      { testserver = "nix_pkg_name" },
-      {
-        configs = {
-          testserver = {
-            on_new_config = function(new_config, root_path)
-              new_config.cmd = helpers.in_shell({ "user_pkg_name" }, new_config.cmd)
-            end,
-          },
+    local cfg = helpers.server_configs(testserver_lspconfig, { testserver = "nix_pkg_name" }, {
+      configs = {
+        testserver = {
+          on_new_config = function(new_config, root_path)
+            new_config.cmd = helpers.in_shell({ "user_pkg_name" }, new_config.cmd)
+          end,
         },
       },
-      {}
-    )
+    }, {})
     cfg.testserver.on_new_config(cfg.testserver, "")
     assert.same({ "nix-shell", "-p", "user_pkg_name", "--run", "'ls_original_cmd'" }, cfg.testserver.cmd)
   end)
@@ -477,7 +461,7 @@ describe("server_configs", function()
 
     it("wraps in shell when option false", function()
       local cfgs =
-          helpers.server_configs(lspconfig_with_binary, fake_servers, { prefer_local = false }, empty_overrides)
+        helpers.server_configs(lspconfig_with_binary, fake_servers, { prefer_local = false }, empty_overrides)
       assert.same({ "nix-shell", "-p", "fakelsp-package", "--run", "'git'" }, make_config(cfgs.fakelsp).cmd)
     end)
 
@@ -496,7 +480,7 @@ describe("server_configs", function()
     }
     it("wraps in shell when binary not found", function()
       local cfgs =
-          helpers.server_configs(lspconfig_without_binary, fake_servers, { prefer_local = true }, empty_overrides)
+        helpers.server_configs(lspconfig_without_binary, fake_servers, { prefer_local = true }, empty_overrides)
       assert.same(
         { "nix-shell", "-p", "fakelsp-package", "--run", "'this-does-not-exist'" },
         make_config(cfgs.fakelsp).cmd
