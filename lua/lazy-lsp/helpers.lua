@@ -227,6 +227,12 @@ local function vim_lsp_server_configs(vim_lsp_config, servers, opts, overrides)
       )
 
       if nix_pkg ~= "" and config.cmd then
+        if type(config.on_new_config) == "function" then
+          state.add_issue({
+            level = "warn",
+            message = lsp .. " uses `on_new_config`, it will likely not work properly"
+          })
+        end
         if type(config.cmd) == "table" then
           -- For Neovim 0.11 API, override cmd statically without using on_new_config hook
           local original_cmd = config.cmd
@@ -241,7 +247,7 @@ local function vim_lsp_server_configs(vim_lsp_config, servers, opts, overrides)
         else
           state.add_issue({
             level = "warn",
-            message = lsp .. " has dynamic cmd, config will not work"
+            message = lsp .. " has dynamic `cmd`, config will not work"
           })
         end
       elseif user_config then
