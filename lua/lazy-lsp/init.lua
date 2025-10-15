@@ -59,6 +59,12 @@ local function setup(opts)
       )
     end
   end
+
+  -- workaround: volar got renamed to vue_ls, but vue_ls is not available as legacy config
+  local servers = require("lazy-lsp.servers")
+  servers.volar = servers.vue_ls
+  servers.vue_ls = ""
+
   setup_with_lspconfig(opts)
 end
 
