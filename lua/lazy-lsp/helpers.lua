@@ -1,3 +1,5 @@
+local state = require("lazy-lsp.state")
+
 local function replace_first(list, replacement)
   local result = vim.list_slice(list, 2)
   table.insert(result, 1, replacement)
@@ -237,7 +239,10 @@ local function vim_lsp_server_configs(vim_lsp_config, servers, opts, overrides)
           end
           returned_configs[lsp] = config
         else
-          vim.notify("lazy-lsp: " .. lsp .. " has dynamic cmd, config will not work", vim.log.levels.WARN)
+          state.add_issue({
+            level = "warn",
+            message = lsp .. " has dynamic cmd, config will not work"
+          })
         end
       elseif user_config then
         returned_configs[lsp] = vim.tbl_extend("keep", user_config, default_config)
