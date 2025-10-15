@@ -3,17 +3,22 @@
 local serpent = require("serpent")
 
 local servers_file = 'lua/lazy-lsp/servers.lua'
-local configurations_directory = 'tmp/nvim-lspconfig/lua/lspconfig/configs'
+local configurations_directories = {
+  'tmp/nvim-lspconfig/lua/lspconfig/configs',
+  'tmp/nvim-lspconfig/lsp'
+}
 
 local lazy_servers = dofile(servers_file)
 local servers = {}
 
-local pfile = assert(io.popen("ls '" .. configurations_directory .. "'"))
-for filename in pfile:lines() do
-  local server = filename:gsub('%.lua$', '')
-  servers[server] = ""
+for _, configurations_directory in ipairs(configurations_directories) do
+  local pfile = assert(io.popen("ls '" .. configurations_directory .. "'"))
+  for filename in pfile:lines() do
+    local server = filename:gsub('%.lua$', '')
+    servers[server] = ""
+  end
+  pfile:close()
 end
-pfile:close()
 
 for k, v in pairs(lazy_servers) do
   local server_exists_in_lspconfig = servers[k]
