@@ -99,6 +99,28 @@ require("lazy-lsp").setup {
 }
 ```
 
+### Experimental Neovim 0.11+ vim.lsp.config API support
+
+Due to a change in config API warning message is shown when using the old lspconfig:
+```
+The `require('lspconfig')` "framework" is deprecated, use vim.lsp.config (see :help lspconfig-nvim-0.11) instead.
+Feature will be removed in nvim-lspconfig v3.0.0
+```
+
+You can opt into using these new APIs by setting `use_vim_lsp_config = true`:
+
+```lua
+require("lazy-lsp").setup {
+  use_vim_lsp_config = true, -- Requires Neovim 0.11+
+}
+```
+
+Additionaly, instead of `default_config` and `configs` options you can use `vim.lsp.config`:
+- `default_config = {...}` becomes `vim.lsp.config("*", {...})`
+- `configs = {lua_ls = {...}}` becomes `vim.lsp.config("lua_ls", {...})`
+
+You can inspect encountered issues in the checkhealth report using `:checkhealth lazy-lsp`.
+
 ## Curated servers
 
 The philosophy of this plugin is to enable all possible plugins by default to get the highest chance of LSP functionality being available, even at a cost of starting multiple servers for a single language. Any misbehaving or unwanted servers can be excluded one by one. 
