@@ -361,7 +361,7 @@ describe("server_configs", function()
   end)
 
   it("augments commands with nix-shell", function()
-    local cfg = helpers.server_configs(fake_lspconfig, fake_servers, {}, fake_overrides)
+    local cfg = helpers.server_configs(fake_lspconfig, fake_servers, { prefer_local = false }, fake_overrides)
     assert.same({ "nix-shell", "-p", "fakelsp-package", "--run", "'fakelsp-binary'" }, make_config(cfg.fakelsp).cmd)
     assert.same(
       { "nix-shell", "-p", "python39Packages.python-lsp-server", "--run", "'pylsp'" },

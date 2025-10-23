@@ -40,9 +40,19 @@ local function setup_with_vim_lsp_config(opts)
   for server, config in pairs(helpers.vim_lsp_server_configs(vim.lsp.config, servers, opts, overrides)) do
     assert(config.filetypes, "server " .. server .. " does not provide filetypes and is not omitted")
 
-    -- For Neovim 0.11+
-    vim.lsp.config(server, config)
-    vim.lsp.enable(server)
+    local lsp_group = vim.api.nvim_create_augroup("lazy_lsp_setup_vim_lsp_config", { clear = false })
+    local autocmd_id
+    autocmd_id = vim.api.nvim_create_autocmd("FileType", {
+      pattern = config.filetypes,
+      callback = function(opt)
+        vim.api.nvim_del_autocmd(autocmd_id)
+
+        vim.lsp.config(server, config)
+        vim.lsp.enable(server)
+      end,
+      group = lsp_group,
+      desc = string.format("Lazily setup %s lsp server with vim.lsp.config", server),
+    })
   end
 end
 
