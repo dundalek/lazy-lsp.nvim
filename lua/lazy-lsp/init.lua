@@ -37,8 +37,44 @@ end
 local function setup_with_vim_lsp_config(opts)
   local servers = require("lazy-lsp.servers")
   local overrides = require("lazy-lsp.overrides")
+  local util = require("lspconfig.util")
+
   for server, config in pairs(helpers.vim_lsp_server_configs(vim.lsp.config, servers, opts, overrides)) do
     assert(config.filetypes, "server " .. server .. " does not provide filetypes and is not omitted")
+
+    -- Workaroud: Once Neovim 0.11 is default move these to overrides.lua
+    -- Handle servers with custom root_dir that need conversion to new vim.lsp.config API
+    -- Old API: root_dir = function(fname)
+    -- New API: root_dir = function(bufnr, on_dir)
+    if server == "gopls" then
+      local original_root_dir = vim.lsp.config[server] and vim.lsp.config[server].root_dir
+      config.root_dir = function(bufnr, on_dir)
+        if vim.fn.executable("go") == 1 and original_root_dir then
+          original_root_dir(bufnr, on_dir)
+        else
+          local fname = vim.api.nvim_buf_get_name(bufnr)
+          local root = util.root_pattern("go.work", "go.mod", ".git")(fname)
+          if root then
+            on_dir(root)
+          end
+        end
+      end
+    elseif server == "rust_analyzer" then
+      local original_root_dir = vim.lsp.config[server] and vim.lsp.config[server].root_dir
+      config.root_dir = function(bufnr, on_dir)
+        if vim.fn.executable("cargo") == 1 and original_root_dir then
+          original_root_dir(bufnr, on_dir)
+        else
+          local fname = vim.api.nvim_buf_get_name(bufnr)
+          local root = util.root_pattern("Cargo.toml")(fname)
+            or util.root_pattern("rust-project.json")(fname)
+            or util.find_git_ancestor(fname)
+          if root then
+            on_dir(root)
+          end
+        end
+      end
+    end
 
     local lsp_group = vim.api.nvim_create_augroup("lazy_lsp_setup_vim_lsp_config", { clear = false })
     local autocmd_id
