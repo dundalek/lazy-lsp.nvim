@@ -384,7 +384,7 @@ return {
   turtle_ls = "",
   tvm_ffi_navigator = "",
   twiggy_language_server = "",
-  ty = "",
+  ty = "ty",
   typeprof = "",
   typos_lsp = "",
   uiua = "",
