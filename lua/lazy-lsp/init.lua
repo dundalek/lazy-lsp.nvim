@@ -85,6 +85,7 @@ local function setup_with_vim_lsp_config(opts)
 
         vim.lsp.config(server, config)
         vim.lsp.enable(server)
+        vim.lsp.start(config)
       end,
       group = lsp_group,
       desc = string.format("Lazily setup %s lsp server with vim.lsp.config", server),
