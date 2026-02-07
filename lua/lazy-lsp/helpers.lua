@@ -83,6 +83,13 @@ local function make_server_filetypes_fn(lspconfig)
   end
 end
 
+local function make_static_server_filetypes_fn()
+  local filetypes = require("lazy-lsp.filetypes")
+  return function(server)
+    return filetypes[server]
+  end
+end
+
 local function build_filetype_to_servers_index(servers, server_filetypes)
   local index = {}
   for server, _ in pairs(servers) do
@@ -144,8 +151,10 @@ local function server_configs(lspconfig, servers, opts, overrides)
   local configs = opts.configs or {}
   local preferred_servers = opts.preferred_servers or {}
   local prefer_local = opts.prefer_local ~= false -- default: true
+  local use_filetype_mapping = opts.use_filetype_mapping or false
 
-  local server_filetypes = make_server_filetypes_fn(lspconfig)
+  local server_filetypes = use_filetype_mapping and make_static_server_filetypes_fn()
+    or make_server_filetypes_fn(lspconfig)
   local filetype_to_servers =
     enabled_filetypes_to_servers(servers, server_filetypes, excluded_servers, preferred_servers)
   local server_to_filetypes = build_server_to_filetypes_index(filetype_to_servers)
@@ -206,8 +215,10 @@ local function vim_lsp_server_configs(vim_lsp_config, servers, opts, overrides)
   local configs = opts.configs or {}
   local preferred_servers = opts.preferred_servers or {}
   local prefer_local = opts.prefer_local ~= false -- default: true
+  local use_filetype_mapping = opts.use_filetype_mapping or false
 
-  local server_filetypes = make_vim_lsp_server_filetypes_fn(vim_lsp_config)
+  local server_filetypes = use_filetype_mapping and make_static_server_filetypes_fn()
+    or make_vim_lsp_server_filetypes_fn(vim_lsp_config)
   local filetype_to_servers =
     enabled_filetypes_to_servers(servers, server_filetypes, excluded_servers, preferred_servers)
   local server_to_filetypes = build_server_to_filetypes_index(filetype_to_servers)
@@ -270,6 +281,7 @@ return {
   escape_shell_arg = escape_shell_arg,
   escape_shell_args = escape_shell_args,
   make_server_filetypes_fn = make_server_filetypes_fn,
+  make_static_server_filetypes_fn = make_static_server_filetypes_fn,
   make_vim_lsp_server_filetypes_fn = make_vim_lsp_server_filetypes_fn,
   build_filetype_to_servers_index = build_filetype_to_servers_index,
   build_server_to_filetypes_index = build_server_to_filetypes_index,
