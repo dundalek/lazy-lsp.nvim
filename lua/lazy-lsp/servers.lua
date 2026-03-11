@@ -101,7 +101,7 @@ return {
   ecsact = "",
   efm = "efm-langserver",
   elixirls = {
-    "elixir_ls",
+    "elixir-ls",
     "beamPackages.hex"
   },
   elmls = "elmPackages.elm-language-server",
