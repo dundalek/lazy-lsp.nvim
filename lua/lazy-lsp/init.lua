@@ -1,7 +1,7 @@
 local helpers = require("lazy-lsp.helpers")
 
 local function setup_with_lspconfig(opts)
-  local lspconfig = require("lspconfig")
+  local lspconfig = vim.lsp.config
   local servers = require("lazy-lsp.servers")
   local overrides = require("lazy-lsp.overrides")
   for server, config in pairs(helpers.server_configs(lspconfig, servers, opts, overrides)) do
