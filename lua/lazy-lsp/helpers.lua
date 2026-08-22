@@ -119,8 +119,8 @@ end
 local function make_server_filetypes_fn(lspconfig)
   return function(server)
     return lspconfig[server]
-        and lspconfig[server].document_config
-        and lspconfig[server].document_config.default_config.filetypes
+      and lspconfig[server].document_config
+      and lspconfig[server].document_config.default_config.filetypes
   end
 end
 
@@ -188,7 +188,7 @@ local function server_configs(lspconfig, servers, opts, overrides)
 
   local server_filetypes = make_server_filetypes_fn(lspconfig)
   local filetype_to_servers =
-      enabled_filetypes_to_servers(servers, server_filetypes, excluded_servers, preferred_servers)
+    enabled_filetypes_to_servers(servers, server_filetypes, excluded_servers, preferred_servers)
   local server_to_filetypes = build_server_to_filetypes_index(filetype_to_servers)
 
   local returned_configs = {}
@@ -244,7 +244,7 @@ local function vim_lsp_server_configs(vim_lsp_config, servers, opts, overrides)
 
   local server_filetypes = make_vim_lsp_server_filetypes_fn(vim_lsp_config)
   local filetype_to_servers =
-      enabled_filetypes_to_servers(servers, server_filetypes, excluded_servers, preferred_servers)
+    enabled_filetypes_to_servers(servers, server_filetypes, excluded_servers, preferred_servers)
   local server_to_filetypes = build_server_to_filetypes_index(filetype_to_servers)
 
   local returned_configs = {}
