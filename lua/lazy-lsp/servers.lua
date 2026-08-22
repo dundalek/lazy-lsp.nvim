@@ -413,8 +413,7 @@ return {
     "typescript"
   },
   ts_query_ls = "ts_query_ls",
-  tsc = "",
-  tsgo = "",
+  tsc = "typescript-go",
   tsp_server = "",
   ttags = "",
   turbo_ls = "",

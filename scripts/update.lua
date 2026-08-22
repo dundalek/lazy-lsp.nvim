@@ -34,6 +34,7 @@ local ignored = {
   "typst_lsp", -- deprecated in favor of tinymist and archived on Nov 5, 2024
   "vuels",     -- deprecated in favor of volar
   "volar",     -- deprecated in favor of vue_ls
+  "tsgo",      -- deprecated in favor of tsc
 }
 print("Ignoring deprecated:", table.concat(ignored, ", "))
 for _, v in ipairs(ignored) do
