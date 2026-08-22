@@ -1,4 +1,5 @@
 local helpers = require("lazy-lsp.helpers")
+local state = require("lazy-lsp.state")
 
 local function make_config(config)
   config.on_new_config(config, "")
@@ -486,6 +487,159 @@ describe("server_configs", function()
         make_config(cfgs.fakelsp).cmd
       )
     end)
+  end)
+end)
+
+describe("vim_lsp_server_configs dynamic commands", function()
+  local function config_for(cmd, opts)
+    local configs = helpers.vim_lsp_server_configs(
+      { testserver = { cmd = cmd, filetypes = { "test" } } },
+      { testserver = "nix_pkg_name" },
+      opts or {},
+      {}
+    )
+    return configs.testserver
+  end
+
+  local function with_rpc_start(rpc_start, callback)
+    local original_rpc_start = vim.lsp.rpc.start
+    vim.lsp.rpc.start = rpc_start
+    local ok, result = xpcall(callback, debug.traceback)
+    vim.lsp.rpc.start = original_rpc_start
+    if not ok then
+      error(result, 0)
+    end
+    return result
+  end
+
+  it("preserves a Node-style project-local executable when it is available", function()
+    local local_executable = vim.fn.exepath("git")
+    local dispatchers = {}
+    local spawn_params = { cwd = "/project", env = { NODE_ENV = "test" }, detached = true }
+    local rpc_call
+    local config = config_for(function(factory_dispatchers, resolved_config)
+      local cmd = vim.fn.executable(resolved_config.local_executable) == 1
+          and { resolved_config.local_executable, "--stdio" }
+        or { "global-server", "--stdio" }
+      return vim.lsp.rpc.start(cmd, factory_dispatchers, spawn_params)
+    end)
+
+    local client = with_rpc_start(function(cmd, rpc_dispatchers, extra_spawn_params)
+      rpc_call = { cmd = cmd, dispatchers = rpc_dispatchers, spawn_params = extra_spawn_params }
+      return "client"
+    end, function()
+      return config.cmd(dispatchers, { local_executable = local_executable })
+    end)
+
+    assert.equals("client", client)
+    assert.same({ local_executable, "--stdio" }, rpc_call.cmd)
+    assert.equals(dispatchers, rpc_call.dispatchers)
+    assert.equals(spawn_params, rpc_call.spawn_params)
+  end)
+
+  it("wraps a jdtls-style computed command when its executable is missing", function()
+    local rpc_cmd
+    local config = config_for(function(dispatchers, resolved_config)
+      return vim.lsp.rpc.start({ "missing-jdtls", "-data", resolved_config.root_dir .. "/workspace" }, dispatchers, {
+        cwd = resolved_config.root_dir,
+      })
+    end)
+
+    with_rpc_start(function(cmd)
+      rpc_cmd = cmd
+      return "client"
+    end, function()
+      return config.cmd({}, { root_dir = "/project" })
+    end)
+
+    assert.same({
+      "nix-shell",
+      "-p",
+      "nix_pkg_name",
+      "--run",
+      "'missing-jdtls' '-data' '/project/workspace'",
+    }, rpc_cmd)
+  end)
+
+  it("wraps an available executable when prefer_local is false", function()
+    local rpc_cmd
+    local config = config_for(function(dispatchers)
+      return vim.lsp.rpc.start({ "git", "--stdio" }, dispatchers)
+    end, { prefer_local = false })
+
+    with_rpc_start(function(cmd)
+      rpc_cmd = cmd
+      return "client"
+    end, function()
+      return config.cmd({})
+    end)
+
+    assert.same({ "nix-shell", "-p", "nix_pkg_name", "--run", "'git' '--stdio'" }, rpc_cmd)
+  end)
+
+  it("does not wrap commands that already use Nix", function()
+    for _, nix_command in ipairs({ "nix", "nix-shell" }) do
+      local original_cmd = { nix_command, "existing-argument" }
+      local rpc_cmd
+      local config = config_for(function(dispatchers)
+        return vim.lsp.rpc.start(original_cmd, dispatchers)
+      end, { prefer_local = false })
+
+      with_rpc_start(function(cmd)
+        rpc_cmd = cmd
+        return "client"
+      end, function()
+        return config.cmd({})
+      end)
+
+      assert.equals(original_cmd, rpc_cmd)
+    end
+  end)
+
+  it("restores rpc.start after a successful launch", function()
+    local rpc_start = function()
+      return "client"
+    end
+    local config = config_for(function(dispatchers)
+      return vim.lsp.rpc.start({ "missing-server" }, dispatchers)
+    end)
+
+    with_rpc_start(rpc_start, function()
+      assert.equals("client", config.cmd({}))
+      assert.equals(rpc_start, vim.lsp.rpc.start)
+    end)
+  end)
+
+  it("restores rpc.start and preserves the error when RPC startup fails", function()
+    local rpc_start = function()
+      error("rpc start failed")
+    end
+    local config = config_for(function(dispatchers)
+      return vim.lsp.rpc.start({ "missing-server" }, dispatchers)
+    end)
+
+    with_rpc_start(rpc_start, function()
+      local ok, err = pcall(config.cmd, {})
+      assert.is_false(ok)
+      assert.matches("rpc start failed", err, 1, true)
+      assert.equals(rpc_start, vim.lsp.rpc.start)
+    end)
+  end)
+
+  it("returns a custom client and warns when the factory does not start RPC", function()
+    state.clear_issues()
+    local custom_client = {}
+    local config = config_for(function()
+      return custom_client
+    end)
+
+    assert.equals(custom_client, config.cmd({}))
+    assert.same({
+      {
+        level = "warn",
+        message = "testserver has dynamic `cmd` but did not call `vim.lsp.rpc.start`; Nix injection was skipped",
+      },
+    }, state.get_issues())
   end)
 end)
 

@@ -70,6 +70,47 @@ local function in_shell(nix_pkgs, cmd)
   return nix_cmd
 end
 
+local function maybe_wrap_in_shell(nix_pkg, cmd, prefer_local)
+  -- Don't wrap with nix shell if user callback already wrapped it
+  if vim.list_contains({ "nix", "nix-shell" }, cmd[1]) then
+    return cmd
+  end
+  if prefer_local and vim.fn.executable(cmd[1]) == 1 then
+    return cmd
+  end
+
+  local nix_pkgs = type(nix_pkg) == "string" and { nix_pkg } or nix_pkg
+  return in_shell(nix_pkgs, cmd)
+end
+
+local function wrap_dynamic_cmd(lsp, original_cmd, nix_pkg, prefer_local)
+  return function(dispatchers, config)
+    local rpc_start = vim.lsp.rpc.start
+    local intercepted = false
+
+    vim.lsp.rpc.start = function(cmd, rpc_dispatchers, extra_spawn_params)
+      intercepted = true
+      return rpc_start(maybe_wrap_in_shell(nix_pkg, cmd, prefer_local), rpc_dispatchers, extra_spawn_params)
+    end
+
+    local ok, client_or_error = xpcall(function()
+      return original_cmd(dispatchers, config)
+    end, debug.traceback)
+    vim.lsp.rpc.start = rpc_start
+
+    if not ok then
+      error(client_or_error, 0)
+    end
+    if not intercepted then
+      state.add_issue({
+        level = "warn",
+        message = lsp .. " has dynamic `cmd` but did not call `vim.lsp.rpc.start`; Nix injection was skipped",
+      })
+    end
+    return client_or_error
+  end
+end
+
 local function is_config_available(lspconfig, server)
   -- For deprecated servers we might get lspconfig entry, but without document_config
   return lspconfig[server] and lspconfig[server].document_config
@@ -78,8 +119,8 @@ end
 local function make_server_filetypes_fn(lspconfig)
   return function(server)
     return lspconfig[server]
-      and lspconfig[server].document_config
-      and lspconfig[server].document_config.default_config.filetypes
+        and lspconfig[server].document_config
+        and lspconfig[server].document_config.default_config.filetypes
   end
 end
 
@@ -147,7 +188,7 @@ local function server_configs(lspconfig, servers, opts, overrides)
 
   local server_filetypes = make_server_filetypes_fn(lspconfig)
   local filetype_to_servers =
-    enabled_filetypes_to_servers(servers, server_filetypes, excluded_servers, preferred_servers)
+      enabled_filetypes_to_servers(servers, server_filetypes, excluded_servers, preferred_servers)
   local server_to_filetypes = build_server_to_filetypes_index(filetype_to_servers)
 
   local returned_configs = {}
@@ -174,13 +215,7 @@ local function server_configs(lspconfig, servers, opts, overrides)
 
         config.on_new_config = function(new_config, root_path)
           pcall(original_on_new_config, new_config, root_path)
-          -- Don't wrap with nix shell if user callback already wrapped it
-          if not vim.list_contains({ "nix", "nix-shell" }, new_config.cmd[1]) then
-            if prefer_local == false or vim.fn.executable(new_config.cmd[1]) == 0 then
-              local nix_pkgs = type(nix_pkg) == "string" and { nix_pkg } or nix_pkg
-              new_config.cmd = in_shell(nix_pkgs, new_config.cmd)
-            end
-          end
+          new_config.cmd = maybe_wrap_in_shell(nix_pkg, new_config.cmd, prefer_local)
         end
 
         returned_configs[lsp] = config
@@ -209,7 +244,7 @@ local function vim_lsp_server_configs(vim_lsp_config, servers, opts, overrides)
 
   local server_filetypes = make_vim_lsp_server_filetypes_fn(vim_lsp_config)
   local filetype_to_servers =
-    enabled_filetypes_to_servers(servers, server_filetypes, excluded_servers, preferred_servers)
+      enabled_filetypes_to_servers(servers, server_filetypes, excluded_servers, preferred_servers)
   local server_to_filetypes = build_server_to_filetypes_index(filetype_to_servers)
 
   local returned_configs = {}
@@ -238,21 +273,11 @@ local function vim_lsp_server_configs(vim_lsp_config, servers, opts, overrides)
         end
         if type(config.cmd) == "table" then
           -- For Neovim 0.11 API, override cmd statically without using on_new_config hook
-          local original_cmd = config.cmd
-          if prefer_local == false or vim.fn.executable(original_cmd[1]) == 0 then
-            local nix_pkgs = type(nix_pkg) == "string" and { nix_pkg } or nix_pkg
-            -- Don't wrap with nix shell if cmd is already wrapped
-            if not vim.list_contains({ "nix", "nix-shell" }, original_cmd[1]) then
-              config.cmd = in_shell(nix_pkgs, original_cmd)
-            end
-          end
-          returned_configs[lsp] = config
+          config.cmd = maybe_wrap_in_shell(nix_pkg, config.cmd, prefer_local)
         else
-          state.add_issue({
-            level = "warn",
-            message = lsp .. " has dynamic `cmd`, config will not work",
-          })
+          config.cmd = wrap_dynamic_cmd(lsp, config.cmd, nix_pkg, prefer_local)
         end
+        returned_configs[lsp] = config
       elseif user_config then
         returned_configs[lsp] = vim.tbl_extend("keep", user_config, default_config)
       end
