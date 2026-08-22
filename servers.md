@@ -51,11 +51,11 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 | `geom` | [glsl_analyzer](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#glsl_analyzer), [glslls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#glslls) | [glsl_analyzer](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#glsl_analyzer), [glslls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#glslls) |
 | `glsl` | [glsl_analyzer](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#glsl_analyzer), [glslls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#glslls) | [glsl_analyzer](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#glsl_analyzer), [glslls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#glslls) |
 | `heex` | [elixirls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#elixirls), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss) | [elixirls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#elixirls) |
-| `html` | [html](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#html), [ltex](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ltex), [stylelint_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#stylelint_lsp), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss) | [html](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#html), [stylelint_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#stylelint_lsp) |
+| `html` | [biome](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#biome), [html](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#html), [ltex](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ltex), [stylelint_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#stylelint_lsp), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss) | [html](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#html), [stylelint_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#stylelint_lsp) |
+| `htmlangular` | [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss) | [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint) |
 | `java` | [java_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#java_language_server), [jdtls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jdtls) | [java_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#java_language_server), [jdtls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jdtls) |
-| `javascript` | [biome](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#biome), [denols](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#denols), [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [flow](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#flow), [oxlint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#oxlint), [quick_lint_js](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#quick_lint_js), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss), [ts_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls) | [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [ts_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls) |
-| `javascript.jsx` | [denols](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#denols), [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [flow](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#flow), [ts_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls) | [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [ts_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls) |
-| `javascriptreact` | [biome](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#biome), [denols](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#denols), [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [flow](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#flow), [oxlint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#oxlint), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss), [ts_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls) | [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [ts_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls) |
+| `javascript` | [biome](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#biome), [denols](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#denols), [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [flow](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#flow), [oxlint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#oxlint), [quick_lint_js](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#quick_lint_js), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss), [ts_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls), [tsc](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tsc) | [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [ts_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls), [tsc](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tsc) |
+| `javascriptreact` | [biome](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#biome), [denols](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#denols), [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [flow](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#flow), [oxlint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#oxlint), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss), [ts_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls), [tsc](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tsc) | [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [ts_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls), [tsc](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tsc) |
 | `json` | [biome](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#biome), [jsonls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jsonls) | [jsonls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jsonls) |
 | `jsonc` | [biome](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#biome), [jsonls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jsonls) | [jsonls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jsonls) |
 | `less` | [cssls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cssls), [stylelint_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#stylelint_lsp), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss) | [cssls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cssls), [stylelint_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#stylelint_lsp) |
@@ -68,31 +68,28 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 | `php` | [intelephense](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#intelephense), [phpactor](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#phpactor), [psalm](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#psalm), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss) | [intelephense](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#intelephense), [phpactor](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#phpactor), [psalm](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#psalm) |
 | `plaintex` | [digestif](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#digestif), [ltex](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ltex), [texlab](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#texlab) | [digestif](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#digestif), [texlab](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#texlab) |
 | `proto` | [buf_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#buf_ls), [protols](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#protols) | [buf_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#buf_ls), [protols](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#protols) |
-| `python` | [basedpyright](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#basedpyright), [jedi_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jedi_language_server), [pylsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pylsp), [pylyzer](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pylyzer), [pyright](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pyright), [ruff](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruff) | [basedpyright](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#basedpyright), [ruff](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruff) |
+| `python` | [basedpyright](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#basedpyright), [jedi_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jedi_language_server), [pylsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pylsp), [pylyzer](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pylyzer), [pyright](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pyright), [ruff](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruff), [ty](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ty) | [basedpyright](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#basedpyright), [ruff](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruff) |
 | `quarto` | [ltex](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ltex), [r_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#r_language_server) | [r_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#r_language_server) |
 | `reason` | [ocamllsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ocamllsp), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss) | [ocamllsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ocamllsp) |
 | `rego` | [regal](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#regal), [regols](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#regols) | [regal](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#regal), [regols](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#regols) |
 | `rmd` | [ltex](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ltex), [r_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#r_language_server) | [r_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#r_language_server) |
 | `ruby` | [ruby_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruby_lsp), [solargraph](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#solargraph), [standardrb](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#standardrb), [syntax_tree](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#syntax_tree) | [ruby_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ruby_lsp), [solargraph](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#solargraph), [standardrb](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#standardrb), [syntax_tree](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#syntax_tree) |
 | `scss` | [cssls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cssls), [stylelint_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#stylelint_lsp), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss) | [cssls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cssls), [stylelint_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#stylelint_lsp) |
-| `sugarss` | [stylelint_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#stylelint_lsp), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss) | [stylelint_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#stylelint_lsp) |
 | `svelte` | [biome](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#biome), [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [oxlint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#oxlint), [svelte](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#svelte), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss) | [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [svelte](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#svelte) |
 | `systemverilog` | [svls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#svls), [verible](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#verible) | [svls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#svls), [verible](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#verible) |
-| `templ` | [html](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#html), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss) | [html](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#html) |
 | `terraform` | [terraform_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#terraform_lsp), [terraformls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#terraformls), [tflint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tflint) | [terraform_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#terraform_lsp), [terraformls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#terraformls), [tflint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tflint) |
 | `tesc` | [glsl_analyzer](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#glsl_analyzer), [glslls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#glslls) | [glsl_analyzer](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#glsl_analyzer), [glslls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#glslls) |
 | `tese` | [glsl_analyzer](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#glsl_analyzer), [glslls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#glslls) | [glsl_analyzer](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#glsl_analyzer), [glslls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#glslls) |
 | `tex` | [digestif](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#digestif), [ltex](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ltex), [texlab](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#texlab) | [digestif](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#digestif), [texlab](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#texlab) |
-| `typescript` | [biome](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#biome), [denols](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#denols), [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [oxlint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#oxlint), [quick_lint_js](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#quick_lint_js), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss), [ts_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls) | [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [ts_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls) |
-| `typescript.tsx` | [biome](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#biome), [denols](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#denols), [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [oxlint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#oxlint), [ts_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls) | [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [ts_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls) |
-| `typescriptreact` | [biome](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#biome), [denols](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#denols), [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [oxlint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#oxlint), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss), [ts_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls) | [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [ts_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls) |
+| `typescript` | [biome](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#biome), [denols](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#denols), [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [oxlint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#oxlint), [quick_lint_js](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#quick_lint_js), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss), [ts_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls), [tsc](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tsc) | [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [ts_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls), [tsc](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tsc) |
+| `typescriptreact` | [biome](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#biome), [denols](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#denols), [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [oxlint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#oxlint), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss), [ts_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls), [tsc](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tsc) | [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [ts_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls), [tsc](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tsc) |
 | `verilog` | [svls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#svls), [verible](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#verible) | [svls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#svls), [verible](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#verible) |
 | `vert` | [glsl_analyzer](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#glsl_analyzer), [glslls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#glslls) | [glsl_analyzer](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#glsl_analyzer), [glslls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#glslls) |
-| `vue` | [biome](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#biome), [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [oxlint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#oxlint), [stylelint_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#stylelint_lsp), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss) | [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [stylelint_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#stylelint_lsp) |
+| `vue` | [biome](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#biome), [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [oxlint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#oxlint), [stylelint_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#stylelint_lsp), [tailwindcss](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tailwindcss), [vue_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#vue_ls) | [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint), [stylelint_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#stylelint_lsp), [vue_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#vue_ls) |
 | `yaml.docker-compose` | [docker_compose_language_service](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#docker_compose_language_service), [yamlls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls) | [yamlls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls) |
 | `yaml.helm-values` | [helm_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#helm_ls), [yamlls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls) | [helm_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#helm_ls), [yamlls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yamlls) |
 
-## Available servers: 135 / 386
+## Available servers: 136 / 420
 
 | Language Server | Nix package |
 | - | - |
@@ -129,7 +126,7 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 | [dolmenls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#dolmenls) | [ocamlPackages.dolmen_lsp](https://search.nixos.org/packages?channel=unstable&query=ocamlPackages.dolmen_lsp&show=ocamlPackages.dolmen_lsp) |
 | [dotls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#dotls) | [dot-language-server](https://search.nixos.org/packages?channel=unstable&query=dot-language-server&show=dot-language-server) |
 | [efm](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#efm) | [efm-langserver](https://search.nixos.org/packages?channel=unstable&query=efm-langserver&show=efm-langserver) |
-| [elixirls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#elixirls) | [elixir_ls](https://search.nixos.org/packages?channel=unstable&query=elixir_ls&show=elixir_ls) |
+| [elixirls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#elixirls) | [elixir-ls](https://search.nixos.org/packages?channel=unstable&query=elixir-ls&show=elixir-ls) |
 | [elmls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#elmls) | [elmPackages.elm-language-server](https://search.nixos.org/packages?channel=unstable&query=elmPackages.elm-language-server&show=elmPackages.elm-language-server) |
 | [erlangls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#erlangls) | [erlang-ls](https://search.nixos.org/packages?channel=unstable&query=erlang-ls&show=erlang-ls) |
 | [eslint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#eslint) | [vscode-langservers-extracted](https://search.nixos.org/packages?channel=unstable&query=vscode-langservers-extracted&show=vscode-langservers-extracted) |
@@ -221,6 +218,7 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 | [tinymist](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tinymist) | [tinymist](https://search.nixos.org/packages?channel=unstable&query=tinymist&show=tinymist) |
 | [ts_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls) | [typescript-language-server](https://search.nixos.org/packages?channel=unstable&query=typescript-language-server&show=typescript-language-server) |
 | [ts_query_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_query_ls) | [ts_query_ls](https://search.nixos.org/packages?channel=unstable&query=ts_query_ls&show=ts_query_ls) |
+| [tsc](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tsc) | [typescript-go](https://search.nixos.org/packages?channel=unstable&query=typescript-go&show=typescript-go) |
 | [ty](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ty) | [ty](https://search.nixos.org/packages?channel=unstable&query=ty&show=ty) |
 | [vala_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#vala_ls) | [vala-language-server](https://search.nixos.org/packages?channel=unstable&query=vala-language-server&show=vala-language-server) |
 | [verible](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#verible) | [verible](https://search.nixos.org/packages?channel=unstable&query=verible&show=verible) |
@@ -232,10 +230,11 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 | [zk](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#zk) | [zk](https://search.nixos.org/packages?channel=unstable&query=zk&show=zk) |
 | [zls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#zls) | [zls](https://search.nixos.org/packages?channel=unstable&query=zls&show=zls) |
 
-## Missing: 251
+## Missing: 284
 
 - [ada_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ada_ls)
 - [agda_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#agda_ls)
+- [agentscript](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#agentscript)
 - [aiken](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#aiken)
 - [air](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#air)
 - [alloy_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#alloy_ls)
@@ -276,9 +275,12 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [coffeesense](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#coffeesense)
 - [contextive](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#contextive)
 - [copilot](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#copilot)
+- [cqlls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cqlls)
 - [cspell_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cspell_ls)
 - [css_variables](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#css_variables)
+- [csskit](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#csskit)
 - [cssmodules_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cssmodules_ls)
+- [ctags_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ctags_lsp)
 - [cucumber_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cucumber_language_server)
 - [custom_elements_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#custom_elements_ls)
 - [cypher_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cypher_ls)
@@ -287,6 +289,7 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [dcmls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#dcmls)
 - [debputy](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#debputy)
 - [delphi_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#delphi_ls)
+- [dexter](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#dexter)
 - [djls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#djls)
 - [djlsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#djlsp)
 - [docker_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#docker_language_server)
@@ -305,9 +308,11 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [esbonio](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#esbonio)
 - [expert](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#expert)
 - [facility_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#facility_language_server)
+- [fallow](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#fallow)
 - [fennel_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#fennel_language_server)
 - [flux_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#flux_lsp)
 - [foam_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#foam_ls)
+- [fortitude](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#fortitude)
 - [fsharp_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#fsharp_language_server)
 - [gdscript](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gdscript)
 - [gdshader_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gdshader_lsp)
@@ -319,6 +324,7 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [gitlab_duo](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gitlab_duo)
 - [glasgow](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#glasgow)
 - [glint](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#glint)
+- [gn_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gn_language_server)
 - [gnls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gnls)
 - [golangci_lint_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#golangci_lint_ls)
 - [gradle_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#gradle_ls)
@@ -326,6 +332,7 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [graphql](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#graphql)
 - [groovyls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#groovyls)
 - [guile_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#guile_ls)
+- [hare_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#hare_lsp)
 - [harper_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#harper_ls)
 - [haxe_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#haxe_language_server)
 - [hdl_checker](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#hdl_checker)
@@ -333,14 +340,18 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [hhvm](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#hhvm)
 - [hie](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#hie)
 - [hlasm](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#hlasm)
+- [home_assistant](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#home_assistant)
 - [hoon_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#hoon_ls)
 - [htmx](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#htmx)
 - [hydra_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#hydra_lsp)
 - [hylo_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#hylo_ls)
 - [janet_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#janet_lsp)
+- [jls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#jls)
 - [julials](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#julials)
 - [just](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#just)
+- [kakehashi](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#kakehashi)
 - [kcl](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#kcl)
+- [kdl_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#kdl_lsp)
 - [kotlin_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#kotlin_lsp)
 - [kulala_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#kulala_ls)
 - [laravel_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#laravel_ls)
@@ -357,12 +368,14 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [markdown_oxide](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#markdown_oxide)
 - [marko-js](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#marko-js)
 - [mdx_analyzer](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#mdx_analyzer)
+- [microcad_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#microcad_lsp)
 - [mlir_lsp_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#mlir_lsp_server)
 - [mlir_pdll_lsp_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#mlir_pdll_lsp_server)
 - [mm0_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#mm0_ls)
 - [mojo](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#mojo)
 - [motoko_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#motoko_lsp)
 - [move_analyzer](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#move_analyzer)
+- [mpls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#mpls)
 - [msbuild_project_tools_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#msbuild_project_tools_server)
 - [muon](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#muon)
 - [mutt_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#mutt_ls)
@@ -377,16 +390,24 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [opencl_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#opencl_ls)
 - [openedge_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#openedge_ls)
 - [openscad_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#openscad_ls)
+- [oso](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#oso)
+- [oxfmt](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#oxfmt)
 - [pact_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pact_ls)
+- [panache](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#panache)
 - [pasls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pasls)
 - [pbls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pbls)
 - [pest_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pest_ls)
 - [phan](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#phan)
+- [php_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#php_lsp)
+- [phpantom_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#phpantom_lsp)
 - [phptools](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#phptools)
 - [pico8_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pico8_ls)
 - [pkgbuild_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pkgbuild_language_server)
+- [pkl](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pkl)
 - [please](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#please)
 - [pli](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pli)
+- [pony_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pony_language_server)
+- [pony_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pony_lsp)
 - [poryscript_pls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#poryscript_pls)
 - [powershell_es](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#powershell_es)
 - [prolog_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#prolog_ls)
@@ -395,6 +416,7 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [puppet](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#puppet)
 - [pyre](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pyre)
 - [pyrefly](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pyrefly)
+- [pytest_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#pytest_language_server)
 - [qmlls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#qmlls)
 - [racket_langserver](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#racket_langserver)
 - [raku_navigator](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#raku_navigator)
@@ -414,7 +436,9 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [selene3p_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#selene3p_ls)
 - [serve_d](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#serve_d)
 - [shopify_theme_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#shopify_theme_ls)
+- [shuck](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#shuck)
 - [sixtyfps](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#sixtyfps)
+- [slang_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#slang_server)
 - [slangd](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#slangd)
 - [smarty_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#smarty_ls)
 - [smithy_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#smithy_ls)
@@ -427,10 +451,12 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [somesass_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#somesass_ls)
 - [sorbet](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#sorbet)
 - [sourcery](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#sourcery)
+- [spade_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#spade_ls)
 - [spectral](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#spectral)
 - [spyglassmc_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#spyglassmc_language_server)
 - [sqlls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#sqlls)
 - [sqruff](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#sqruff)
+- [stan_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#stan_ls)
 - [starlark_rust](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#starlark_rust)
 - [starpls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#starpls)
 - [statix](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#statix)
@@ -441,17 +467,19 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [superhtml](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#superhtml)
 - [svlangserver](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#svlangserver)
 - [swift_mesonls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#swift_mesonls)
+- [symfony_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#symfony_lsp)
 - [systemd_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#systemd_ls)
+- [systemd_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#systemd_lsp)
 - [tabby_ml](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tabby_ml)
 - [tblgen_lsp_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tblgen_lsp_server)
 - [tclsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tclsp)
 - [templ](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#templ)
 - [termux_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#termux_language_server)
+- [terragrunt_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#terragrunt_ls)
 - [textlsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#textlsp)
 - [theme_check](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#theme_check)
 - [tofu_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tofu_ls)
 - [tombi](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tombi)
-- [tsgo](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tsgo)
 - [tsp_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#tsp_server)
 - [ttags](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ttags)
 - [turbo_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#turbo_ls)
@@ -473,6 +501,7 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [veridian](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#veridian)
 - [veryl_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#veryl_ls)
 - [vespa_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#vespa_ls)
+- [vimdoc_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#vimdoc_ls)
 - [visualforce_ls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#visualforce_ls)
 - [vscoqtop](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#vscoqtop)
 - [vsrocq](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#vsrocq)
@@ -480,8 +509,10 @@ It can be used to decide which servers to specify using the `excluded_servers` a
 - [wasm_language_tools](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#wasm_language_tools)
 - [wc_language_server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#wc_language_server)
 - [wgsl_analyzer](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#wgsl_analyzer)
+- [wolfram_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#wolfram_lsp)
 - [yang_lsp](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yang_lsp)
 - [yls](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#yls)
 - [ziggy](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ziggy)
 - [ziggy_schema](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#ziggy_schema)
+- [zizmor](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#zizmor)
 - [zuban](https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#zuban)
