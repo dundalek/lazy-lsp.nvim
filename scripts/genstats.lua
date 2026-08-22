@@ -4,19 +4,19 @@
 vim.opt.rtp:append(".")
 vim.opt.rtp:append("tmp/nvim-lspconfig")
 
-local lspconfig = require("lspconfig")
 local servers = require("lazy-lsp.servers")
 local helpers = require("lazy-lsp.helpers")
+
+-- Read filetypes from vim.lsp.config, it covers both the new `lsp/*.lua` configs
+-- and the ones still using the deprecated lspconfig framework.
+local server_filetypes = helpers.make_vim_lsp_server_filetypes_fn(vim.lsp.config)
 
 -- Filetype stats
 local available_servers = {}
 for server, pkg in pairs(servers) do
   if pkg ~= "" then
     available_servers[server] = pkg
-  end
-  local config = lspconfig[server]
-  if config and config.document_config then
-    if not config.document_config.default_config.filetypes then
+    if not server_filetypes(server) then
       print(string.format("Info: No filetypes for %s", server))
     end
   end
@@ -44,7 +44,6 @@ local curated_opts = [[{
 ]]
 local opts = load("return " .. curated_opts)()
 
-local server_filetypes = helpers.make_server_filetypes_fn(lspconfig)
 local filetype_to_servers = helpers.enabled_filetypes_to_servers(
   available_servers, server_filetypes, {}, {}
 )
